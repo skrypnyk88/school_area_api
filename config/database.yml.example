@@ -1,21 +1,22 @@
+# Provide default local block
+local: &local
+ username: myuser
+ password: mypass
+
+common: &common
+ adapter: postgresql
+ encoding: unicode 
+ pool: 5
+ <<: *local
+
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: school_area_development
-  pool: 5
-  username: 
-  password:
+  database: neighbours-ss_development
+  <<: *common
+
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: school_area_test 
-  pool: 5
-  username: 
-  password:
+  database: neighbours-ss_test
+  <<: *common
+  
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: school_area_production
-  pool: 5
-  username: 
-  password:
+  database: neighbours-ss_production
+  <<: *common
