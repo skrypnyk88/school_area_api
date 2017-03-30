@@ -12,9 +12,8 @@ gem 'rails', '~> 5.0.2'
 gem 'rubocop', '~> 0.47.1'
 
 group :development, :test do
-  gem 'factory_girl_rails', '~> 4.8'
-  gem 'rspec-rails', '~> 3.5'
   gem 'byebug', platform: :mri
+  gem 'factory_girl_rails', '~> 4.8'
   gem 'rspec-rails', '~> 3.5'
 end
 
@@ -25,7 +24,7 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'faker', '~> 1.7', '>= 1.7.3'
   gem 'shoulda-matchers', '~> 3.1'
-  gem 'database_cleaner'
 end

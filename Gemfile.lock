@@ -165,10 +165,10 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  jbuilder (~> 2.5)
   database_cleaner
   factory_girl_rails (~> 4.8)
   faker (~> 1.7, >= 1.7.3)
+  jbuilder (~> 2.5)
   listen (~> 3.0.5)
   pg (~> 0.20.0)
   puma (~> 3.0)
