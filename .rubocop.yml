@@ -1,2 +1,15 @@
 Documentation:
   Enabled: false
+
+AllCops:
+  Exclude:
+    - 'app/views/**/*'
+    - 'db/schema.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
