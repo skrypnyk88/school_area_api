@@ -10,8 +10,6 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
   Shoulda::Matchers.configure do |conf|
     conf.integrate do |with|
       with.test_framework :rspec
