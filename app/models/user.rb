@@ -10,8 +10,9 @@ class User < ApplicationRecord
             length: { maximum: 24 },
             format: { with: VALID_NAME_REGEX, message: 'use only letters' },
             presence: true
-  validates_inclusion_of :gender, in: genders.keys, allow_nil:true
+  validates_inclusion_of :gender, in: genders.keys, allow_nil: true
   validates :phone,
             length: { in: 7..10 },
-            format: { with: VALID_PHONE_REGEX, message: 'use only digits' }, allow_nil: true
+            format: { with: VALID_PHONE_REGEX, message: 'use only digits' },
+            allow_nil: true
 end
