@@ -1,14 +1,13 @@
 ## JIRA
 
-* [Main JIRA ticket](http://ssu-jira.softserveinc.com/browse/LVRUBYM-220)
-* [JIRA subtask](http://ssu-jira.softserveinc.com/browse/LVRUBYM-292)
+* [Main JIRA ticket](http://ssu-jira.softserveinc.com/browse/LVRUBYM-224)
+* [JIRA subtask](http://ssu-jira.softserveinc.com/browse/LVRUBYM-252)
 
 ## Code reviewers
 
-- [ ] @Mykhailo123
-- [ ] @JulkaIII
 - [ ] @vikabelous
-
+- [ ] @HelenMaherovska
+- [ ] @andriyarterchuk
 
 ### Second Level Review
 
