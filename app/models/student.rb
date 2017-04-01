@@ -1,7 +1,7 @@
 class Student < ApplicationRecord
   before_save :titleize_name
 
-  enum gender: [:male, :female, :other]
+  enum gender: [:male, :female]
 
   validate :validate_age
 
@@ -17,9 +17,10 @@ class Student < ApplicationRecord
             presence: true
 
   validates :gender,
+            allow_nil: true,
             inclusion: {
               in: :gender,
-              message: 'should be male, female or other'
+              message: 'should be male or female'
             }
 
   private
@@ -30,7 +31,8 @@ class Student < ApplicationRecord
   end
 
   def validate_age
-    age = (Date.today - birthdate).to_i / 365
+    return unless birthdate
+    age = (Date.today - birthdate).to_i / 365.0
     errors.add(:age, 'should be from 2 to 6') unless age.between?(2, 6)
   end
 end
