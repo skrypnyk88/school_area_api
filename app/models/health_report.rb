@@ -1,4 +1,4 @@
 class HealthReport < ApplicationRecord
   validates :health_note, length: { maximum: 250 }
-  validates_inclusion_of :special_care, in: [true, false]
+  validates :special_care, inclusion: { in: [ true, false ] }
 end
