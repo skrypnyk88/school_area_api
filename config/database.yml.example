@@ -3,7 +3,7 @@ common: &common
  adapter: postgresql
  encoding: unicode
  pool: 5
- username: postgres
+ username:
  password:
 
 development:

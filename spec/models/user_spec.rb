@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
 
   describe '#last_name' do
     context 'when length <= 24' do
-      it 'is not valid' do
+      it 'is valid' do
         expect(build(:user, last_name: "O'Nell")).to be_valid
       end
     end
