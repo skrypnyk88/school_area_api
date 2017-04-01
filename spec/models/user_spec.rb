@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     end
     context 'when length > 24' do
       it 'is not valid' do
-        expect(build(:user, first_name: 'Wolfeschlegelsteinhbergerdimsemann'))
+        expect(build(:user, first_name: 'a' * 25))
           .to_not be_valid
       end
     end
