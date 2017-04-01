@@ -4,7 +4,7 @@ class CreateBottles < ActiveRecord::Migration[5.0]
       t.float :quantity
       t.datetime :time
       t.integer :uom
-      t.integer :botlle_report_id
+      t.integer :bottle_report_id
 
       t.timestamps
     end
