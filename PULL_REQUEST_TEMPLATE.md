@@ -6,12 +6,12 @@
 ## Code reviewers
 
 - [ ] @vikabelous
-- [ ] @HelenMaherovska  
+- [ ] @HelenMaherovska
 - [ ] @andriyarterchuk
 
 ### Second Level Review
 
-- [ ] @omaik 
+- [ ] @omaik
 
 ## Summary of issue
 
