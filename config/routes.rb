@@ -24,5 +24,7 @@ Rails.application.routes.draw do
     resources :teachers do
       put :upload, on: :member
     end
+
+    resources :healthReports
   end
 end
