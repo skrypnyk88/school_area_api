@@ -9,5 +9,6 @@ Rails.application.routes.draw do
       resources :students, shallow: true
       resources :my_day_reports
     end
+    resources :healthReports
   end
 end
