@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20170331152759) do
     t.string   "first_name"
     t.string   "last_name"
     t.date     "birthdate"
-    t.integer  "gender",     default: 2
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 end

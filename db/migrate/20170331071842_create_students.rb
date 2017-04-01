@@ -4,7 +4,7 @@ class CreateStudents < ActiveRecord::Migration[5.0]
       t.string :first_name
       t.string :last_name
       t.date :birthdate
-      t.integer :gender, default: 2
+      t.integer :gender
 
       t.timestamps
     end
