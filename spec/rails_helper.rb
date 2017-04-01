@@ -7,6 +7,7 @@ if Rails.env.production?
 end
 require 'spec_helper'
 require 'rspec/rails'
+require 'database_cleaner'
 require 'support/factory_girl'
 
 ActiveRecord::Migration.maintain_test_schema!
