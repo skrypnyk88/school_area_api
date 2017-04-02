@@ -4,3 +4,4 @@ FactoryGirl.define do
     note { Faker::Lorem.sentence }
   end
 end
+

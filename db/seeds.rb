@@ -20,3 +20,11 @@ group = Group.create(name: 'Group 1')
     gender: Faker::Demographic.sex.downcase
   )
 end
+
+FactoryGirl.define do
+  factory :my_day_report do
+    day { Faker::Date.backward(111) }
+    note { Faker::Lorem.sentence }
+  end
+end
+10.times { FactoryGirl.create(:my_day_report) }
