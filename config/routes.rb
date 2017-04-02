@@ -47,6 +47,16 @@ Rails.application.routes.draw do
       end
 >>>>>>> LVRUBYM-219: add ReportTimesController
     end
+<<<<<<< 624920b1a3efa372cbd806fe6010367441c5e6e7
 >>>>>>> LVRUBYM-190: User actions on backend
+=======
+  	get '/bottle_reports/:day', to: 'bottle_reports#show'
+
+  	post '/bottle_reports/addbottle', to: 'bottle_reports#create'
+
+  	post '/bottle_reports/updatebottle', to: 'bottle_reports#update'
+
+  	delete '/bottle_reports/removebottle', to: 'bottle_reports#destroy'
+>>>>>>> LVRUBYM-285:Implement api routes
   end
 end
