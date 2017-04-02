@@ -3,6 +3,7 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
     create_table :report_times do |t|
       t.datetime :start_time
       t.datetime :end_time
+<<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
       t.integer  :reportable_id
       t.string   :reportable_type
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
@@ -29,5 +30,10 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_index :report_times, [:reportable_type, :reportable_id]
+=======
+      
+      t.timestamps
+    end
+>>>>>>> LVRUBYM-203: ReportTime model creation
   end
 end

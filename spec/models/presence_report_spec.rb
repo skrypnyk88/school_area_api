@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PresenceReport, type: :model do
+<<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
   describe '#day' do
     context 'when empty' do
       it 'is invalid' do
@@ -20,4 +21,7 @@ RSpec.describe PresenceReport, type: :model do
       end
     end
   end
+=======
+  pending "add some examples to (or delete) #{__FILE__}"
+>>>>>>> LVRUBYM-203: ReportTime model creation
 end

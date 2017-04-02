@@ -1,4 +1,5 @@
 class PresenceReport < ApplicationRecord
+<<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
 <<<<<<< 48e10a96f8e73830c363cd8222bce553b6f884de
   belongs_to :student
@@ -18,4 +19,6 @@ class PresenceReport < ApplicationRecord
   validates :day, presence: true
   has_many :report_times, as: :reportable, dependent: :destroy
 >>>>>>> LVRUBYM-192: Unit tests implementation
+=======
+>>>>>>> LVRUBYM-203: ReportTime model creation
 end

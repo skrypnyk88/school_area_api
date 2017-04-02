@@ -1,4 +1,5 @@
 class ReportTime < ApplicationRecord
+<<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
   belongs_to :reportable, polymorphic: true
 =======
@@ -22,4 +23,7 @@ class ReportTime < ApplicationRecord
     end_time.strftime('%H:%M') if end_time != nil
 >>>>>>> LVRUBYM-191: rebase master branch
   end
+=======
+  validates :start_time, presence: true
+>>>>>>> LVRUBYM-203: ReportTime model creation
 end
