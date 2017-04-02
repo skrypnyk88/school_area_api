@@ -33,4 +33,14 @@ ActiveRecord::Schema.define(version: 20170403084317) do
   end
 
   add_foreign_key "students", "groups"
+
+  create_table "my_day_reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.date     "day"
+    t.integer  "student_id"
+    t.text     "note"
+    t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
+  end
 end
