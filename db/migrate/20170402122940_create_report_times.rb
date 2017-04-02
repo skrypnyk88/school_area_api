@@ -5,9 +5,13 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
       t.datetime :end_time
       t.integer  :reportable_id
       t.string   :reportable_type
+<<<<<<< 48e10a96f8e73830c363cd8222bce553b6f884de
       t.integer  :created_by
       t.integer  :updated_by
 
+=======
+      
+>>>>>>> LVRUBYM-192: Unit tests implementation
       t.timestamps
     end
     add_index :report_times, [:reportable_type, :reportable_id]
