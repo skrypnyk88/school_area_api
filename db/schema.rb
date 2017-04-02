@@ -1,8 +1,14 @@
 
-ActiveRecord::Schema.define(version: 20170402122940) do
+ActiveRecord::Schema.define(version: 20170402123802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "presence_reports", force: :cascade do |t|
+    t.date     "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "report_times", force: :cascade do |t|
     t.datetime "start_time"
