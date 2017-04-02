@@ -1,11 +1,16 @@
 language: ruby
 rvm:
   2.4.0
-  
+
 before_script:
   - cp config/database.yml.example config/database.yml
+  - RAILS_ENV=test rake db:create db:schema:load
   - bundle install
 
 rspec:
   script:
     - bundle exec rspec
+
+rubocop:
+  script:
+    - bundle exec rubocop

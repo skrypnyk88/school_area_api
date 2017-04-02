@@ -1,10 +1,10 @@
 # Provide default local block
 common: &common
  adapter: postgresql
- encoding: unicode 
+ encoding: unicode
  pool: 5
- username: myuser
- password: mypass
+ username:
+ password:
 
 development:
   database: school_area_api_development
@@ -13,7 +13,7 @@ development:
 test:
   database: school_area_api_test
   <<: *common
-  
+
 production:
   database: school_area_api_production
   <<: *common
