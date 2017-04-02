@@ -1,9 +1,12 @@
-ActiveRecord::Schema.define(version: 20170423095234) do
 
+ActiveRecord::Schema.define(version: 20170402122940) do
+
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "groups", force: :cascade do |t|
-    t.string   "name"
+  create_table "report_times", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
