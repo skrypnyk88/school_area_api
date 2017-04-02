@@ -1,8 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
+  let(:student) { build(:student) }
+
   it 'is valid with valid arguments' do
     expect(build(:student)).to be_valid
+  end
+
+  describe '#age' do
+    it 'calculates age based on birthdate' do
+      student.birthdate = Date.today - 8.years
+      expect(student.age).to be 8
+    end
+  end
+
+  describe '#valid_age?' do
+    context 'when age from 2 to 6' do
+      it 'returns true' do
+        student.birthdate = Date.today - 4.years
+        expect(student.valid_age?).to be true
+      end
+    end
+
+    context 'when age < 2' do
+      it 'returns false' do
+        student.birthdate = Date.tomorrow + 1 - 2.years
+        expect(student.valid_age?).to be false
+      end
+    end
+
+    context 'when age > 6' do
+      it 'returns false' do
+        student.birthdate = Date.yesterday - 1 - 7.years
+        expect(student.valid_age?).to be false
+      end
+    end
   end
 
   describe 'Validations' do
