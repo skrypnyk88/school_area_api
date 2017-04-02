@@ -9,5 +9,12 @@ Rails.application.routes.draw do
       resources :students, shallow: true
       resources :my_day_reports, shallow: true
     end
+  	get '/bottle_reports/:day', to: 'bottle_reports#show'
+
+  	post '/bottle_reports/addbottle', to: 'bottle_reports#create'
+
+  	post '/bottle_reports/updatebottle', to: 'bottle_reports#update'
+
+  	delete '/bottle_reports/removebottle', to: 'bottle_reports#destroy'
   end
 end
