@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReportTime, type: :model do
+<<<<<<< b65e4a29b844cb164727aae68d6b9ad169158d53
   let(:presence_report) do
     create(:presence_report)
   end
@@ -30,4 +31,7 @@ RSpec.describe ReportTime, type: :model do
       end
     end
   end
+=======
+  pending "add some examples to (or delete) #{__FILE__}"
+>>>>>>> LVRUBYM-203: ReportTime model creation
 end
