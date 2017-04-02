@@ -3,6 +3,7 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
     create_table :report_times do |t|
       t.datetime :start_time
       t.datetime :end_time
+<<<<<<< 434c714d7ae81fa3524826d23fa9d986a38a0685
 <<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
       t.integer  :reportable_id
       t.string   :reportable_type
@@ -13,6 +14,10 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
       t.integer  :updated_by
 
 =======
+=======
+      t.integer  :reportable_id
+      t.string   :reportable_type
+>>>>>>> LVRUBYM-192: Unit tests implementation
       
 >>>>>>> LVRUBYM-192: Unit tests implementation
 =======
@@ -30,10 +35,13 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_index :report_times, [:reportable_type, :reportable_id]
+<<<<<<< 434c714d7ae81fa3524826d23fa9d986a38a0685
 =======
       
       t.timestamps
     end
 >>>>>>> LVRUBYM-203: ReportTime model creation
+=======
+>>>>>>> LVRUBYM-192: Unit tests implementation
   end
 end
