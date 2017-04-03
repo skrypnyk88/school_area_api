@@ -1,6 +1,5 @@
 module V1
 	class BottleReportsController < ApplicationController		
-
 		def show
 			date = Date.parse(params[:day])
 			@bottle_report = BottleReport.where(:day => date.beginning_of_day..date.end_of_day).first
@@ -10,13 +9,13 @@ module V1
 						@bottle_report.save
 				end
 				get_report_bottles(@bottle_report.id)
-				render :json => { :bottle_report => @bottle_report, :bottles => @bottles }
+				render 'bottle_report/show.json.jbuilder'
 		end
 
 		def create
 			@bottle = Bottle.new(quantity: 30, time: DateTime.now, uom: 'ml', bottle_report_id: params[:bottle_report_id])
 			@bottle.save
-			render json: @bottle
+			render 'bottle_report/create.json.jbuilder'
 		end
 
 		def update
@@ -26,7 +25,7 @@ module V1
 			end
 	    @bottle.update_attributes(bottle_params)
 			@bottle.save
-			render json: @bottle
+			render 'bottle_report/update.json.jbuilder'
 		end
 
 		def destroy
