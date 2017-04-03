@@ -11,20 +11,18 @@ Rails.application.routes.draw do
     resources :students do
       put :upload, on: :member
     end
+    resources :teachers do
+      put :upload, on: :member
+    end
 
     resources :groups
     resources :my_day_reports
     resources :presence_reports
     resources :report_times
+    resources :healthReports
 
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
-
-    resources :teachers do
-      put :upload, on: :member
-    end
-
-    resources :healthReports
   end
 end
