@@ -21,7 +21,7 @@ module V1
     end
     private
       def report_params
-        params.require(:report).permit(:day, :note)
+        params.permit(:day, :note)
       end
   end
 end
