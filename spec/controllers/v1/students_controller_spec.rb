@@ -19,9 +19,9 @@ RSpec.describe V1::StudentsController, type: :controller do
     post :update,
          format: :json,
          params: {
-          method: :patch,
-          id: @student,
-          student: { first_name: 'Aaaa' }
+           method: :patch,
+           id: @student,
+           student: { first_name: 'Aaaa' }
          }
   end
 
@@ -29,9 +29,9 @@ RSpec.describe V1::StudentsController, type: :controller do
     post :update,
          format: :json,
          params: {
-          method: :patch,
-          id: @student,
-          student: { first_name: '111' }
+           method: :patch,
+           id: @student,
+           student: { first_name: '111' }
          }
   end
 
@@ -39,8 +39,8 @@ RSpec.describe V1::StudentsController, type: :controller do
     post :destroy,
          format: :json,
          params: {
-          method: :delete,
-          id: @student
+           method: :delete,
+           id: @student
          }
   end
 
@@ -113,7 +113,7 @@ RSpec.describe V1::StudentsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'deletes student' do
       delete_student
-      expect(Student.exists?(@student)).to be false
+      expect(Student.exists?(@student.id)).to be false
     end
 
     it 'renders ok response' do
