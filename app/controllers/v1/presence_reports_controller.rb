@@ -1,5 +1,6 @@
 module V1
   class PresenceReportsController < ApplicationController
+<<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
@@ -63,6 +64,10 @@ module V1
     def render_json_or_exception(condition, json_file)
       condition ? (render json_file) : (head :bad_request)
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+    def index
+      @presence_reports = PresenceReport.all
+>>>>>>> LVRUBYM-190: User actions on backend
     end
   end
 end

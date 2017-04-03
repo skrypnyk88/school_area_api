@@ -1,5 +1,6 @@
 module V1
   class ReportTimesController < ApplicationController
+<<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
@@ -87,6 +88,14 @@ module V1
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
       @report_time = ReportTime.new(report_params)
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
+=======
+    def index
+      @report_times = ReportTime.all
+    end
+
+    def create
+      @report_time = ReportTime.new(report_params)
+>>>>>>> LVRUBYM-190: User actions on backend
       if @report_time.save
         render 'create.json.jbuilder'
       else
@@ -104,6 +113,7 @@ module V1
         render json: { error: 'Incorrect data' }
       end
       @report_time.save
+<<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 =======
       render_show_or_bad_request(@report_time.save)
     end
@@ -154,6 +164,18 @@ module V1
     def render_json_or_exception(condition, json_file)
       condition ? (render json_file) : (head :bad_request)
 >>>>>>> LVRUBYM-219: add ReportTimesController
+    end
+>>>>>>> LVRUBYM-190: User actions on backend
+=======
+    end
+
+    def destroy
+      @report_time = ReportTime.find(params[:id])
+      @report_time.destroy
+    end
+
+    def report_params
+      params.require(:report_time).permit(:start_time, :end_time)
     end
 >>>>>>> LVRUBYM-190: User actions on backend
   end
