@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
-  has_many :students
+  has_many :students, dependent: :nullify
+
   before_save :capitalize_name
 
   validates :name,

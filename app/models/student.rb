@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
-  belongs_to :group
+  belongs_to :group, optional: true
+
   before_save :titleize_name
 
   enum gender: { male: 0, female: 1 }
