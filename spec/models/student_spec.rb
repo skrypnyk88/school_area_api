@@ -142,6 +142,10 @@ RSpec.describe Student, type: :model do
     end
   end
 
+  describe 'Associations' do
+    it { should belong_to(:group) }
+  end
+
   describe 'Callbacks' do
     describe 'before_save' do
       it 'titleize first name' do

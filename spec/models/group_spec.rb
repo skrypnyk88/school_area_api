@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-  # let(:group) { build(:group) }
 
   it 'is valid with valid arguments' do
     expect(build(:group)).to be_valid
@@ -39,6 +38,10 @@ RSpec.describe Group, type: :model do
         end
       end
     end
+  end
+
+  describe 'Associations' do
+    it { should have_many(:students) }
   end
 
   describe 'Callbacks' do
