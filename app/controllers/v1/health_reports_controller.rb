@@ -27,9 +27,15 @@ module V1
       end
     end
 
+    def destroy
+      @report = HealthReport.find(params[:id])
+      @report.destroy
+      head :no_content
+    end
+
     private
       def report_params
-        params.require(:reports).permit(:health_note, :special_care)
+        params.require(:reports).permit(:health_note, :special_care, :day)
       end
   end
 end
