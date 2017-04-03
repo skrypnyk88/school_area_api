@@ -35,7 +35,8 @@ module V1
     private
 
     def student_params
-      params.permit(:first_name, :last_name, :birthdate, :gender)
+      params.require(:student)
+            .permit(:first_name, :last_name, :birthdate, :gender)
     end
   end
 end
