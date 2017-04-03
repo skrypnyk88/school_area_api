@@ -13,7 +13,7 @@ module V1
       if @report.save
         render 'create.json.jbuilder'
       else
-        render :json => { :error => 'Incorrect data' }
+        render json: { error: 'Incorrect data' }
       end
     end
 
@@ -21,9 +21,9 @@ module V1
       @report = MyDayReport.find(params[:id])
       @report.update_attributes(report_params)
       if @report.save
-         render 'update.json.jbuilder'
-       else
-        render :json => { :error => 'Incorrect data' }
+        render 'update.json.jbuilder'
+      else
+        render json: { error: 'Incorrect data' }
       end
     end
 
