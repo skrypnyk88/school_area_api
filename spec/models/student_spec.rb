@@ -24,7 +24,7 @@ RSpec.describe Student, type: :model do
 
     context 'when age < 2' do
       it 'returns false' do
-        student.birthdate = Date.tomorrow + 1 - 2.years
+        student.birthdate = Date.tomorrow + 2 - 2.years
         expect(student.valid_age?).to be false
       end
     end
@@ -121,7 +121,7 @@ RSpec.describe Student, type: :model do
     describe '#age' do
       context 'when < 2' do
         it 'is invalid' do
-          date = Date.tomorrow + 1 - 2.years
+          date = Date.tomorrow + 2 - 2.years
           expect(build(:student, birthdate: date)).to_not be_valid
         end
       end
