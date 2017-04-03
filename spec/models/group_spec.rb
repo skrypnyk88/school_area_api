@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-
   it 'is valid with valid arguments' do
     expect(build(:group)).to be_valid
   end
@@ -48,7 +47,7 @@ RSpec.describe Group, type: :model do
     describe 'before_save' do
       it 'capitalize name' do
         group = create(:group, name: 'group 11')
-        expect(group.name).to eq('Group 11'.capitalize)
+        expect(group.name).to eq('Group 11')
       end
     end
   end
