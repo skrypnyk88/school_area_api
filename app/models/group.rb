@@ -1,4 +1,5 @@
 class Group < ApplicationRecord
+  has_many :students
   before_save :capitalize_name
 
   validates :name,
