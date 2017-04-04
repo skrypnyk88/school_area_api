@@ -11,7 +11,7 @@ module V1
     def create
       @report = MyDayReport.new(report_params)
       if @report.save
-        render 'create.json.jbuilder'
+        render 'create'
       else
         render json: { error: 'Incorrect data' }
       end
@@ -21,7 +21,7 @@ module V1
       @report = MyDayReport.find(params[:id])
       @report.update_attributes(report_params)
       if @report.save
-        render 'update.json.jbuilder'
+        render 'update'
       else
         render json: { error: 'Incorrect data' }
       end
