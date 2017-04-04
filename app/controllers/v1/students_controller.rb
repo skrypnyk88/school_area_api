@@ -1,38 +1,40 @@
 module V1
   class StudentsController < ApplicationController
+    before_action :find_student, only: [:show, :update, :destroy]
+
     def index
-      @students = Student.all
+      @students = Group.find(params[:group_id]).students
     end
 
     def create
       @student = Student.new(student_params)
-      if @student.save
-        render :show
-      else
-        head :bad_request
-      end
+      render_show_or_bad_request(@student.save)
     end
 
-    def show
-      @student = Student.find(params[:id])
-    end
+    def show; end
 
     def update
-      @student = Student.find(params[:id])
-      if @student.update(student_params)
-        render :show
-      else
-        head :bad_request
-      end
+      render_show_or_bad_request(@student.update(student_params))
     end
 
     def destroy
-      @student = Student.find(params[:id])
       @student.destroy
-      head :ok
+      head :no_content
     end
 
     private
+
+    def find_student
+      if Student.exists?(params[:id])
+        @student = Student.find(params[:id])
+      else
+        head :not_found
+      end
+    end
+
+    def render_show_or_bad_request(succeed)
+      succeed ? (render :show) : (head :bad_request)
+    end
 
     def student_params
       params.require(:student)
