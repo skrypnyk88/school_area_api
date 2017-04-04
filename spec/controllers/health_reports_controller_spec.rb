@@ -15,21 +15,6 @@ RSpec.describe V1::HealthReportsController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy' do
-    context 'when report is valid' do
-      it 'destroy report' do
-        post :destroy,
-             format: :json,
-             params: {
-               method: :delete,
-               id: @reports
-             }
-
-        expect(HealthReport.exists?(@reports.id)).to be false
-      end
-    end
-  end
-
   describe 'GET #index' do
     it 'returns all reports' do
       create(:health_report)
@@ -84,6 +69,21 @@ RSpec.describe V1::HealthReportsController, type: :controller do
                reports: { special_care: nil }
              }
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'when report is valid' do
+      it 'destroy report' do
+        post :destroy,
+             format: :json,
+             params: {
+               method: :delete,
+               id: @reports
+             }
+
+        expect(HealthReport.exists?(@reports.id)).to be false
       end
     end
   end
