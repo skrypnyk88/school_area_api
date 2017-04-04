@@ -1,6 +1,5 @@
 module V1
   class HealthReportsController < ApplicationController
-
     def show
       @reports = HealthReport.find(params[:id])
     end
@@ -34,8 +33,9 @@ module V1
     end
 
     private
-      def report_params
-        params.require(:reports).permit(:health_note, :special_care, :day)
-      end
+
+    def report_params
+      params.require(:reports).permit(:health_note, :special_care, :day)
+    end
   end
 end

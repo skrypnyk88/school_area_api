@@ -3,13 +3,12 @@ require 'rails_helper'
 RSpec.describe HealthReport, type: :model do
   describe 'Validation of HealthReport' do
     context 'when peport is valid' do
-
       it 'be valid if all value is valid' do
         expect(build(:health_report)).to be_valid
       end
 
       it 'be valid if length of health note is less then 250 char' do
-        expect(build(:health_report, health_note: 'a'*249)).to be_valid
+        expect(build(:health_report, health_note: 'a' * 249)).to be_valid
       end
 
       it 'be valid if special_care = true' do
@@ -27,7 +26,7 @@ RSpec.describe HealthReport, type: :model do
 
     context 'when report is invalid' do
       it 'be invalid if length of health note is less then 250 char' do
-        expect(build(:health_report, health_note: 'a'*251)).to_not be_valid
+        expect(build(:health_report, health_note: 'a' * 251)).to_not be_valid
       end
 
       it 'be invalid if some value is invalid' do
@@ -39,7 +38,7 @@ RSpec.describe HealthReport, type: :model do
       end
 
       it 'be invalid if date be string' do
-        expect(build(:health_report, day: "Some string")).to_not be_valid
+        expect(build(:health_report, day: 'Some string')).to_not be_valid
       end
     end
   end
