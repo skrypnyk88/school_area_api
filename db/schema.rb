@@ -46,4 +46,12 @@ ActiveRecord::Schema.define(version: 20170409135323) do
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
   add_foreign_key "students", "groups"
+
+  create_table "our_days", force: :cascade do |t|
+    t.text     "description"
+    t.date     "day"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
 end
