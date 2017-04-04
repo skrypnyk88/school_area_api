@@ -1,1 +1,1 @@
-json.(@report, :day, :note)
+json.(@report, :day, :note, :updated_at)
