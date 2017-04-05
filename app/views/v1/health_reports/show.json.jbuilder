@@ -1,5 +1,4 @@
-json.(@reports, :id,
-                :health_note,
-                :special_care,
-                :day)
-
+json.(@report, :id,
+               :special_care,
+               :health_note,
+               :day)

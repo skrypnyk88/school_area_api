@@ -1,8 +1,8 @@
 module V1
   class HealthReportsController < ApplicationController
-    def show
-      @reports = HealthReport.find(params[:id])
-    end
+    before_action :set_report, only: [:show, :update, :destroy]
+
+    def show; end
 
     def index
       @reports = HealthReport.all
@@ -11,14 +11,13 @@ module V1
     def create
       @reports = HealthReport.new(report_params)
       if @reports.save
-        render json: @reports, status: :created
+        render json: :show, status: :created
       else
         render json: @reports.errors, status: :unprocessable_entity
       end
     end
 
     def update
-      @report = HealthReport.find(params[:id])
       if @report.update(report_params)
         head :no_content
       else
@@ -27,12 +26,15 @@ module V1
     end
 
     def destroy
-      @report = HealthReport.find(params[:id])
       @report.destroy
       head :no_content
     end
 
     private
+
+    def set_report
+      @report = HealthReport.find(params[:id])
+    end
 
     def report_params
       params.require(:reports).permit(:health_note, :special_care, :day)

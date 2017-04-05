@@ -1,4 +1,4 @@
 json.array! @reports, :id,
-                      :health_note,
                       :special_care,
+                      :health_note,
                       :day

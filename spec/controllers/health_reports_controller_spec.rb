@@ -4,23 +4,36 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   render_views
 
   before do
-    @reports = create(:health_report)
+    @report = create(:health_report)
   end
 
   describe 'GET #show' do
-    it 'renders report json' do
-      get :show, params: { id: @reports },
+    it 'returns report' do
+      report = HealthReport.select(:id,
+                                   :special_care,
+                                   :health_note,
+                                   :day).to_json
+      report[0] = ''
+      report[-1] = ''
+
+      get :show, params: { id: @report },
                  format: :json
-      expect(response.body) == HealthReport.where(id: @reports).first.to_json
+
+      expect(response.body).to be_eql(report)
     end
   end
 
   describe 'GET #index' do
     it 'returns all reports' do
       create(:health_report)
+      report = HealthReport.select(:id,
+                                   :special_care,
+                                   :health_note,
+                                   :day).to_json
 
       get :index, format: :json
-      expect(response.body) == HealthReport.where(id: @reports).first.to_json
+
+      expect(response.body).to be_eql(report)
     end
   end
 
@@ -30,7 +43,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
         post :create, format: :json,
                       params: { reports: attributes_for(:health_report) }
 
-        expect(HealthReport.exists?(@reports.id)).to be true
+        expect(JSON.parse(response.body)).to be_eql('show')
       end
     end
     context 'when report is not valid' do
@@ -51,11 +64,11 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              format: :json,
              params: {
                method: :patch,
-               id: @reports,
+               id: @report,
                reports: { health_note: 'Some text for testing' }
              }
 
-        expect(@reports.reload.health_note).to eq('Some text for testing')
+        expect(@report.reload.health_note).to eq('Some text for testing')
       end
     end
 
@@ -65,7 +78,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              format: :json,
              params: {
                method: :patch,
-               id: @reports,
+               id: @report,
                reports: { special_care: nil }
              }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -80,10 +93,10 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              format: :json,
              params: {
                method: :delete,
-               id: @reports
+               id: @report
              }
 
-        expect(HealthReport.exists?(@reports.id)).to be false
+        expect(HealthReport.exists?(@report.id)).to be false
       end
     end
   end
