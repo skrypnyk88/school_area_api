@@ -5,15 +5,15 @@ module V1
     def show; end
 
     def index
-      @reports = HealthReport.all
+      @report = HealthReport.all
     end
 
     def create
-      @reports = HealthReport.new(report_params)
-      if @reports.save
+      @report = HealthReport.new(report_params)
+      if @report.save
         render json: :show, status: :created
       else
-        render json: @reports.errors, status: :unprocessable_entity
+        render json: @report.errors, status: :unprocessable_entity
       end
     end
 
@@ -33,11 +33,15 @@ module V1
     private
 
     def set_report
-      @report = HealthReport.find(params[:id])
+      if HealthReport.exists?(params[:id])
+        @report = HealthReport.find_by_id(params[:id])
+      else
+        head :not_found
+      end
     end
 
     def report_params
-      params.require(:reports).permit(:health_note, :special_care, :day)
+      params.require(:report).permit(:health_note, :special_care, :day)
     end
   end
 end

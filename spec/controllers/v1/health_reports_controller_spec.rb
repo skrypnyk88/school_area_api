@@ -41,7 +41,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
     context 'when report is valid' do
       it 'renders report json' do
         post :create, format: :json,
-                      params: { reports: attributes_for(:health_report) }
+                      params: { report: attributes_for(:health_report) }
 
         expect(JSON.parse(response.body)).to be_eql('show')
       end
@@ -49,8 +49,8 @@ RSpec.describe V1::HealthReportsController, type: :controller do
     context 'when report is not valid' do
       it 'renders bad_request response' do
         post :create, format: :json,
-                      params: { reports: attributes_for(:health_report,
-                                                        special_care: nil) }
+                      params: { report: attributes_for(:health_report,
+                                                       special_care: nil) }
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -65,7 +65,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              params: {
                method: :patch,
                id: @report,
-               reports: { health_note: 'Some text for testing' }
+               report: { health_note: 'Some text for testing' }
              }
 
         expect(@report.reload.health_note).to eq('Some text for testing')
@@ -79,7 +79,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              params: {
                method: :patch,
                id: @report,
-               reports: { special_care: nil }
+               report: { special_care: nil }
              }
         expect(response).to have_http_status(:unprocessable_entity)
       end
