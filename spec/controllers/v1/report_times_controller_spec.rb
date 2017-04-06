@@ -82,6 +82,7 @@
   end
 
   describe 'GET #index' do
+<<<<<<< a1f389c618d564e2ca1be54f63337368b3535631
     it 'return all reports' do
       get :index, format: :json,
                   params: { group_id: group,
@@ -90,6 +91,15 @@
         .to include(report_time_json(report))
     end
   end
+=======
+    it 'returns all reports' do
+      @new_report = create(:report_time).to_json
+      get :index,
+          format: :json,
+          params: {
+            presence_report_id: 1
+          }
+>>>>>>> LVRUBYM-219: Add CI
 
   describe 'GET #show' do
     it 'renders presence_report json' do
