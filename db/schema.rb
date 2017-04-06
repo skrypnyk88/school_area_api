@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170331162525) do
+ActiveRecord::Schema.define(version: 20170403084317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20170331162525) do
     t.integer  "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.index ["group_id"], name: "index_students_on_group_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
