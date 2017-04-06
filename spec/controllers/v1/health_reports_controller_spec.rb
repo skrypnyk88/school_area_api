@@ -3,40 +3,38 @@ require 'rails_helper'
 RSpec.describe V1::HealthReportsController, type: :controller do
   render_views
 
-  let(:create_health_report) { @report = create(:health_report) }
+  def report_params(report)
+    report.attributes
+          .with_indifferent_access
+          .extract!(:id, :special_care, :health_note, :day)
+  end
 
-  # before do
-  #   @report = create(:health_report)
-  # end
+  let(:report) { create(:health_report) }
+
+  let(:atr_for_rep) { attributes_for(:health_report).with_indifferent_access }
 
   describe 'GET #show' do
     it 'returns report' do
-      create_health_report
-      report = HealthReport.select(:id,
-                                   :special_care,
-                                   :health_note,
-                                   :day).to_json
-      report[0] = ''
-      report[-1] = ''
-
-      get :show, params: { id: @report },
+      get :show, params: { id: report },
                  format: :json
 
-      expect(response.body).to be_eql(report)
+      expect(response.body).to eq(report_params(report).to_json)
     end
   end
 
   describe 'GET #index' do
     it 'returns all reports' do
-      create(:health_report)
-      report = HealthReport.select(:id,
-                                   :special_care,
-                                   :health_note,
-                                   :day).to_json
+      5.times do
+        create(:health_report)
+      end
+      responce_report = HealthReport.select(:id,
+                                            :special_care,
+                                            :health_note,
+                                            :day).to_json
 
       get :index, format: :json
 
-      expect(response.body).to be_eql(report)
+      expect(response.body).to be_eql(responce_report)
     end
   end
 
@@ -44,9 +42,9 @@ RSpec.describe V1::HealthReportsController, type: :controller do
     context 'when report is valid' do
       it 'renders report json' do
         post :create, format: :json,
-                      params: { report: attributes_for(:health_report) }
+                      params: { report: atr_for_rep }
 
-        expect(JSON.parse(response.body)).to be_eql('show')
+        expect(HealthReport.find_by(atr_for_rep)).to be_present
       end
     end
     context 'when report is not valid' do
@@ -63,27 +61,25 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   describe 'PATCH #update' do
     context 'when report is valid' do
       it 'updates reports attributes' do
-        create_health_report
         post :update,
              format: :json,
              params: {
                method: :patch,
-               id: @report,
+               id: report,
                report: { health_note: 'Some text for testing' }
              }
 
-        expect(@report.reload.health_note).to eq('Some text for testing')
+        expect(report.reload.health_note).to eq('Some text for testing')
       end
     end
 
     context 'when report is not valid' do
       it 'renders bad_request response' do
-        create_health_report
         post :update,
              format: :json,
              params: {
                method: :patch,
-               id: @report,
+               id: report,
                report: { special_care: nil }
              }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -92,17 +88,22 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    let(:delete_params) { { method: :delete, id: report } }
     context 'when report is valid' do
       it 'destroy report' do
-        create_health_report
         post :destroy,
              format: :json,
-             params: {
-               method: :delete,
-               id: @report
-             }
+             params: delete_params
 
-        expect(HealthReport.exists?(@report.id)).to be false
+        expect(HealthReport.exists?(report.id)).to be false
+      end
+
+      it 'renders ok response' do
+        post :destroy,
+             format: :json,
+             params: delete_params
+
+        expect(response).to have_http_status(:no_content)
       end
     end
   end

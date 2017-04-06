@@ -11,7 +11,7 @@ module V1
     def create
       @report = HealthReport.new(report_params)
       if @report.save
-        render json: :show, status: :created
+        render :show, status: :created
       else
         render json: @report.errors, status: :unprocessable_entity
       end
