@@ -5,7 +5,9 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
       t.datetime :end_time
       t.integer  :reportable_id
       t.string   :reportable_type
-
+      t.integer  :created_by
+      t.integer  :updated_by
+       
       t.timestamps
     end
     add_index :report_times, [:reportable_type, :reportable_id]
