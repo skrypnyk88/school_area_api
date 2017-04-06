@@ -4,12 +4,14 @@ module V1
       @report_times = ReportTime.all
     end
 
+    def show; end
+
     def create
       @report_time = ReportTime.new(report_params)
       if @report_time.save
-        render 'create.json.jbuilder'
+        render json: :show, status: :created
       else
-        render json: { error: 'Incorrect data' }
+        head :bad_request
       end
       @report_time.save
     end
@@ -18,9 +20,9 @@ module V1
       @report_time = ReportTime.find(params[:id])
       @report_time.update_attributes(report_params)
       if @report_time.save
-        render 'update.json.jbuilder'
+        render json: :show, status: :created
       else
-        render json: { error: 'Incorrect data' }
+        head :bad_request
       end
       @report_time.save
     end
@@ -31,7 +33,8 @@ module V1
     end
 
     def report_params
-      params.require(:report_time).permit(:start_time, :end_time)
+      params.require(:report_time)
+            .permit(:start_time, :end_time, :reportable_id, :reportable_type)
     end
   end
 end
