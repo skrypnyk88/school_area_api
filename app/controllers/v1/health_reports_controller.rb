@@ -33,11 +33,8 @@ module V1
     private
 
     def set_report
-      if HealthReport.exists?(params[:id])
-        @report = HealthReport.find_by_id(params[:id])
-      else
-        head :not_found
-      end
+      @report = HealthReport.find_by_id(params[:id])
+      head :not_found if @report.nil?
     end
 
     def report_params

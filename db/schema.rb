@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170403084317) do
     t.date     "day"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["day"], name: "index_health_reports_on_day", using: :btree
   end
 
   create_table "my_day_reports", force: :cascade do |t|

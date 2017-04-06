@@ -3,12 +3,15 @@ require 'rails_helper'
 RSpec.describe V1::HealthReportsController, type: :controller do
   render_views
 
-  before do
-    @report = create(:health_report)
-  end
+  let(:create_health_report) { @report = create(:health_report) }
+
+  # before do
+  #   @report = create(:health_report)
+  # end
 
   describe 'GET #show' do
     it 'returns report' do
+      create_health_report
       report = HealthReport.select(:id,
                                    :special_care,
                                    :health_note,
@@ -60,6 +63,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   describe 'PATCH #update' do
     context 'when report is valid' do
       it 'updates reports attributes' do
+        create_health_report
         post :update,
              format: :json,
              params: {
@@ -74,6 +78,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
     context 'when report is not valid' do
       it 'renders bad_request response' do
+        create_health_report
         post :update,
              format: :json,
              params: {
@@ -89,6 +94,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   describe 'DELETE #destroy' do
     context 'when report is valid' do
       it 'destroy report' do
+        create_health_report
         post :destroy,
              format: :json,
              params: {
