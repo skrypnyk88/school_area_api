@@ -25,7 +25,7 @@ module V1
     private
 
     def find_student
-      @student = Student.find_by id: params[:id]
+      @student = Student.find_by(id: params[:id])
       head :not_found unless @student
     end
 

@@ -46,7 +46,7 @@ RSpec.describe V1::StudentsController, type: :controller do
                student: student_attrs
              }
 
-        expect(Student.find_by(student_attrs)).to_not be nil
+        expect(Student.find_by(student_attrs)).to be_present
       end
 
       it 'renders student json' do
@@ -87,19 +87,13 @@ RSpec.describe V1::StudentsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:valid_params) do
-      { method: :patch,
-        id: student,
-        student: { first_name: 'Aaaa' } }
-    end
-
-    let(:invalid_params) do
-      { method: :patch,
-        id: student,
-        student: { first_name: '111' } }
-    end
-
     context 'when student is valid' do
+      let(:valid_params) do
+        { method: :patch,
+          id: student,
+          student: { first_name: 'Aaaa' } }
+      end
+
       it 'updates students attributes' do
         post :update, format: :json,
                       params: valid_params
@@ -117,6 +111,12 @@ RSpec.describe V1::StudentsController, type: :controller do
     end
 
     context 'when student is not valid' do
+      let(:invalid_params) do
+        { method: :patch,
+          id: student,
+          student: { first_name: '111' } }
+      end
+
       it 'renders bad_request response' do
         post :update,
              format: :json,
