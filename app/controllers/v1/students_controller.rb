@@ -25,11 +25,8 @@ module V1
     private
 
     def find_student
-      if Student.exists?(params[:id])
-        @student = Student.find(params[:id])
-      else
-        head :not_found
-      end
+      @student = Student.find_by id: params[:id]
+      head :not_found unless @student
     end
 
     def render_show_or_bad_request(succeed)
