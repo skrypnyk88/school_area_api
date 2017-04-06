@@ -12,7 +12,11 @@ RSpec.describe V1::ReportTimesController, type: :controller do
   describe 'GET #index' do
     it 'returns all reports' do
       @new_report = create(:report_time).to_json
-      get :index, format: :json, presence_report_id: 1
+      get :index,
+          format: :json,
+          params: {
+            presence_report_id: 1
+          }
 
       expect(response.body).to include(@report_time_json)
       expect(response.body).to include(@new_report)

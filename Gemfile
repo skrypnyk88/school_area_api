@@ -9,7 +9,6 @@ gem 'devise', '~> 4.2', '>= 4.2.1'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.6'
 gem 'pg', '~> 0.20.0'
-gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
 gem 'puma', '~> 3.0'
 gem 'rack-cors', '~> 0.4.1'
 gem 'rails', '~> 5.0.2'
@@ -18,7 +17,7 @@ gem 'unicorn', '~> 5.1'
 
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
-  gem 'pry-byebug', '~> 3.3'
+  gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
   gem 'rspec-rails', '~> 3.5'
 end
 

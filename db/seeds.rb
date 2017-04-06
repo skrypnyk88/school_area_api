@@ -52,4 +52,3 @@ group = Group.create(name: 'Group 1')
     end
   end
 end
-
