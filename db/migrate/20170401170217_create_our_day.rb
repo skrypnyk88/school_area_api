@@ -3,7 +3,7 @@ class CreateOurDay < ActiveRecord::Migration[5.0]
     create_table :our_days do |t|
       t.text :description
       t.date :day
-      
+
       t.timestamps
     end
   end
