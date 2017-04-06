@@ -1,5 +1,6 @@
 module V1
   class PresenceReportsController < ApplicationController
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
@@ -11,6 +12,9 @@ module V1
     def index
       @reports = reports_renderer(@group.students, PresenceReport).call
 =======
+=======
+    before_action :find_presence_report, only: [:update, :destroy]
+>>>>>>> LVRUBYM-219: Fixed
     def index
       @presence_reports = PresenceReport.all
 >>>>>>> LVRUBYM-190: User actions on backend
@@ -35,6 +39,7 @@ module V1
     def show; end
 
     def create
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
       @report = PresenceReport.new(report_params)
       render_json_or_exception(@report.save, :create)
     end
@@ -54,6 +59,30 @@ module V1
       @report = PresenceReport.find_by(id: params[:id],
                                        group_id: params[:group_id])
       head :not_found unless @report
+=======
+      @presence_report = PresenceReport.new(report_params)
+      render_show_or_bad_request(@presence_report.save)
+    end
+
+    def update
+      render_show_or_bad_request(@presence_report.update(report_params))
+    end
+
+    def destroy
+      @presence_report.destroy
+      head :no_content
+    end
+
+    private
+
+    def find_presence_report
+      @presence_report = PresenceReport.find(params[:id])
+      head :not_found unless @presence_report
+    end
+
+    def render_show_or_bad_request(succeed)
+      succeed ? (render :show) : (head :bad_request)
+>>>>>>> LVRUBYM-219: Fixed
     end
 
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390

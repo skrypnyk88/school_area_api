@@ -1,5 +1,6 @@
 module V1
   class ReportTimesController < ApplicationController
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
@@ -82,6 +83,11 @@ module V1
 >>>>>>> LVRUBYM-219: add ReportTimesController
     def index
       @reports = @presence.report_times
+=======
+    before_action :find_report_time, only: [:update, :destroy]
+    def index
+      @report_times = Group.find(params[:group_id]).reporttimes
+>>>>>>> LVRUBYM-219: Fixed
     end
 
     def create
@@ -95,6 +101,7 @@ module V1
 
     def create
       @report_time = ReportTime.new(report_params)
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 >>>>>>> LVRUBYM-190: User actions on backend
       if @report_time.save
         render 'create.json.jbuilder'
@@ -167,15 +174,38 @@ module V1
     end
 >>>>>>> LVRUBYM-190: User actions on backend
 =======
+=======
+      render_show_or_bad_request(@report_time.save)
+    end
+
+    def update
+      render_show_or_bad_request(@report_time.update(report_params))
+>>>>>>> LVRUBYM-219: Fixed
     end
 
     def destroy
-      @report_time = ReportTime.find(params[:id])
       @report_time.destroy
+      head :no_content
+    end
+
+    private
+
+    def find_report_time
+      @report_time = ReportTime.find(params[:id])
+      head :not_found unless @report_time
+    end
+
+    def render_show_or_bad_request(succeed)
+      succeed ? (render :show) : (head :bad_request)
     end
 
     def report_params
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
       params.require(:report_time).permit(:start_time, :end_time)
+=======
+      params.require(:report_time)
+            .permit(:start_time, :end_time)
+>>>>>>> LVRUBYM-219: Fixed
     end
 >>>>>>> LVRUBYM-190: User actions on backend
   end

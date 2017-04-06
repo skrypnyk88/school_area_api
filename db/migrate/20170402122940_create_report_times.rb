@@ -7,6 +7,7 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
 <<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
       t.integer  :reportable_id
       t.string   :reportable_type
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
 <<<<<<< 3d6ef24b1f115a08fa031f7cb22c9e05126b0cb6
@@ -36,6 +37,11 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
 =======
 
 >>>>>>> LVRUBYM-190: User actions on backend
+=======
+      t.integer  :created_by
+      t.integer  :updated_by
+       
+>>>>>>> LVRUBYM-219: Fixed
       t.timestamps
     end
     add_index :report_times, [:reportable_type, :reportable_id]

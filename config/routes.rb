@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :groups do
       resources :students, shallow: true
+
       resources :my_day_reports, shallow: true
+<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
       
       resources :presence_reports do
         resources :report_times
@@ -32,6 +34,13 @@ Rails.application.routes.draw do
 =======
     resources :presence_reports do
       resources :report_times
+=======
+
+      resources :presence_reports do
+        resources :report_times
+    end
+
+>>>>>>> LVRUBYM-219: Fixed
     end
 >>>>>>> LVRUBYM-190: User actions on backend
   end
