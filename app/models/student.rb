@@ -1,7 +1,12 @@
 class Student < ApplicationRecord
   belongs_to :group, optional: true
   has_many :my_day_reports, dependent: :nullify
+<<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
   has_many :presence_reports, dependent: :nullify
+=======
+  has_many :presence_reports
+  
+>>>>>>> LVRUBYM-219: Fixed
 
   before_save :titleize_name
 
