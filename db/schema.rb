@@ -13,9 +13,11 @@ ActiveRecord::Schema.define(version: 20170403084317) do
     t.boolean  "special_care", default: false
     t.text     "health_note"
     t.date     "day"
+    t.integer  "student_id"
+    t.integer  "group_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.index ["day"], name: "index_health_reports_on_day", using: :btree
+    t.index ["group_id"], name: "index_health_reports_on_group_id", using: :btree
   end
 
   create_table "my_day_reports", force: :cascade do |t|
