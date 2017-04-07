@@ -1,41 +1,43 @@
 module V1
   class MyDayReportsController < ApplicationController
+    before_action :find_my_day_report, only: [:show, :update, :destroy]
+
     def index
       @reports = MyDayReport.all
     end
 
-    def show
-      @report = MyDayReport.find(params[:id])
-    end
+    def show; end
 
     def create
       @report = MyDayReport.new(report_params)
-      if @report.save
-        render 'create'
-      else
-        render json: { error: 'Incorrect data' }
-      end
+      render_json_or_exception(@report.save, 'create')
     end
 
     def update
-      @report = MyDayReport.find(params[:id])
-      @report.update_attributes(report_params)
-      if @report.save
-        render 'update'
-      else
-        render json: { error: 'Incorrect data' }
-      end
+      render_json_or_exception(@report.update(report_params), 'update')
     end
 
     def destroy
-      @report = MyDayReport.find(params[:id])
       @report.destroy
+      head :no_content
     end
 
     private
 
     def report_params
       params.require(:report).permit(:day, :note)
+    end
+
+    def find_my_day_report
+      if MyDayReport.exists?(params[:id])
+        @report = MyDayReport.find(params[:id])
+      else
+        head :not_found
+      end
+    end
+
+    def render_json_or_exception(condition, json_file)
+      condition ? (render json_file) : (head :bad_request)
     end
   end
 end

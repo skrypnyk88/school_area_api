@@ -26,7 +26,7 @@ FactoryGirl.define do
     day { Faker::Date.backward(111) }
     note { Faker::Lorem.sentence }
   end
-
+end
 
 10.times do
   MyDayReport.create(

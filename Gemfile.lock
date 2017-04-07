@@ -187,7 +187,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   database_cleaner (>= 1.5.3)
   devise (~> 4.2, >= 4.2.1)
   factory_girl_rails (~> 4.8)
