@@ -1,7 +1,19 @@
 require 'faker'
 
+Teacher.create(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: 'test@test.com',
+  password: 'password',
+  password_confirmation: 'password',
+  gender: %w(male female other).sample,
+  phone: '1234567890'
+)
+
+group = Group.create(name: 'Group 1')
+
 10.times do
-  Student.create(
+  group.students.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     birthdate: Faker::Date.birthday(2, 6),
