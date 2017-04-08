@@ -19,5 +19,6 @@ Bundler.require(*Rails.groups)
 module SchoolAreaApi
   class Application < Rails::Application
     config.api_only = true
+    config.autoload_paths << "#{Rails.root}/lib"
   end
 end
