@@ -90,5 +90,3 @@ group = Group.create(name: 'Group 1')
   )
 >>>>>>> LVRUBYM-219: add ReportTimesController
 end
-
-
