@@ -3,18 +3,18 @@ module V1
     before_action :find_my_day_report, only: [:show, :update, :destroy]
 
     def index
-      @reports = MyDayReport.all
+      @reports = Group.find(params[:group_id]).my_day_reports
     end
 
     def show; end
 
     def create
       @report = MyDayReport.new(report_params)
-      render_json_or_exception(@report.save, 'create')
+      render_json_or_exception(@report.save, :create)
     end
 
     def update
-      render_json_or_exception(@report.update(report_params), 'update')
+      render_json_or_exception(@report.update(report_params), :update)
     end
 
     def destroy
@@ -29,11 +29,8 @@ module V1
     end
 
     def find_my_day_report
-      if MyDayReport.exists?(params[:id])
-        @report = MyDayReport.find(params[:id])
-      else
-        head :not_found
-      end
+      @report = MyDayReport.find_by(id: params[:id])
+      head :not_found unless @report
     end
 
     def render_json_or_exception(condition, json_file)
