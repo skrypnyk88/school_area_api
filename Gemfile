@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.6'
 gem 'pg', '~> 0.20.0'
 gem 'puma', '~> 3.0'
+gem 'rack-cors', '~> 0.4.1'
 gem 'rails', '~> 5.0.2'
 gem 'rubocop', '~> 0.47.1'
 
