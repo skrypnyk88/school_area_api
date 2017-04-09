@@ -23,28 +23,28 @@ RSpec.describe V1::BottlesController, type: :controller do
 
   describe 'PUT #update' do
     context 'when bottle is updated' do
-      before do
+      let(:new_test_bottle) { FactoryGirl.create(:bottle,
+                                                 quantity: 10,
+                                                 uom: 'oz',
+                                                 bottle_report_id: test_bottle_report.id) }
       put :update, format: :json,
                      bottle_report_day: test_bottle_report.day,
                      id: test_bottle.id, bottle: { quantity: 500,
                                                    time: DateTime.now,
                                                    uom: 'ml' }
-      end
 
-      it 'updated an existing bottle' do
-        expect(JSON.parse(response.body)['id']).to be > 0
-      end
+      updated_bottle = Bottle.find_by id: test_bottle.id
 
       it 'updated an existing bottle quantity' do
-        expect(JSON.parse(response.body)['quantity']).to be == 500
+        expect(existed_bottle.quantity).to be == 500
       end
 
       it 'updated an existing bottle uom' do
-        expect(JSON.parse(response.body)['uom']).to be == 'ml'
+        expect(existed_bottle.uom).to be == 'ml'
       end
 
       it 'updated an existing bottle time' do
-        expect(JSON.parse(response.body)['time']).to be > ((DateTime.now - 5.seconds))
+        expect(existed_bottle.time).to be > ((DateTime.now - 5.seconds))
       end
     end
   end

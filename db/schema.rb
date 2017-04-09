@@ -12,7 +12,7 @@ ActiveRecord::Schema.define(version: 20170409135323) do
   end
 
   create_table "bottles", force: :cascade do |t|
-    t.float    "quantity",         default: 30.0
+    t.float    "quantity"
     t.datetime "time"
     t.integer  "uom",              default: 0
     t.integer  "bottle_report_id"
