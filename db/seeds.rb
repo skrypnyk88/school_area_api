@@ -21,22 +21,7 @@ group = Group.create(name: 'Group 1')
   )
 end
 
-=begin
-5.times do
-  Group.create(
-    name: Faker::GameOfThrones.house
-  )
-end
-
-10.times do
-  MyDayReport.create(
-    day: Faker::Date.backward(111),
-    note:  Faker::Lorem.sentence,
-    group_id: rand(1..5)
-  )
-end
-=end
-group = Group.create(name: 'Group 1')
+group = Group.create(name: 'Group 111')
 
 10.times do
   group.my_day_reports.create(
