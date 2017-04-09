@@ -8,6 +8,7 @@ RSpec.describe HealthReport, type: :model do
       end
     end
   end
+
   describe '#health note' do
     context 'when length <= 250 char' do
       it 'is valid' do

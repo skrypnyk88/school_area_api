@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170403084317) do
+ActiveRecord::Schema.define(version: 20170409175847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -13,11 +13,12 @@ ActiveRecord::Schema.define(version: 20170403084317) do
     t.boolean  "special_care", default: false
     t.text     "health_note"
     t.date     "day"
-    t.integer  "student_id"
-    t.integer  "group_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "group_id"
+    t.integer  "student_id"
     t.index ["group_id"], name: "index_health_reports_on_group_id", using: :btree
+    t.index ["student_id"], name: "index_health_reports_on_student_id", using: :btree
   end
 
   create_table "my_day_reports", force: :cascade do |t|
@@ -57,5 +58,7 @@ ActiveRecord::Schema.define(version: 20170403084317) do
 
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
+  add_foreign_key "health_reports", "groups"
+  add_foreign_key "health_reports", "students"
   add_foreign_key "students", "groups"
 end

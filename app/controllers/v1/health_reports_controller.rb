@@ -1,15 +1,16 @@
 module V1
   class HealthReportsController < ApplicationController
     before_action :set_report, only: [:show, :update, :destroy]
+    before_action :availability_group, only: [:index, :create]
+
+    def index
+      @reports = @group.health_reports
+    end
 
     def show; end
 
-    def index
-      @reports = Group.find(params[:group_id]).health_reports
-    end
-
     def create
-      @report = HealthReport.new(report_params)
+      @report =  @group.health_reports.build(report_params)
       if @report.save
         render :show, status: :created
       else
@@ -21,7 +22,7 @@ module V1
       if @report.update(report_params)
         head :no_content
       else
-       bad_reqest
+        bad_reqest
       end
     end
 
@@ -34,15 +35,23 @@ module V1
 
     def set_report
       @report = HealthReport.find_by(id: params[:id])
-      head :not_found if @report.nil?
+      head :not_found unless @report
+    end
+
+    def availability_group
+      @group = Group.find_by(id: params[:group_id])
+      head :not_found unless @group
     end
 
     def report_params
-      params.require(:report).permit(:health_note, :special_care, :day)
+      params.require(:report).permit(:health_note,
+                                     :special_care,
+                                     :day,
+                                     :student_id)
     end
 
     def bad_reqest
-      render json: @report.errors, status: :unprocessable_entity
+      render json: @report.errors, status: :bad_request
     end
   end
 end
