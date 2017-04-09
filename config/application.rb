@@ -19,5 +19,15 @@ Bundler.require(*Rails.groups)
 module SchoolAreaApi
   class Application < Rails::Application
     config.api_only = true
+    config.autoload_paths << "#{Rails.root}/lib"
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any,
+                      methods: [:get, :post, :options],
+                      expose: ['Auth-Token']
+      end
+    end
   end
 end

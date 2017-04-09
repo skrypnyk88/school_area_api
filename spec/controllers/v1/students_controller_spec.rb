@@ -17,10 +17,12 @@ RSpec.describe V1::StudentsController, type: :controller do
   let(:student_attrs) { attributes_for(:student).with_indifferent_access }
 
   let(:group_with_students) do
-    3.times do
-      create(:student, group: group)
-    end
+    create_list(:student, 3, group: group)
     group
+  end
+
+  before do
+    allow(subject).to receive(:authenticate_user!)
   end
 
   describe 'GET #index' do

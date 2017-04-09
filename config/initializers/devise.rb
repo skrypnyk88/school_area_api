@@ -9,7 +9,7 @@ Devise.setup do |config|
   # Configure which authentication keys should have whitespace stripped.
   config.strip_whitespace_keys = [:email]
   # skip storage for particular strategies by setting this option.
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth, :jwt]
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 11
   config.stretches = Rails.env.test? ? 1 : 11
@@ -29,4 +29,10 @@ Devise.setup do |config|
   # ==> Navigation configuration
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+
+  config.warden do |manager|
+    manager.strategies.add :jwt, Devise::Strategies::JWT
+    manager.default_strategies(scope: :user).unshift :jwt
+    manager.failure_app = Devise::JwtFailureApp
+  end
 end
