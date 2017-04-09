@@ -1,6 +1,24 @@
 ActiveRecord::Schema.define(version: 20170409135323) do
-  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bottle_reports", force: :cascade do |t|
+    t.date     "day"
+    t.integer  "student_id"
+    t.integer  "updated_by"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day"], name: "index_bottle_reports_on_day", using: :btree
+  end
+
+  create_table "bottles", force: :cascade do |t|
+    t.float    "quantity",         default: 30.0
+    t.datetime "time"
+    t.integer  "uom",              default: 0
+    t.integer  "bottle_report_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"

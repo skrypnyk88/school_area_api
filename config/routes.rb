@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :groups do
       resources :students, shallow: true
+<<<<<<< bb76cb055ad2fbb409311893a6359a745590dac6
       resources :my_day_reports, shallow: true
+=======
+      resources :bottle_reports, param: :day, only: [:index, :show] do
+      resources :bottles, shallow: true
     end
-  	get '/bottle_reports/:day', to: 'bottle_reports#show'
-
-  	post '/bottle_reports/addbottle', to: 'bottle_reports#create'
-
-  	post '/bottle_reports/updatebottle', to: 'bottle_reports#update'
-
-  	delete '/bottle_reports/removebottle', to: 'bottle_reports#destroy'
+    delete '/bottle_reports/:id', to: 'bottle_reports#destroy', as: 'destroy'
+>>>>>>> LVRUBYM-221:Added associations to group and student; Changed controllers and added tests for it
+    end
   end
 end

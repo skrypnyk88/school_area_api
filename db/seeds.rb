@@ -26,3 +26,5 @@ group = Group.create(name: 'Group 1')
     student_id: student.id
   )
 end
+
+

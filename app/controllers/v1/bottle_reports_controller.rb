@@ -1,49 +1,28 @@
 module V1
-	class BottleReportsController < ApplicationController		
-		def show
-			date = Date.parse(params[:day])
-			@bottle_report = BottleReport.where(:day => date.beginning_of_day..date.end_of_day).first
-				if 	@bottle_report.nil?
-						@bottle_report = BottleReport.new
-						@bottle_report.day = date
-						@bottle_report.save
-				end
-				get_report_bottles(@bottle_report.id)
-				render 'bottle_report/show.json.jbuilder'
-		end
+  class BottleReportsController < ApplicationController
+    before_action :find_group_bottle_reports, only: [:index]
 
-		def create
-			@bottle = Bottle.new(quantity: 30, time: DateTime.now, uom: 'ml', bottle_report_id: params[:bottle_report_id])
-			@bottle.save
-			render 'bottle_report/create.json.jbuilder'
-		end
+    def index; end
 
-		def update
-			@bottle = Bottle.find(params[:id])
-			if @bottle.nil?
-				render :json => { :error => 'Not found' } 
-			end
-	    @bottle.update_attributes(bottle_params)
-			@bottle.save
-			render 'bottle_report/update.json.jbuilder'
-		end
+    def show
+      date = Date.parse(params[:day])
+      @bottle_reports = BottleReport.where(day: date,
+                                           group_id: params[:group_id])
+    end
 
-		def destroy
-			@bottle = Bottle.find(params[:id])
-			if @bottle.nil?
-				render :json => { :error => 'Not found' } 
-			end
-			@bottle.destroy
-			head :ok
-		end
+    def destroy
+      @bottle_report = BottleReport.find_by id: params[:id]
+      render :not_found if @bottle_report.nil?
+      @bottle_report.destroy
+      head :ok
+    end
 
-		private
-		def get_report_bottles(bottle_report_id)
-			@bottles = Bottle.where(:bottle_report_id	=> bottle_report_id)
-		end
+    private
 
-		def bottle_params
-			params.permit(:quantity, :time, :uom)
-		end
-	end
+    def find_group_bottle_reports
+      group = Group.find_by id: params[:group_id]
+      render :not_found if group.nil?
+      @bottle_reports = group.bottle_reports
+    end
+  end
 end
