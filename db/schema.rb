@@ -38,6 +38,25 @@ ActiveRecord::Schema.define(version: 20170424073006) do
     t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
   end
 
+    create_table "bottle_reports", force: :cascade do |t|
+    t.date     "day"
+    t.integer  "student_id"
+    t.integer  "updated_by"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day"], name: "index_bottle_reports_on_day", using: :btree
+  end
+
+  create_table "bottles", force: :cascade do |t|
+    t.float    "quantity",         default: 30.0
+    t.datetime "time"
+    t.integer  "uom",              default: 0
+    t.integer  "bottle_report_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
   create_table "presence_reports", force: :cascade do |t|
     t.date     "day"
     t.integer  "updated_by"

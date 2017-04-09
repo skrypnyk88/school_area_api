@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   post '/signin', to: 'authentication#authenticate'
   get '/refresh_token', to: 'authentication#refresh_token'
+<<<<<<< 9f3e1d86d221652a12f76a032aac88aea240d517
 
+=======
+>>>>>>> LVRUBYM-221:Added associations to group and student; Changed controllers and added tests for it
   devise_for :user, skip: :sessions
 
   namespace :v1 do
@@ -28,6 +31,7 @@ Rails.application.routes.draw do
 >>>>>>> LVRUBYM-219: Fixed
 =======
       end
+<<<<<<< 9f3e1d86d221652a12f76a032aac88aea240d517
 >>>>>>> LVRUBYM-219: add ReportTimesController
     end
 >>>>>>> LVRUBYM-190: User actions on backend
@@ -58,5 +62,12 @@ Rails.application.routes.draw do
 
   	delete '/bottle_reports/removebottle', to: 'bottle_reports#destroy'
 >>>>>>> LVRUBYM-285:Implement api routes
+=======
+      resources :bottle_reports, param: :day, only: [:index, :show] do
+      resources :bottles, shallow: true
+    end
+    delete '/bottle_reports/:id', to: 'bottle_reports#destroy', as: 'destroy'
+    end
+>>>>>>> LVRUBYM-221:Added associations to group and student; Changed controllers and added tests for it
   end
 end
