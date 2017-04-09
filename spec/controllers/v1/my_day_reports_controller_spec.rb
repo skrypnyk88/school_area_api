@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe V1::MyDayReportsController, type: :controller do
   render_views
+  let!(:group) { create(:group) }
 
-  let!(:report) { create(:my_day_report) }
+  let!(:student) { create(:student, group: group) }
+  let!(:report) { create(:my_day_report, group: group, student: student) }
 
   def my_day_report_json(report)
     {
@@ -29,8 +31,9 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
 
   describe 'GET #index' do
     it 'return all reports' do
-      get :index, format: :json
-      expect(JSON.parse(response.body).length).to eq(MyDayReport.all.length)
+      get :index, format: :json,
+                  params: { group_id: group }
+      expect(response.body).to eq(MyDayReport.all.to_json)
     end
   end
 
