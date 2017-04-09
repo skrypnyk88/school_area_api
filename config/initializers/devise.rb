@@ -33,40 +33,6 @@ Devise.setup do |config|
   config.warden do |manager|
     manager.strategies.add :jwt, Devise::Strategies::JWT
     manager.default_strategies(scope: :user).unshift :jwt
-    manager.failure_app = JwtFailureApp
-  end
-end
-
-module Devise
-  module Strategies
-    class JWT < Base
-      def valid?
-        request.authorization
-      end
-
-      def authenticate!
-        payload = JsonWebToken.decode(token)
-        success! User.find(payload[:user_id])
-      rescue ::JWT::ExpiredSignature
-        fail! 'Auth token has expired'
-      rescue ::JWT::DecodeError
-        fail! 'Auth token is invalid'
-      end
-
-      private
-
-      def token
-        request.authorization.split.last
-      end
-    end
-  end
-end
-
-class JwtFailureApp < Devise::FailureApp
-  def respond
-    self.status = :unauthorized
-    self.content_type = 'application/json'
-    self.response_body = { error: request.env['warden.options'][:message] }
-                         .to_json
+    manager.failure_app = Devise::JwtFailureApp
   end
 end

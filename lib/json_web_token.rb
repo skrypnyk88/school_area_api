@@ -1,4 +1,4 @@
-class JsonWebToken
+module JsonWebToken
   def self.encode(user)
     JWT.encode(payload(user), Rails.application.secrets.secret_key_base)
   end
