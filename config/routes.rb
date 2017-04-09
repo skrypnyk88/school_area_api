@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       resources :presence_reports do
         resources :report_times
       end
+<<<<<<< dc7cabfcc374cf2f4458079cda5f4c52ddaf7205
 >>>>>>> LVRUBYM-219: add ReportTimesController
     end
 <<<<<<< 624920b1a3efa372cbd806fe6010367441c5e6e7
@@ -64,9 +65,11 @@ Rails.application.routes.draw do
 >>>>>>> LVRUBYM-285:Implement api routes
 =======
       resources :bottle_reports, param: :day, only: [:index, :show] do
+=======
+      resources :bottle_reports, only: [:index] do
+>>>>>>> LVRUBYM-221:Changed controllers and tests; deleted show.json.jbuilder; fixed routes; removed default quantity value from schema
       resources :bottles, shallow: true
-    end
-    delete '/bottle_reports/:id', to: 'bottle_reports#destroy', as: 'destroy'
+      end
     end
 >>>>>>> LVRUBYM-221:Added associations to group and student; Changed controllers and added tests for it
   end

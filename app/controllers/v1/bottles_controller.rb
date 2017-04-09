@@ -3,7 +3,7 @@ module V1
     before_action :find_bottle, only: [:update, :destroy]
 
     def create
-      @bottle = Bottle.new(time: DateTime.now,
+      @bottle = Bottle.new(time: DateTime.now, quantity: 30,
                            bottle_report_id: params[:bottle_report_id])
       @bottle.save
       render :bottle

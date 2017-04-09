@@ -1,28 +1,33 @@
 module V1
   class BottleReportsController < ApplicationController
-    before_action :find_group_bottle_reports, only: [:index]
+    before_action :get_day, :find_group, :find_bottle_reports
 
-    def index; end
-
-    def show
-      date = Date.parse(params[:day])
-      @bottle_reports = BottleReport.where(day: date,
-                                           group_id: params[:group_id])
-    end
-
-    def destroy
-      @bottle_report = BottleReport.find_by id: params[:id]
-      render :not_found if @bottle_report.nil?
-      @bottle_report.destroy
-      head :ok
+    def index
+      @day.nil? ? find_by_group : find_by_group_and_day
     end
 
     private
 
-    def find_group_bottle_reports
-      group = Group.find_by id: params[:group_id]
-      render :not_found if group.nil?
-      @bottle_reports = group.bottle_reports
+    def find_by_group_and_day
+      @bottle_reports = BottleReport.where(day: @day,
+                                           group_id: params[:group_id])
+    end
+
+    def find_by_group
+      @bottle_reports = BottleReport.where(group_id: params[:group_id])
+    end
+
+    def get_day
+      @day = Date.parse(params[:day]) unless params[:day].nil?
+    end
+
+    def find_group
+      @group = Group.find_by id: params[:group_id]
+      render :not_found if @group.nil?
+    end
+
+    def find_bottle_reports
+      @bottle_reports = @group.bottle_reports
     end
   end
 end

@@ -2,45 +2,45 @@ require 'rails_helper'
 
 RSpec.describe V1::BottleReportsController, type: :controller do
   render_views
+
+  def bottle_report_json(bottle_report)
+    bottle_report_json = {'id'=> bottle_report.id,
+      'day'=> bottle_report.day.to_s,
+      'group_id' => bottle_report.group_id,
+      'student_id' => bottle_report.student_id,
+      'bottles'=> bottle_report.bottles.map{|b| {'id' => b.id,
+                                                 'quantity' => b.quantity,
+                                                 'time' => b.time.to_s,
+                                                 'uom' => b.uom,
+                                                 'bottle_report_id' => b.bottle_report_id}}
+                                                }
+  end
+
   let(:test_group) { FactoryGirl.create(:group) }
-  let(:test_bottle_report) { FactoryGirl.create(:bottle_report,
-                                                group_id: test_group.id) }
 
   describe 'GET #index' do
-    context 'when search for all bottle reports' do
-      it 'return all bottle reports' do
+    context 'when search for all bottle reports by group' do
+      it 'return all bottle reports for exact group' do
         test_bottle_reports = FactoryGirl.create_list(:bottle_report, 10,
                                                       group_id: test_group.id)
         get :index, format: :json, group_id: test_group.id
 
-        expect([JSON.parse(response.body).map { |entry| entry['id']}])
-        .to contain_exactly(test_bottle_reports.map(&:id))
+        expect(JSON.parse(response.body))
+        .to eq(test_bottle_reports.collect{|entry| bottle_report_json(entry)})
       end
     end
-  end
 
-  describe 'GET #show' do
-    context 'when search for existing bottle report bolongs to exact group' do
-      it 'return existing bottle_report' do
-        get :show, format: :json, day: test_bottle_report.day,
-                   group_id: test_group.id
-        expect(JSON.parse(response.body)[0]['id']).to eq(test_bottle_report.id)
-      end
-    end
-  end
+    context 'when search for all bottle reports by day and group' do
+      it 'return all bottle reports for exact day and group' do
+        test_bottle_reports = FactoryGirl.create_list(:bottle_report, 10,
+                                                      group_id:
+                                                      test_group.id,
+                                                      day: DateTime.now)
+        get :index, format: :json, group_id: test_group.id,
+                             day: DateTime.now
 
-  describe 'DELETE #destroy' do
-    context 'when bottle_report is deleted' do
-      it 'bottle_report doesn"t exist anymore' do
-        existed_bottle_reports = BottleReport.find_by id:
-        test_bottle_report.id
-
-        delete :destroy, format: :json, id: test_bottle_report.id,
-                         group_id: test_group.id
-        deleted_bottle_report = BottleReport.find_by id: test_bottle_report.id
-
-        expect(existed_bottle_reports).not_to be nil
-        expect(deleted_bottle_report).to be nil
+        expect(JSON.parse(response.body))
+        .to eq(test_bottle_reports.collect{|entry| bottle_report_json(entry)})
       end
     end
   end
