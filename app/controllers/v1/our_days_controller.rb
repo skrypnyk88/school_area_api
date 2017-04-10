@@ -1,11 +1,14 @@
 module V1
   class OurDaysController < ApplicationController
+    before_action :find_groups, only: [:index, :create]
+    before_action :join_our_day, only: [:show, :update, :destroy]
+    
     def index
-      @our_days = OurDay.all
+      @our_days = @group.our_days
     end
 
     def create
-      @our_day = OurDay.new(our_day_params)
+      @our_day = @group.our_days.build(our_day_params)
       if @our_day.save
         render :show
       else
@@ -14,11 +17,9 @@ module V1
     end
 
     def show
-      @our_day = OurDay.find(params[:id])
     end
 
     def update
-      @our_day = OurDay.find(params[:id])
       if @our_day.update(our_day_params)
         render :show
       else
@@ -27,12 +28,21 @@ module V1
     end
 
     def destroy
-      @our_day = OurDay.find(params[:id])
       @our_day.destroy
       head :ok
     end
 
     private
+    
+    def join_our_day
+      @our_day = OurDay.find_by(id: params[:id])
+      head :bad_request unless @our_day
+    end
+    
+    def find_groups
+      @group = Group.find_by(id: params[:group_id])
+      head :bad_request unless @group
+    end
 
     def our_day_params
       params.require(:our_day).permit(:description, :day)
