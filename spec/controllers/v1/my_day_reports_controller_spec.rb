@@ -7,6 +7,10 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
   let!(:student) { create(:student, group: group) }
   let!(:report) { create(:my_day_report, group: group, student: student) }
 
+  before do
+    allow(subject).to receive(:authenticate_user!)
+  end
+
   def my_day_report_json(report)
     {
       id: report.id,
@@ -39,8 +43,8 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
 
   describe 'GET #show' do
     it 'renders my_day_report json' do
-      get :show, id: report,
-                 format: :json
+      get :show, format: :json,
+                 params: { id: report }
       expect(response.body).to eq(my_day_report_json(report))
     end
   end
