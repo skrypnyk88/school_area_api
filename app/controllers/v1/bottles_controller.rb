@@ -11,9 +11,9 @@ module V1
 
     def update
       if @bottle.update_attributes(bottle_params)
-         render :bottle
+        render :bottle
       else
-         render :bad_request
+        render :bad_request
       end
     end
 

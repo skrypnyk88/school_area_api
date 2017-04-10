@@ -1,29 +1,29 @@
-ActiveRecord::Schema.define(version: 20170409135323) do
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20170404182250) do
+  enable_extension 'plpgsql'
 
-  create_table "bottle_reports", force: :cascade do |t|
-    t.date     "day"
-    t.integer  "student_id"
-    t.integer  "updated_by"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["day"], name: "index_bottle_reports_on_day", using: :btree
+  create_table 'bottle_reports', force: :cascade do |t|
+    t.date     'day'
+    t.integer  'student_id'
+    t.integer  'updated_by'
+    t.integer  'group_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['day'], name: 'index_bottle_reports_on_day', using: :btree
   end
 
-  create_table "bottles", force: :cascade do |t|
-    t.float    "quantity"
-    t.datetime "time"
-    t.integer  "uom",              default: 0
-    t.integer  "bottle_report_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+  create_table 'bottles', force: :cascade do |t|
+    t.float    'quantity'
+    t.datetime 'time'
+    t.integer  'uom',              default: 0
+    t.integer  'bottle_report_id'
+    t.datetime 'created_at',                      null: false
+    t.datetime 'updated_at',                      null: false
   end
 
-  create_table "groups", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'groups', force: :cascade do |t|
+    t.string   'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table "my_day_reports", force: :cascade do |t|
@@ -46,22 +46,33 @@ ActiveRecord::Schema.define(version: 20170409135323) do
     t.datetime "updated_at", null: false
     t.integer  "group_id"
     t.index ["group_id"], name: "index_students_on_group_id", using: :btree
+
+  create_table 'students', force: :cascade do |t|
+    t.string   'first_name'
+    t.string   'last_name'
+    t.date     'birthdate'
+    t.integer  'gender'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer  'group_id'
+    t.index ['group_id'], name: 'index_students_on_group_id', using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "gender"
-    t.string   "phone"
-    t.string   "type"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "email",              default: "", null: false
-    t.string   "encrypted_password", default: "", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+  create_table 'users', force: :cascade do |t|
+    t.string   'first_name'
+    t.string   'last_name'
+    t.integer  'gender'
+    t.string   'phone'
+    t.string   'type'
+    t.datetime 'created_at',                      null: false
+    t.datetime 'updated_at',                      null: false
+    t.string   'email',              default: '', null: false
+    t.string   'encrypted_password', default: '', null: false
+    t.index ['email'], name: 'index_users_on_email', unique: true, using: :btree
   end
 
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
   add_foreign_key "students", "groups"
+  add_foreign_key 'students', 'groups'
 end
