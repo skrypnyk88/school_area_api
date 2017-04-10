@@ -44,7 +44,7 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
   describe 'GET #show' do
     it 'renders my_day_report json' do
       get :show, format: :json,
-                 params: { id: report }
+                 params: { id: report, group_id: group }
       expect(response.body).to eq(my_day_report_json(report))
     end
   end
@@ -54,6 +54,7 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
       let(:valid_params) do
         { method: :patch,
           id: report,
+          group_id: group,
           report: { note: 'Aaaa' } }
       end
 
@@ -73,7 +74,7 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let(:delete_params) { { method: :delete, id: report } }
+    let(:delete_params) { { method: :delete, id: report, group_id: group } }
 
     it 'deletes reports' do
       post :destroy,

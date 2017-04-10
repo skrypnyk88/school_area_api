@@ -29,7 +29,8 @@ module V1
     end
 
     def find_my_day_report
-      @report = MyDayReport.find_by(id: params[:id])
+      @report = MyDayReport.find_by(id: params[:id],
+                                    group_id: params[:group_id])
       head :not_found unless @report
     end
 
