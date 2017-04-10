@@ -2,11 +2,14 @@ require 'rails_helper'
 
 RSpec.describe V1::BottlesController, type: :controller do
   render_views
+
   let(:test_group) { FactoryGirl.create(:group) }
-  let(:test_bottle_report) { FactoryGirl.create(:bottle_report,
-                                                 group_id: test_group.id) }
+  let(:test_bottle_report) { FactoryGirl.create(:bottle_report,                                             group_id: test_group.id) }
   let(:test_bottle) { FactoryGirl.create(:bottle,
                                          bottle_report_id: test_bottle_report.id) }
+  before do
+    allow(subject).to receive(:authenticate_user!)
+  end
 
   describe 'POST #create' do
     context 'when bottle is created' do
@@ -23,28 +26,50 @@ RSpec.describe V1::BottlesController, type: :controller do
 
   describe 'PUT #update' do
     context 'when bottle is updated' do
-      let(:new_test_bottle) { FactoryGirl.create(:bottle,
-                                                 quantity: 10,
-                                                 uom: 'oz',
-                                                 bottle_report_id: test_bottle_report.id) }
-      put :update, format: :json,
+      it 'property quantity is updated' do
+        new_bottle = FactoryGirl.create(:bottle, quantity: 10, uom: 'oz',
+                                        bottle_report_id: test_bottle_report.id)
+        put :update, format: :json,
                      bottle_report_day: test_bottle_report.day,
-                     id: test_bottle.id, bottle: { quantity: 500,
-                                                   time: DateTime.now,
-                                                   uom: 'ml' }
+                     id: new_bottle.id,
+                     bottle: { quantity: 500,
+                               time: DateTime.now,
+                               uom: 'ml' }
+        updated_bottle = Bottle.find_by id: new_bottle.id
 
-      updated_bottle = Bottle.find_by id: test_bottle.id
-
-      it 'updated an existing bottle quantity' do
-        expect(existed_bottle.quantity).to be == 500
+        expect(updated_bottle.quantity).to be == 500
       end
+    end
 
-      it 'updated an existing bottle uom' do
-        expect(existed_bottle.uom).to be == 'ml'
+    context 'when bottle is updated' do
+      it 'property uom is updated' do
+        new_bottle = FactoryGirl.create(:bottle, quantity: 10, uom: 'oz',
+                                        bottle_report_id: test_bottle_report.id)
+        put :update, format: :json,
+                     bottle_report_day: test_bottle_report.day,
+                     id: new_bottle.id,
+                     bottle: { quantity: 500,
+                               time: DateTime.now,
+                               uom: 'ml' }
+        updated_bottle = Bottle.find_by id: new_bottle.id
+
+        expect(updated_bottle.uom).to be == 'ml'
       end
+    end
 
-      it 'updated an existing bottle time' do
-        expect(existed_bottle.time).to be > ((DateTime.now - 5.seconds))
+    context 'when bottle is updated' do
+      it 'property time is updated' do
+        new_bottle = FactoryGirl.create(:bottle, quantity: 10, uom: 'oz',
+                                        bottle_report_id: test_bottle_report.id)
+        put :update, format: :json,
+                     bottle_report_day: test_bottle_report.day,
+                     id: new_bottle.id,
+                     bottle: { quantity: 500,
+                               time: DateTime.now,
+                               uom: 'ml' }
+        updated_bottle = Bottle.find_by id: new_bottle.id
+
+        expect(updated_bottle.time).to be > ((DateTime.now - 5.seconds))
       end
     end
   end
