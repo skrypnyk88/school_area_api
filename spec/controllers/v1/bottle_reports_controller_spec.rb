@@ -18,6 +18,10 @@ RSpec.describe V1::BottleReportsController, type: :controller do
 
   let(:test_group) { FactoryGirl.create(:group) }
 
+  before do
+    allow(subject).to receive(:authenticate_user!)
+  end
+
   describe 'GET #index' do
     context 'when search for all bottle reports by group' do
       it 'return all bottle reports for exact group' do
