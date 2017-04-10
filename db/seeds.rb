@@ -13,7 +13,6 @@ Teacher.create(
 group = Group.create(name: 'Group 1')
 
 10.times do
-
   group.students.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -29,5 +28,6 @@ group = Group.create(name: 'Group 1')
     day: Faker::Date.backward(111),
     note:  Faker::Lorem.sentence,
     student_id: student.id
+
   )
 end

@@ -2,7 +2,7 @@ module V1
   class OurDaysController < ApplicationController
     before_action :find_groups, only: [:index, :create]
     before_action :join_our_day, only: [:show, :update, :destroy]
-    
+
     def index
       @our_days = @group.our_days
     end
@@ -16,8 +16,7 @@ module V1
       end
     end
 
-    def show
-    end
+    def show; end
 
     def update
       if @our_day.update(our_day_params)
@@ -33,12 +32,12 @@ module V1
     end
 
     private
-    
+
     def join_our_day
       @our_day = OurDay.find_by(id: params[:id])
       head :bad_request unless @our_day
     end
-    
+
     def find_groups
       @group = Group.find_by(id: params[:group_id])
       head :bad_request unless @group
