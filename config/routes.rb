@@ -67,8 +67,12 @@ Rails.application.routes.draw do
       resources :bottle_reports, param: :day, only: [:index, :show] do
 =======
       resources :bottle_reports, only: [:index] do
+<<<<<<< 6f21083b0febfee5b0ee0c58ec3b8dd2db40bd2b
 >>>>>>> LVRUBYM-221:Changed controllers and tests; deleted show.json.jbuilder; fixed routes; removed default quantity value from schema
       resources :bottles, shallow: true
+=======
+        resources :bottles, shallow: true
+>>>>>>> LVRUBYM-221: Checked with rubocop
       end
     end
 >>>>>>> LVRUBYM-221:Added associations to group and student; Changed controllers and added tests for it

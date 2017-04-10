@@ -1,3 +1,4 @@
+
 Documentation:
   Enabled: false
 
@@ -15,3 +16,37 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
+
+Metrics/LineLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 100
+
+NumericLiterals:
+  MinDigits: 20
+
+Style/BlockDelimiters:
+  Description: >-
+                Avoid using {...} for multi-line blocks (multiline chaining is
+                always ugly).
+                Prefer {...} over do...end for single-line blocks.
+  StyleGuide: '#single-line-blocks'
+  Enabled: false
+
+Style/AlignParameters:
+  Description: >-
+                 Align the parameters of a method call if they span more
+                 than one line.
+  StyleGuide: '#no-double-indent'
+  Enabled: false
+
+Style/MultilineHashBraceLayout:
+  Description: >-
+                 Checks that the closing brace in a hash literal is
+                 either on the same line as the last hash element, or
+                 a new line.
+  Enabled: false
