@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe OurDay, type: :model do
+  let(:group) { FactoryGirl.create :group }
+
   describe '#our_day' do
     context 'when our_day is good' do
       it 'should valid' do
-        expect(build(:our_day)).to be_valid
+        expect(build(:our_day, group: group)).to be_valid
       end
     end
   end
