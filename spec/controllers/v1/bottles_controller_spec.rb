@@ -3,9 +3,18 @@ require 'rails_helper'
 RSpec.describe V1::BottlesController, type: :controller do
   render_views
 
-  let(:test_group) { FactoryGirl.create(:group) }
-  let(:test_bottle_report) { FactoryGirl.create(:bottle_report, group_id: test_group.id) }
-  let(:test_bottle) { FactoryGirl.create(:bottle, bottle_report_id: test_bottle_report.id) }
+  let(:test_group) do
+    FactoryGirl.create(:group)
+  end
+
+  let(:test_bottle_report) do
+    FactoryGirl.create(:bottle_report, group_id: test_group.id)
+  end
+
+  let(:test_bottle) do
+    FactoryGirl.create(:bottle, bottle_report_id: test_bottle_report.id)
+  end
+
   before do
     allow(subject).to receive(:authenticate_user!)
   end
@@ -27,7 +36,8 @@ RSpec.describe V1::BottlesController, type: :controller do
     context 'when bottle is updated' do
       it 'property quantity is updated' do
         new_bottle = FactoryGirl.create(:bottle, quantity: 10, uom: 'oz',
-                                                 bottle_report_id: test_bottle_report.id)
+                                                 bottle_report_id:
+                                                 test_bottle_report.id)
         put :update, format: :json,
                      bottle_report_day: test_bottle_report.day,
                      id: new_bottle.id,
@@ -43,7 +53,8 @@ RSpec.describe V1::BottlesController, type: :controller do
     context 'when bottle is updated' do
       it 'property uom is updated' do
         new_bottle = FactoryGirl.create(:bottle, quantity: 10, uom: 'oz',
-                                                 bottle_report_id: test_bottle_report.id)
+                                                 bottle_report_id:
+                                                 test_bottle_report.id)
         put :update, format: :json,
                      bottle_report_day: test_bottle_report.day,
                      id: new_bottle.id,
@@ -59,7 +70,8 @@ RSpec.describe V1::BottlesController, type: :controller do
     context 'when bottle is updated' do
       it 'property time is updated' do
         new_bottle = FactoryGirl.create(:bottle, quantity: 10, uom: 'oz',
-                                                 bottle_report_id: test_bottle_report.id)
+                                                 bottle_report_id:
+                                                 test_bottle_report.id)
         put :update, format: :json,
                      bottle_report_day: test_bottle_report.day,
                      id: new_bottle.id,
