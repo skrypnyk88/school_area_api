@@ -1,7 +1,7 @@
 module V1
   class HealthReportsController < ApplicationController
+    before_action :set_group, exept: [:show, :update, :destroy]
     before_action :set_report, only: [:show, :update, :destroy]
-    before_action :availability_group, only: [:index, :create]
 
     def index
       @reports = @group.health_reports
@@ -34,11 +34,10 @@ module V1
     private
 
     def set_report
-      @report = HealthReport.find_by(id: params[:id])
-      head :not_found unless @report
+      @report = @group.health_reports.find_by(id: params[:id])
     end
 
-    def availability_group
+    def set_group
       @group = Group.find_by(id: params[:group_id])
       head :not_found unless @group
     end

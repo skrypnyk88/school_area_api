@@ -15,9 +15,11 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   let(:report) { create(:health_report, group: group, student: student) }
 
-  let(:atr_for_rep) { attributes_for(:health_report).with_indifferent_access }
+  let(:attributes_for_health_reports) do
+    attributes_for(:health_report).with_indifferent_access
+  end
 
-  let(:group_report) do
+  let(:health_reports) do
     5.times do
       create(:health_report, group: group)
     end
@@ -30,7 +32,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   describe 'GET #show' do
     it 'returns report' do
-      get :show, params: { id: report },
+      get :show, params: { id: report, group_id: health_reports },
                  format: :json
 
       expect(response.body).to eq(report_params(report).to_json)
@@ -39,12 +41,12 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns all reports' do
-      responce_report = group_report.health_reports
-                                    .map { |s| report_params(s) }
-                                    .to_json
+      responce_report = health_reports.health_reports
+                                      .map { |s| report_params(s) }
+                                      .to_json
 
       get :index, format: :json,
-                  params: { group_id: group_report }
+                  params: { group_id: group }
 
       expect(response.body).to be_eql(responce_report)
     end
@@ -66,6 +68,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
         expect(HealthReport.find_by(report_params(test_report))).to be_present
       end
     end
+
     context 'when report is not valid' do
       it 'renders bad_request response' do
         post :create,
@@ -73,7 +76,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              params: {
                group_id: group,
                student_id: student,
-               report: atr_for_rep
+               report: attributes_for_health_reports
              }
 
         expect(response).to have_http_status(:bad_request)
@@ -89,6 +92,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              params: {
                method: :patch,
                id: report,
+               group_id: group,
                report: { health_note: 'Some text for testing' }
              }
 
@@ -103,6 +107,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
              params: {
                method: :patch,
                id: report,
+               group_id: group,
                report: { special_care: nil }
              }
         expect(response).to have_http_status(:bad_request)
@@ -111,7 +116,9 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let(:delete_params) { { method: :delete, id: report } }
+    let(:delete_params) do
+      { method: :delete, id: report, group_id: group }
+    end
     context 'when report is valid' do
       it 'destroy report' do
         post :destroy,
