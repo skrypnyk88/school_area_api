@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
   belongs_to :group, optional: true
+  has_many :my_day_reports, dependent: :nullify
 
   before_save :titleize_name
 
