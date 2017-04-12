@@ -10,7 +10,8 @@ RSpec.describe V1::BottleReportsController, type: :controller do
       'bottles' => bottle_report.bottles
                                 .map do |b|
                                   { 'id' => b.id, 'quantity' => b.quantity,
-                                    'time' => b.time.to_s, 'uom' => b.uom,
+                                    'time' => JSON.parse(b.time.to_json),
+                                    'uom' => b.uom,
                                     'bottle_report_id' => b.bottle_report_id }
                                 end }
   end

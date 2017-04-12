@@ -1,6 +1,6 @@
 module V1
   class BottleReportsController < ApplicationController
-    before_action :check_day, :find_group, :find_bottle_reports
+    before_action :fill_group_and_day
 
     def index
       @day.nil? ? find_by_group : find_by_group_and_day
@@ -9,25 +9,17 @@ module V1
     private
 
     def find_by_group_and_day
-      @bottle_reports = BottleReport.where(day: @day,
-                                           group_id: params[:group_id])
+      @bottle_reports = @group.bottle_reports.where(day: @day)
     end
 
     def find_by_group
-      @bottle_reports = BottleReport.where(group_id: params[:group_id])
-    end
-
-    def check_day
-      @day = Date.parse(params[:day]) unless params[:day].nil?
-    end
-
-    def find_group
-      @group = Group.find_by id: params[:group_id]
-      render :not_found if @group.nil?
-    end
-
-    def find_bottle_reports
       @bottle_reports = @group.bottle_reports
+    end
+
+    def fill_group_and_day
+      @group = Group.find_by id: params[:group_id]
+      head :not_found if @group.nil?
+      @day = Date.parse(params[:day]) unless params[:day].nil?
     end
   end
 end
