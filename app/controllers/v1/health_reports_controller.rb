@@ -1,6 +1,6 @@
 module V1
   class HealthReportsController < ApplicationController
-    before_action :set_group, exept: [:show, :update, :destroy]
+    before_action :set_group#, except: [:show, :update, :destroy]
     before_action :set_report, only: [:show, :update, :destroy]
 
     def index
