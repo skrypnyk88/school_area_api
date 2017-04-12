@@ -1,5 +1,4 @@
 ActiveRecord::Schema.define(version: 20170409135323) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -10,12 +9,12 @@ ActiveRecord::Schema.define(version: 20170409135323) do
   end
 
   create_table "my_day_reports", force: :cascade do |t|
+    t.date     "day"
+    t.text     "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date     "day"
-    t.integer  "student_id"
-    t.text     "note"
     t.integer  "group_id"
+    t.integer  "student_id"
     t.index ["group_id"], name: "index_my_day_reports_on_group_id", using: :btree
     t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
   end
@@ -45,5 +44,6 @@ ActiveRecord::Schema.define(version: 20170409135323) do
   end
 
   add_foreign_key "my_day_reports", "groups"
+  add_foreign_key "my_day_reports", "students"
   add_foreign_key "students", "groups"
 end
