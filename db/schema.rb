@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170409175847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
-  add_foreign_key "my_day_reports", "groups"
-  add_foreign_key "my_day_reports", "students"
   add_foreign_key "health_reports", "groups"
   add_foreign_key "health_reports", "students"
+  add_foreign_key "my_day_reports", "groups"
+  add_foreign_key "my_day_reports", "students"
   add_foreign_key "students", "groups"
 end

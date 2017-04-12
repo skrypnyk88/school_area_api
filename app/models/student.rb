@@ -3,7 +3,6 @@ class Student < ApplicationRecord
   has_many :my_day_reports, dependent: :nullify
   has_many :health_reports, dependent: :destroy
 
-
   before_save :titleize_name
 
   enum gender: { male: 0, female: 1 }

@@ -19,22 +19,17 @@ group = Group.create(name: 'Group 1')
     birthdate: Faker::Date.birthday(2, 6),
     gender: Faker::Demographic.sex.downcase
   )
-end
 
-10.times do
   group.my_day_reports.create(
     day: Faker::Date.backward(111),
     note:  Faker::Lorem.sentence,
     student_id: student.id
   )
-end
 
-10.times do
-  HealthReport.create(
+  group.health_reports.create(
     day: Faker::Date.backward(100),
     special_care: [true, false].sample,
     health_note: Faker::Lorem.sentence,
-    student_id: 1,
-    group_id: 1
+    student_id: student.id
   )
 end
