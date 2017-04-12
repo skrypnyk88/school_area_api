@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20170424073006) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
-      create_table "bottle_reports", force: :cascade do |t|
+    create_table "bottle_reports", force: :cascade do |t|
     t.date     "day"
     t.integer  "student_id"
     t.integer  "updated_by"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20170424073006) do
   end
 
   create_table "bottles", force: :cascade do |t|
-    t.float    "quantity"
+    t.float    "quantity",         default: 30.0
     t.datetime "time"
     t.integer  "uom",              default: 0
     t.integer  "bottle_report_id"
