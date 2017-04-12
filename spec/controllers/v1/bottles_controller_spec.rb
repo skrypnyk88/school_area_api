@@ -3,6 +3,14 @@ require 'rails_helper'
 RSpec.describe V1::BottlesController, type: :controller do
   render_views
 
+  def bottle_json(bottle)
+    { 'id' => bottle.id,
+      'quantity' => bottle.quantity,
+      'time' => JSON.parse(bottle.time.to_json),
+      'uom' => bottle.uom,
+      'bottle_report_id' => bottle.bottle_report_id }
+  end
+
   let(:test_group) do
     FactoryGirl.create(:group)
   end
@@ -17,6 +25,23 @@ RSpec.describe V1::BottlesController, type: :controller do
 
   before do
     allow(subject).to receive(:authenticate_user!)
+  end
+
+  describe 'GET #index' do
+    context 'when return all bottles belongs to exact report' do
+      it 'return all bottles for exact report' do
+        test_bottles = FactoryGirl.create_list(:bottle, 10,
+                                               bottle_report_id:
+                                               test_bottle_report.id)
+        get :index, format: :json,
+                    group_id: test_group.id,
+                    bottle_report_id: test_bottle_report.id
+
+        expect(JSON.parse(response.body))
+          .to eq(test_bottles
+          .collect { |entry| bottle_json(entry) })
+      end
+    end
   end
 
   describe 'POST #create' do
@@ -39,7 +64,8 @@ RSpec.describe V1::BottlesController, type: :controller do
                                                  bottle_report_id:
                                                  test_bottle_report.id)
         put :update, format: :json,
-                     bottle_report_day: test_bottle_report.day,
+                     group_id: test_group.id,
+                     bottle_report_id: test_bottle_report.id,
                      id: new_bottle.id,
                      bottle: { quantity: 500,
                                time: DateTime.now,
@@ -56,7 +82,8 @@ RSpec.describe V1::BottlesController, type: :controller do
                                                  bottle_report_id:
                                                  test_bottle_report.id)
         put :update, format: :json,
-                     bottle_report_day: test_bottle_report.day,
+                     group_id: test_group.id,
+                     bottle_report_id: test_bottle_report.id,
                      id: new_bottle.id,
                      bottle: { quantity: 500,
                                time: DateTime.now,
@@ -73,7 +100,8 @@ RSpec.describe V1::BottlesController, type: :controller do
                                                  bottle_report_id:
                                                  test_bottle_report.id)
         put :update, format: :json,
-                     bottle_report_day: test_bottle_report.day,
+                     group_id: test_group.id,
+                     bottle_report_id: test_bottle_report.id,
                      id: new_bottle.id,
                      bottle: { quantity: 500,
                                time: DateTime.now,
@@ -91,7 +119,8 @@ RSpec.describe V1::BottlesController, type: :controller do
         existed_bottles = Bottle.find_by id: test_bottle.id
 
         delete :destroy, format: :json,
-                         bottle_report_day: test_bottle_report.day,
+                         group_id: test_group.id,
+                         bottle_report_id: test_bottle_report.id,
                          id: test_bottle.id
 
         deleted_bottle = Bottle.find_by id: test_bottle.id

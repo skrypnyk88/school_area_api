@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
     delete '/bottle_reports/:id', to: 'bottle_reports#destroy', as: 'destroy'
       resources :bottle_reports, only: [:index] do
-        resources :bottles, shallow: true
+        resources :bottles
       end
     end
   end
