@@ -1,1 +1,4 @@
-json.(@report, :id, :group_id, :day, :student_id, :note)
+json.first_name @report.student.first_name
+json.last_name @report.student.last_name
+json.my_day_report_id @report.id
+json.my_day_report_note @report.note
