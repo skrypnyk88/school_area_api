@@ -1,10 +1,10 @@
 module V1
   class MyDayReportsController < ApplicationController
     before_action :find_my_day_report, only: [:show, :update, :destroy]
+    before_action :find_students, only: [:index, :show]
 
     def index
       @reports = Group.find(params[:group_id]).my_day_reports
-      @students = Group.find(params[:group_id]).students
     end
 
     def show; end
@@ -33,6 +33,10 @@ module V1
       @report = MyDayReport.find_by(id: params[:id],
                                     group_id: params[:group_id])
       head :not_found unless @report
+    end
+
+    def find_students
+      @students = Group.find(params[:group_id]).students
     end
 
     def render_json_or_exception(condition, json_file)
