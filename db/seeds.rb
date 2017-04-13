@@ -22,12 +22,11 @@ group = Group.create(name: 'Group 1')
   OurDay.create(
     description: Faker::Lorem.paragraph,
     day: Faker::Date.between(10.days.ago, Date.today),
-    group_id: 1
+    group_id: group
   )
   group.my_day_reports.create(
     day: Faker::Date.backward(111),
     note:  Faker::Lorem.sentence,
     student_id: student.id
-
   )
 end

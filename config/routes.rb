@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :groups do
       resources :students, shallow: true
-      resources :our_days, shallow: true
       resources :my_day_reports, shallow: true
+      resources :our_days
     end
   end
 end

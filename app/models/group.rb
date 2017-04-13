@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
   has_many :students, dependent: :nullify
-  has_many :our_day, dependent: :nullify
+  has_many :our_days, dependent: :nullify
   has_many :my_day_reports, dependent: :nullify
 
   before_save :capitalize_name
