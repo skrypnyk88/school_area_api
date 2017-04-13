@@ -16,11 +16,10 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
 
   def my_day_report_json(report)
     {
-      id: report.id,
-      group_id: report.group_id,
-      day: report.day,
-      student_id: report.student_id,
-      note: report.note
+      first_name: report.student.first_name,
+      last_name: report.student.last_name,
+      my_day_report_id: report.id,
+      my_day_report_note: report.note
     }.to_json
   end
 
