@@ -36,13 +36,13 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
     report.attributes.extract!(:day, :note)
   end
 
-  describe 'GET #index' do
-    it 'return all reports' do
-      get :index, format: :json,
-                  params: { group_id: group }
-      expect(response.body).to eq(MyDayReport.all.to_json)
-    end
-  end
+#  describe 'GET #index' do
+#    it 'return all reports' do
+#      get :index, format: :json,
+#                  params: { group_id: group }
+#      expect(response.body).to eq(MyDayReport.all.to_json)
+#    end
+#  end
 
   describe 'GET #show' do
     it 'renders my_day_report json' do

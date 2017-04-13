@@ -4,6 +4,7 @@ module V1
 
     def index
       @reports = Group.find(params[:group_id]).my_day_reports
+      @students = Group.find(params[:group_id]).students
     end
 
     def show; end
