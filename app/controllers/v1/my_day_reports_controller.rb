@@ -1,13 +1,9 @@
 module V1
   class MyDayReportsController < ApplicationController
-    before_action :find_my_day_report, only: [:show, :update, :destroy]
-    before_action :find_students, only: [:index, :show]
-
     def index
       @reports = Group.find(params[:group_id]).my_day_reports
+      @students = Group.find(params[:group_id]).students
     end
-
-    def show; end
 
     def create
       @report = MyDayReport.new(report_params)
@@ -15,24 +11,16 @@ module V1
     end
 
     def update
+      @report = MyDayReport.find_by(id: params[:id],
+                                    group_id: params[:group_id])
+      head :not_found unless @report
       render_json_or_exception(@report.update(report_params), :update)
-    end
-
-    def destroy
-      @report.destroy
-      head :no_content
     end
 
     private
 
     def report_params
       params.require(:report).permit(:day, :note)
-    end
-
-    def find_my_day_report
-      @report = MyDayReport.find_by(id: params[:id],
-                                    group_id: params[:group_id])
-      head :not_found unless @report
     end
 
     def find_students
