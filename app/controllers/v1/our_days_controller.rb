@@ -9,21 +9,13 @@ module V1
 
     def create
       @our_day = @group.our_days.build(our_day_params)
-      if @our_day.save
-        render :show
-      else
-        head :bad_request
-      end
+      render_show_or_bad_request(@our_day.save)
     end
 
     def show; end
 
     def update
-      if @our_day.update(our_day_params)
-        render :show
-      else
-        head :bad_request
-      end
+      render_show_or_bad_request(@our_day.update(our_day_params))
     end
 
     private
@@ -36,6 +28,10 @@ module V1
     def find_our_day
       @our_day = @group.our_days.find_by(id: params[:id])
       head :bad_request unless @our_day
+    end
+
+    def render_show_or_bad_request(succeed)
+      succeed ? (render :show) : (head :bad_request)
     end
 
     def our_day_params

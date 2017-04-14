@@ -13,16 +13,15 @@ Teacher.create(
 group = Group.create(name: 'Group 1')
 
 10.times do
-  group.students.create(
+  student = group.students.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     birthdate: Faker::Date.birthday(2, 6),
     gender: Faker::Demographic.sex.downcase
   )
-  OurDay.create(
+  group.our_days.create(
     description: Faker::Lorem.paragraph,
-    day: Faker::Date.between(10.days.ago, Date.today),
-    group_id: group
+    day: Faker::Date.between(10.days.ago, Date.today)
   )
   group.my_day_reports.create(
     day: Faker::Date.backward(111),

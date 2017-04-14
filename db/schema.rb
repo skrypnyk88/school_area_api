@@ -1,20 +1,11 @@
 ActiveRecord::Schema.define(version: 20170410155717) do
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "our_days", force: :cascade do |t|
-    t.text     "description"
-    t.date     "day"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "group_id"
-    t.index ["day"], name: "index_our_days_on_day", using: :btree
-    t.index ["group_id"], name: "index_our_days_on_group_id", using: :btree
   end
 
   create_table "my_day_reports", force: :cascade do |t|
@@ -26,6 +17,16 @@ ActiveRecord::Schema.define(version: 20170410155717) do
     t.integer  "student_id"
     t.index ["group_id"], name: "index_my_day_reports_on_group_id", using: :btree
     t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
+  end
+
+  create_table "our_days", force: :cascade do |t|
+    t.text     "description"
+    t.date     "day"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "group_id"
+    t.index ["day"], name: "index_our_days_on_day", using: :btree
+    t.index ["group_id"], name: "index_our_days_on_group_id", using: :btree
   end
 
   create_table "students", force: :cascade do |t|
