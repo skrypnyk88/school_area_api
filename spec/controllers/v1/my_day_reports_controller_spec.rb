@@ -2,11 +2,26 @@ require 'rails_helper'
 
 RSpec.describe V1::MyDayReportsController, type: :controller do
   render_views
+
+  def report_params(report)
+    {
+      first_name: report.student.first_name,
+      last_name: report.student.last_name,
+      my_day_report_id: report.id,
+      my_day_report_note: report.note
+    }
+  end
+
   let!(:group) { create(:group) }
 
   let!(:student) { create(:student, group: group) }
   let!(:report) { create(:my_day_report, group: group, student: student) }
-
+  let(:my_day_reports) do
+    5.times do
+      create(:my_day_report, group: group, student: student)
+    end
+    group
+  end
   before do
     allow(subject).to receive(:authenticate_user!)
   end
@@ -32,13 +47,16 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
     report.attributes.extract!(:day, :note)
   end
 
-  # describe 'GET #index' do
-  #   it 'return all reports' do
-  #      get :index, format: :json,
-  #                  params: { group_id: group }
-  #      expect(response.body).to eq(MyDayReport.all.to_json)
-  #    end
-  #  end
+  describe 'GET #index' do
+    it 'return all reports' do
+      response_report = my_day_reports.my_day_reports
+                                      .map { |s| report_params(s) }
+                                      .to_json
+      get :index, format: :json,
+                  params: { group_id: group }
+      expect(response.body).to eq(response_report)
+    end
+  end
 
   describe 'GET #show' do
     it 'renders my_day_report json' do
