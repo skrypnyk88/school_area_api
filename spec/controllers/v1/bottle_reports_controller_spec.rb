@@ -25,9 +25,11 @@ RSpec.describe V1::BottleReportsController, type: :controller do
         get :index, format: :json,
                     group_id: test_group.id
 
+        body = test_bottle_reports.collect { |entry| bottle_report_data(entry) }
+                                  .to_json
+
         expect(response.body)
-          .to eq(test_bottle_reports
-          .collect { |entry| bottle_report_data(entry) }.to_json)
+          .to eq(body)
       end
     end
 
@@ -40,9 +42,11 @@ RSpec.describe V1::BottleReportsController, type: :controller do
                     group_id: test_group.id,
                     day: DateTime.now
 
+        body = test_bottle_reports.collect { |entry| bottle_report_data(entry) }
+                                  .to_json
+
         expect(response.body)
-          .to eq(test_bottle_reports
-          .collect { |entry| bottle_report_data(entry) }.to_json)
+          .to eq(body)
       end
     end
   end
