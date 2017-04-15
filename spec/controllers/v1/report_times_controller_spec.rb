@@ -3,6 +3,7 @@
 # RSpec.describe V1::ReportTimesController, type: :controller do
 #   render_views
 
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
@@ -48,6 +49,8 @@
                                 } }
         expect(ReportTime.exists?(start_time: '2017-01-01 11:11')).to be_truthy
 =======
+=======
+>>>>>>> LVRUBYM-219: add ReportTimesController
   let!(:group) { create(:group) }
   let!(:student) { create(:student, group: group) }
   let!(:presence_report) do
@@ -57,6 +60,7 @@
   before do
     allow(subject).to receive(:authenticate_user!)
   end
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 =======
 #   let!(:group) { create(:group) }
 #   let!(:student) { create(:student, group: group) }
@@ -278,97 +282,121 @@
   #   @report_time = create(:report_time)
   #   @report_time_json = create(:report_time).to_json
   # end
+=======
+>>>>>>> LVRUBYM-219: add ReportTimesController
 
-  # describe 'GET #index' do
-  #   it 'returns all reports' do
-  #     @new_report = create(:report_time).to_json
-  #     get :index,
-  #         format: :json,
-  #         params: {
-  #           presence_report_id: 1
-  #         }
+  def report_time_json(report)
+    {
+      id: report.id,
+      start_time: report.start_time,
+      end_time: report.end_time
+    }.to_json
+  end
 
-  #     expect(response.body).to include(@report_time_json)
-  #     expect(response.body).to include(@new_report)
-  #   end
-  # end
+  def report_time_params(report)
+    report.attributes.extract!(:start_time)
+  end
 
-  # describe 'POST #create' do
-  #   # context 'when report is valid' do
-  #   #   it 'renders student json' do
-  #   #     report_time_attrs = attributes_for(:report_time)
-  #   #     post :create,
-  #   #          format: :json,
-  #   #          params: {
-  #   #            report_time: report_time_attrs,
-  #   #            presence_report_id: 1
-  #   #          }
+  describe 'GET #index' do
+    it 'return all reports' do
+      get :index, format: :json,
+                  params: { group_id: group,
+                            presence_report_id: presence_report.id }
+      expect(response.body)
+        .to include(report_time_json(report))
+    end
+  end
 
-  #   #     expect(JSON.parse(response.body)).to include(report_time_attrs)
-  #   #   end
-  #   # end
-  #   context 'when report is not valid' do
-  #     it 'renders bad_request response' do
-  #       report_time_attrs = attributes_for(:report_time, start_time: 'sada')
-  #       post :create,
-  #            format: :json,
-  #            params: {
-  #              report_time: report_time_attrs,
-  #              presence_report_id: 1
-  #            }
+  describe 'GET #show' do
+    it 'renders presence_report json' do
+      get :show, format: :json,
+                 params: { id: report,
+                           group_id: group,
+                           presence_report_id: presence_report.id }
+      expect(response.body).to eq(report_time_json(report))
+    end
+  end
 
-  #       expect(response).to have_http_status(:bad_request)
-  #     end
-  #   end
-  # end
+  describe 'POST #create' do
+    context 'when group is valid' do
+      it 'creates group' do
+        post :create,
+             format: :json,
+             params: {
+               group_id: group,
+               presence_report_id: presence_report.id,
+               report_time: { start_time: '2017-01-01',
+                              end_time: '2017-02-01' }
+             }
+        expect(ReportTime.find_by(start_time: '2017-01-01')).to be_present
+      end
+    end
+    context 'when group is not valid' do
+      it 'renders bad_request response' do
+        post :create,
+             format: :json,
+             params: {
+               group_id: group,
+               presence_report_id: presence_report.id,
+               report_time: { start_time: '`a`' }
+             }
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+  end
 
-  # describe 'PATCH #update' do
-  #   context 'when report is valid' do
-  #     it 'updates reports attributes' do
-  #       post :update,
-  #            format: :json,
-  #            params: {
-  #              method: :patch,
-  #              report_time: { start_time: '2016-01-01' },
-  #              presence_report_id: 1,
-  #              id: @report_time
-  #            }
+  describe 'PATCH #update' do
+    context 'when group is valid' do
+      let(:valid_params) do
+        {
+          method: :patch,
+          id: report,
+          group_id: group,
+          presence_report_id: presence_report.id,
+          report_time: { start_time: '2000-01-01' }
+        }
+      end
 
-  #       expect(@report_time.reload.start_time).to eq('2016-01-01')
-  #     end
-  #   end
+      it 'renders group json' do
+        post :update, format: :json,
+                      params: valid_params
+        expect(response.body).to include(report_time_json(report.reload))
+      end
+    end
+  end
 
-  #   context 'when report is not valid' do
-  #     it 'renders bad_request response' do
-  #       post :update,
-  #            format: :json,
-  #            params: {
-  #              method: :patch,
-  #              id: @report_time,
-  #              report_time: { start_time: 'one' },
-  #              presence_report_id: 1
-  #            }
-  #       expect(response).to have_http_status(:bad_request)
-  #     end
-  #   end
-  # end
+  describe 'DELETE #destroy' do
+    let(:delete_params) do
+      {
+        method: :delete,
+        id: report,
+        group_id: group,
+        presence_report_id: presence_report.id
+      }
+    end
 
-  # describe 'DELETE #destroy' do
-  #   context 'when report is valid' do
-  #     it 'destroy report' do
-  #       post :destroy,
-  #            format: :json,
-  #            params: {
-  #              method: :delete,
-  #              id: @report_time,
-  #              presence_report_id: 1
-  #            }
+    it 'deletes reports' do
+      post :destroy,
+           format: :json,
+           params: delete_params
+      expect(ReportTime.exists?(report.id)).to be false
+    end
 
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
   #       expect(ReportTime.exists?(@report_time.id)).to be false
   #     end
   #   end
   # end
 >>>>>>> LVRUBYM-219: Fixed
+=======
+    it 'renders ok response' do
+      post :destroy,
+           format: :json,
+           params: delete_params
+      expect(response).to have_http_status(:no_content)
+    end
+  end
+>>>>>>> LVRUBYM-219: add ReportTimesController
 end
 =======
 #     it 'renders ok response' do

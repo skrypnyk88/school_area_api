@@ -1,7 +1,11 @@
 class ReportTime < ApplicationRecord
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
   belongs_to :reportable, polymorphic: true
+=======
+  belongs_to :reportable, polymorphic: true, dependent: :destroy
+>>>>>>> LVRUBYM-219: add ReportTimesController
 =======
   belongs_to :reportable, polymorphic: true, dependent: :destroy
 >>>>>>> LVRUBYM-219: add ReportTimesController

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :groups do
       resources :students, shallow: true
-
       resources :my_day_reports, shallow: true
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
       
       resources :presence_reports do
@@ -41,6 +41,11 @@ Rails.application.routes.draw do
     end
 
 >>>>>>> LVRUBYM-219: Fixed
+=======
+      resources :presence_reports do
+        resources :report_times
+      end
+>>>>>>> LVRUBYM-219: add ReportTimesController
     end
 >>>>>>> LVRUBYM-190: User actions on backend
   end

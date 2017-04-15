@@ -7,6 +7,7 @@ FactoryGirl.define do
     day DateTime.now
 =======
     day { Faker::Date.forward(30) }
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 >>>>>>> LVRUBYM-219: add ReportTimesController
     group
     student
@@ -19,5 +20,9 @@ FactoryGirl.define do
 =======
     day { Faker::Date.forward(30) }
 >>>>>>> LVRUBYM-190: User actions on backend
+=======
+    group
+    student
+>>>>>>> LVRUBYM-219: add ReportTimesController
   end
 end

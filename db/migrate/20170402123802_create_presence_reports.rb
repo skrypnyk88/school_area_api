@@ -5,6 +5,7 @@ class CreatePresenceReports < ActiveRecord::Migration[5.0]
 <<<<<<< f31edd1b9c125f751a7d416d9280fbc318167c67
 <<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
       t.date     :day
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
       t.integer  :updated_by
@@ -21,6 +22,9 @@ class CreatePresenceReports < ActiveRecord::Migration[5.0]
       t.date     :day
       t.integer  :updated_by    
 >>>>>>> LVRUBYM-219: Fixed
+=======
+      t.integer  :updated_by
+>>>>>>> LVRUBYM-219: add ReportTimesController
 
       t.timestamps
     end

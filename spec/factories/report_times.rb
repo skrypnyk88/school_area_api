@@ -9,6 +9,7 @@ FactoryGirl.define do
 =======
     start_time { Faker::Date.forward(30) }
     end_time { Faker::Date.forward(30) }
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 >>>>>>> LVRUBYM-219: add ReportTimesController
     association :reportable
 =======
@@ -22,5 +23,8 @@ FactoryGirl.define do
     start_time { Faker::Date.forward(30) }
     end_time { Faker::Date.forward(30) }
 >>>>>>> LVRUBYM-190: User actions on backend
+=======
+    association :reportable
+>>>>>>> LVRUBYM-219: add ReportTimesController
   end
 end

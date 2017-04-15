@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe PresenceReport, type: :model do
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 434c714d7ae81fa3524826d23fa9d986a38a0685
 <<<<<<< 1ea34634f0eb6267eca22a41a192d0dec1fa2964
+=======
+>>>>>>> LVRUBYM-219: add ReportTimesController
   describe '#day' do
     context 'when empty' do
       it 'is invalid' do
         expect(build(:presence_report, day: nil)).to_not be_valid
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 =======
    describe '#day' do
     context 'when empty' do
@@ -63,19 +67,31 @@ RSpec.describe PresenceReport, type: :model do
   #       expect(build(:presence_report, day: nil)).to_not be_valid
   #     end
   #   end
+=======
+      end
+    end
+>>>>>>> LVRUBYM-219: add ReportTimesController
 
-  #   context 'when not empty' do
-  #     it 'is valid' do
-  #       expect(build(:presence_report, day: '2017-01-11')).to be_valid
-  #     end
-  #   end
+    context 'when not empty' do
+      it 'is valid' do
+        expect(build(:presence_report, day: '2017-01-11')).to be_valid
+      end
+    end
 
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
   #   context 'when incorrect order' do
   #     it 'is invalid' do
   #       expect(build(:presence_report, day: '20 2017 April')).to_not be_valid
   #     end
   #   end
 >>>>>>> LVRUBYM-219: Fixed
+=======
+    context 'when incorrect order' do
+      it 'is invalid' do
+        expect(build(:presence_report, day: '20 2017 April')).to_not be_valid
+      end
+    end
+>>>>>>> LVRUBYM-219: add ReportTimesController
   end
 >>>>>>> LVRUBYM-192: Unit tests implementation
 end

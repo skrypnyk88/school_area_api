@@ -1,5 +1,6 @@
 module V1
   class ReportTimesController < ApplicationController
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
@@ -88,6 +89,13 @@ module V1
     def index
       @report_times = Group.find(params[:group_id]).reporttimes
 >>>>>>> LVRUBYM-219: Fixed
+=======
+    before_action :set_presence_report
+    before_action :find_my_day_report, only: [:show, :update, :destroy]
+
+    def index
+      @reports = @presence.report_times
+>>>>>>> LVRUBYM-219: add ReportTimesController
     end
 
     def create
@@ -100,6 +108,7 @@ module V1
     end
 
     def create
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
       @report_time = ReportTime.new(report_params)
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 >>>>>>> LVRUBYM-190: User actions on backend
@@ -181,24 +190,32 @@ module V1
     def update
       render_show_or_bad_request(@report_time.update(report_params))
 >>>>>>> LVRUBYM-219: Fixed
+=======
+      @report = @presence.report_times.new(report_params)
+      render_json_or_exception(@report.save, :create)
+    end
+
+    def update
+      render_json_or_exception(@report.update(report_params), :update)
+>>>>>>> LVRUBYM-219: add ReportTimesController
     end
 
     def destroy
-      @report_time.destroy
+      @report.destroy
       head :no_content
     end
 
     private
 
-    def find_report_time
-      @report_time = ReportTime.find(params[:id])
-      head :not_found unless @report_time
+    def report_params
+      params.require(:report_time).permit(:start_time, :end_time)
     end
 
-    def render_show_or_bad_request(succeed)
-      succeed ? (render :show) : (head :bad_request)
+    def find_my_day_report
+      @report = @presence.report_times.find_by(id: params[:id])
     end
 
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
     def report_params
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
       params.require(:report_time).permit(:start_time, :end_time)
@@ -206,6 +223,16 @@ module V1
       params.require(:report_time)
             .permit(:start_time, :end_time)
 >>>>>>> LVRUBYM-219: Fixed
+=======
+    def set_presence_report
+      url_part = [PresenceReport]
+                 .detect { |c| params["#{c.name.underscore}_id"] }
+      @presence = url_part.find(params["#{url_part.name.underscore}_id"])
+    end
+
+    def render_json_or_exception(condition, json_file)
+      condition ? (render json_file) : (head :bad_request)
+>>>>>>> LVRUBYM-219: add ReportTimesController
     end
 >>>>>>> LVRUBYM-190: User actions on backend
   end

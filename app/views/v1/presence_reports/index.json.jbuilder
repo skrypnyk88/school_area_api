@@ -1,3 +1,4 @@
+<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 3d6ef24b1f115a08fa031f7cb22c9e05126b0cb6
@@ -37,3 +38,6 @@ end
   end
 end
 >>>>>>> LVRUBYM-190: User actions on backend
+=======
+json.array! @reports
+>>>>>>> LVRUBYM-219: add ReportTimesController
