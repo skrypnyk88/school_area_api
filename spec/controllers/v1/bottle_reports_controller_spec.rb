@@ -3,17 +3,12 @@ require 'rails_helper'
 RSpec.describe V1::BottleReportsController, type: :controller do
   render_views
 
-  def bottle_report_json(bottle_report)
-    { 'id' => bottle_report.id, 'day' => bottle_report.day.to_s,
-      'group_id' => bottle_report.group_id,
-      'student_id' => bottle_report.student_id,
-      'bottles' => bottle_report.bottles
-                                .map do |b|
-                                  { 'id' => b.id, 'quantity' => b.quantity,
-                                    'time' => JSON.parse(b.time.to_json),
-                                    'uom' => b.uom,
-                                    'bottle_report_id' => b.bottle_report_id }
-                                end }
+  def bottle_report_data(bottle_report)
+    bottle_report.attributes.extract!('id',
+                                      'day',
+                                      'group_id',
+                                      'student_id')
+                 .merge!(bottles: [])
   end
 
   let(:test_group) { FactoryGirl.create(:group) }
@@ -30,9 +25,9 @@ RSpec.describe V1::BottleReportsController, type: :controller do
         get :index, format: :json,
                     group_id: test_group.id
 
-        expect(JSON.parse(response.body))
+        expect(response.body)
           .to eq(test_bottle_reports
-          .collect { |entry| bottle_report_json(entry) })
+          .collect { |entry| bottle_report_data(entry) }.to_json)
       end
     end
 
@@ -45,9 +40,9 @@ RSpec.describe V1::BottleReportsController, type: :controller do
                     group_id: test_group.id,
                     day: DateTime.now
 
-        expect(JSON.parse(response.body))
+        expect(response.body)
           .to eq(test_bottle_reports
-          .collect { |entry| bottle_report_json(entry) })
+          .collect { |entry| bottle_report_data(entry) }.to_json)
       end
     end
   end

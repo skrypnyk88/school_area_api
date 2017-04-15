@@ -1,6 +1,6 @@
 module V1
   class BottlesController < ApplicationController
-    before_action :fill_bottle_report
+    before_action :fill_group, :fill_bottle_report
     before_action :find_bottle, only: [:update, :destroy]
 
     def index
@@ -8,8 +8,7 @@ module V1
     end
 
     def create
-      @bottle = Bottle.new(time: DateTime.now, quantity: 30,
-                           bottle_report_id: params[:bottle_report_id])
+      @bottle = @bottle_report.bottles.new(time: DateTime.now, quantity: 30)
       result_handler(@bottle.save)
     end
 
@@ -24,11 +23,14 @@ module V1
 
     private
 
+    def fill_group
+      @group = Group.find_by id: params[:group_id]
+      nil_handler(@group)
+    end
+
     def fill_bottle_report
-      group = Group.find_by id: params[:group_id]
-      nil_handler(group)
-      @bottle_report = group.bottle_reports
-                            .find_by id: params[:bottle_report_id]
+      @bottle_report = @group.bottle_reports
+                             .find_by id: params[:bottle_report_id]
       nil_handler(@bottle_report)
     end
 
@@ -46,7 +48,11 @@ module V1
     end
 
     def bottle_params
-      params.require(:bottle).permit(:quantity, :time, :uom)
+      params.require(:bottle).permit(:id,
+                                     :bottle_report_id,
+                                     :quantity,
+                                     :time,
+                                     :uom)
     end
   end
 end

@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe V1::BottlesController, type: :controller do
   render_views
 
-  def bottle_json(bottle)
-    { 'id' => bottle.id,
-      'quantity' => bottle.quantity,
-      'time' => JSON.parse(bottle.time.to_json),
-      'uom' => bottle.uom,
-      'bottle_report_id' => bottle.bottle_report_id }
+  def bottle_data(bottle)
+    bottle.attributes.extract!('id',
+                               'quantity',
+                               'uom',
+                               'bottle_report_id')
+          .merge!(time: bottle.time.strftime('%H:%M'))
   end
 
   let(:test_group) do
@@ -37,9 +37,9 @@ RSpec.describe V1::BottlesController, type: :controller do
                     group_id: test_group.id,
                     bottle_report_id: test_bottle_report.id
 
-        expect(JSON.parse(response.body))
+        expect(response.body)
           .to eq(test_bottles
-          .collect { |entry| bottle_json(entry) })
+          .collect { |entry| bottle_data(entry) }.to_json)
       end
     end
   end
