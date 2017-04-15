@@ -1,1 +1,5 @@
-json.extract! @bottle, :id, :quantity, :time, :uom, :bottle_report_id
+json.extract! @bottle, :id,
+                       :quantity,
+                       :uom,
+                       :bottle_report_id
+json.time @bottle.time.strftime('%H:%M')
