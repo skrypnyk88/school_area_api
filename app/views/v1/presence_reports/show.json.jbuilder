@@ -1,2 +1,1 @@
-json.(@presence_report, :id,
-               :day)
+json.(@report, :id, :group_id, :day, :student_id)

@@ -1,4 +1,3 @@
-<<<<<<< 7b75256756e3db6b3203b6c86b3d9394f9e06a6a
 require 'faker'
 
 <<<<<<< 3d6ef24b1f115a08fa031f7cb22c9e05126b0cb6
@@ -18,9 +17,7 @@ Teacher.create(
 
 group = Group.create(name: 'Group 1')
 
-=======
->>>>>>> LVRUBYM-190: User actions on backend
-10.times do
+15.times do
   student = group.students.create(
 >>>>>>> LVRUBYM-190: User actions on backend
     first_name: Faker::Name.first_name,
@@ -32,6 +29,7 @@ group = Group.create(name: 'Group 1')
     phone: '1234567890'
   )
 
+<<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
   3.times do
     group = Group.create(name: "Group #{n += 1}")
     teacher.groups << group
@@ -51,4 +49,21 @@ group = Group.create(name: 'Group 1')
       )
     end
   end
+=======
+  group.my_day_reports.create(
+    day: Faker::Date.backward(111),
+    note:  Faker::Lorem.sentence,
+    student_id: student.id
+  )
+
+  presence_report = group.presence_reports.create(
+    day: Faker::Date.backward(111),
+    student_id: student.id
+  )
+
+  presence_report.report_times.create(
+    start_time: Faker::Date.backward(111),
+    end_time: Faker::Date.backward(111)
+  )
+>>>>>>> LVRUBYM-219: add ReportTimesController
 end

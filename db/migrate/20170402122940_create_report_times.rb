@@ -20,8 +20,12 @@ class CreateReportTimes < ActiveRecord::Migration[5.0]
 =======
       t.integer  :created_by
       t.integer  :updated_by
+<<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
        
 >>>>>>> LVRUBYM-219: Fixed
+=======
+
+>>>>>>> LVRUBYM-219: add ReportTimesController
       t.timestamps
     end
     add_index :report_times, [:reportable_type, :reportable_id]

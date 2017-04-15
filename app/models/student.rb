@@ -1,12 +1,16 @@
 class Student < ApplicationRecord
   belongs_to :group, optional: true
   has_many :my_day_reports, dependent: :nullify
+<<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
   has_many :presence_reports, dependent: :nullify
 =======
   has_many :presence_reports
   
 >>>>>>> LVRUBYM-219: Fixed
+=======
+  has_many :presence_reports, dependent: :nullify
+>>>>>>> LVRUBYM-219: add ReportTimesController
 
   before_save :titleize_name
 

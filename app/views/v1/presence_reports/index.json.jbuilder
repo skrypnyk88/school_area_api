@@ -1,3 +1,4 @@
+<<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 3d6ef24b1f115a08fa031f7cb22c9e05126b0cb6
 json.array!(@reports) do |report|
   json.extract! report, :id, :day, :group_id
@@ -16,3 +17,6 @@ json.presence_reports @presence_reports do |presence_report|
 >>>>>>> LVRUBYM-190: User actions on backend
   end
 end
+=======
+json.array! @reports
+>>>>>>> LVRUBYM-219: add ReportTimesController
