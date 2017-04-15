@@ -70,9 +70,8 @@ RSpec.describe V1::BottlesController, type: :controller do
                      bottle: { quantity: 500,
                                time: DateTime.now,
                                uom: 'ml' }
-        updated_bottle = Bottle.find_by id: new_bottle.id
 
-        expect(updated_bottle.quantity).to be == 500
+        expect(new_bottle.reload.quantity).to be == 500
       end
     end
 
@@ -88,9 +87,8 @@ RSpec.describe V1::BottlesController, type: :controller do
                      bottle: { quantity: 500,
                                time: DateTime.now,
                                uom: 'ml' }
-        updated_bottle = Bottle.find_by id: new_bottle.id
 
-        expect(updated_bottle.uom).to be == 'ml'
+        expect(new_bottle.reload.uom).to be == 'ml'
       end
     end
 
@@ -106,9 +104,8 @@ RSpec.describe V1::BottlesController, type: :controller do
                      bottle: { quantity: 500,
                                time: DateTime.now,
                                uom: 'ml' }
-        updated_bottle = Bottle.find_by id: new_bottle.id
 
-        expect(updated_bottle.time).to be > ((DateTime.now - 5.seconds))
+        expect(new_bottle.reload.time).to be > ((DateTime.now - 5.seconds))
       end
     end
   end
