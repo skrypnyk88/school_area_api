@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   private
 
   def find_group
-    @findgroup = current_user.groups.find_by(id: params[:id])
-    head :not_found unless @findgroup
+    @group = current_user.groups.find_by(id: params[:id])
+    head :not_found unless @group
   end
 end

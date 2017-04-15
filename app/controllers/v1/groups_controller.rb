@@ -7,20 +7,18 @@ module V1
     end
 
     def create
-      @group = current_user.groups.new(group_params)
+      @group = current_user.groups.create(group_params)
       render_show_or_bad_request(@group.save)
-      current_user.groups << @group if @group.save
     end
 
     def show; end
 
     def update
-      @group = @findgroup
       render_show_or_bad_request(@group.update(group_params))
     end
 
     def destroy
-      @findgroup.destroy
+      @group.destroy
       head :no_content
     end
 
@@ -31,7 +29,7 @@ module V1
     end
 
     def group_params
-      params.require(:group).permit(:id, :name)
+      params.require(:group).permit(:name)
     end
   end
 end
