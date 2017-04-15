@@ -22,7 +22,7 @@ RSpec.describe V1::StudentsController, type: :controller do
   end
 
   before do
-    allow(subject).to receive(:authenticate_user!)
+    allow(controller).to receive(:authenticate_user!)
   end
 
   describe 'GET #index' do

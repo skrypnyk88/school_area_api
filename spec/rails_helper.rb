@@ -12,6 +12,8 @@ require 'support/factory_girl'
 
 ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   Shoulda::Matchers.configure do |conf|
     conf.integrate do |with|
       with.test_framework :rspec
