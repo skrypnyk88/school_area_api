@@ -37,9 +37,11 @@ RSpec.describe V1::BottlesController, type: :controller do
                     group_id: test_group.id,
                     bottle_report_id: test_bottle_report.id
 
+        body = test_bottles.collect { |entry| bottle_data(entry) }
+                           .to_json
+
         expect(response.body)
-          .to eq(test_bottles
-          .collect { |entry| bottle_data(entry) }.to_json)
+          .to eq(body)
       end
     end
   end
