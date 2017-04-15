@@ -2,85 +2,82 @@ require 'rails_helper'
 
 RSpec.describe V1::PresenceReportsController, type: :controller do
   render_views
+  let!(:group) { create(:group) }
 
-  # before do
-  #   @presence_report = create(:presence_report)
-  # end
+  let!(:student) { create(:student, group: group) }
+  let!(:report) do
+    create(:presence_report, group: group, student: student)
+  end
 
-  # describe 'GET #index' do
-  #   it 'returns all reports' do
-  #     presence_report = PresenceReport.select(:id, :day).to_json
-  #     get :index, format: :json
-  #     expect(response.body).to include(presence_report)
-  #   end
-  # end
+  before do
+    allow(subject).to receive(:authenticate_user!)
+  end
 
-  # describe 'POST #create' do
-  #   # context 'when report is valid' do
-  #   #   it 'renders report json' do
-  #   #     post :create,
-  #   #          format: :json,
-  #   #          params: {
-  #   #            presence_report: attributes_for(:presence_report)
-  #   #          }
+  def presence_report_json(report)
+    {
+      id: report.id,
+      group_id: report.group_id,
+      day: report.day,
+      student_id: report.student_id
+    }.to_json
+  end
 
-  #   #     expect(JSON.parse(response.body)).to be_eql('show')
-  #   #   end
-  #   # end
-  #   context 'when report is not valid' do
-  #     it 'renders bad_request response' do
-  #       post :create,
-  #            format: :json,
-  #            params: {
-  #              presence_report: attributes_for(:presence_report, day: nil)
-  #            }
+  def presence_report_json_update(report)
+    {
+      day: report.day,
+      updated_at: report.updated_at
+    }.to_json
+  end
 
-  #       expect(response).to have_http_status(:bad_request)
-  #     end
-  #   end
-  # end
+  def presence_report_params(report)
+    report.attributes.extract!(:day)
+  end
 
-  # describe 'PATCH #update' do
-  #   context 'when report is valid' do
-  #     it 'updates reports attributes' do
-  #       post :update,
-  #            format: :json,
-  #            params: {
-  #              method: :patch,
-  #              id: @presence_report,
-  #              presence_report: { day: '2000-01-01' }
-  #            }
+  describe 'GET #index' do
+    it 'return all reports' do
+      get :index, format: :json,
+                  params: { group_id: group }
+      expect(response.body).to eq(PresenceReport.all.to_json)
+    end
+  end
 
-  #       expect(@presence_report.reload.day) == '2000-01-01'
-  #     end
-  #   end
+  describe 'GET #show' do
+    it 'renders presence_report json' do
+      get :show, format: :json,
+                 params: { id: report, group_id: group }
+      expect(response.body).to eq(presence_report_json(report))
+    end
+  end
 
-  #   context 'when report is not valid' do
-  #     it 'renders bad_request response' do
-  #       post :update,
-  #            format: :json,
-  #            params: {
-  #              method: :patch,
-  #              id: @presence_report,
-  #              presence_report: { day: nil }
-  #            }
-  #       expect(response).to have_http_status(:bad_request)
-  #     end
-  #   end
-  # end
+  describe 'POST #create' do
+    context 'when group is not valid' do
+      it 'renders bad_request response' do
+        post :create,
+             format: :json,
+             params: {
+               group_id: group,
+               report: { day: '`a`' }
+             }
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+  end
 
-  # describe 'DELETE #destroy' do
-  #   context 'when report is valid' do
-  #     it 'destroy report' do
-  #       post :destroy,
-  #            format: :json,
-  #            params: {
-  #              method: :delete,
-  #              id: @presence_report
-  #            }
+  describe 'DELETE #destroy' do
+    let(:delete_params) { { method: :delete, id: report, group_id: group } }
 
-  #       expect(PresenceReport.exists?(@presence_report.id)).to be false
-  #     end
-  #   end
-  # end
+    it 'deletes reports' do
+      post :destroy,
+           format: :json,
+           params: delete_params
+      expect(PresenceReport.exists?(report.id)).to be false
+    end
+
+    it 'renders ok response' do
+      post :destroy,
+           format: :json,
+           params: delete_params
+      expect(response).to have_http_status(:no_content)
+    end
+  end
 end

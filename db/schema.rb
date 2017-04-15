@@ -1,3 +1,4 @@
+<<<<<<< 5c0bc7762ed72a707b07d65e609572a0ef480472
 <<<<<<< 002fb8593a1a5ba24bbc2e7176ad50e465ec3d76
 <<<<<<< dee51ffb7ca113bcca323d7fbb9309d0e14d4b3a
 
@@ -7,6 +8,9 @@ ActiveRecord::Schema.define(version: 20170402123802) do
   enable_extension "plpgsql"
 =======
 =======
+=======
+<<<<<<< 7f951a3c1338830006f0fec34b0c3a0e31dd3c4b
+>>>>>>> LVRUBYM-219: add ReportTimesController
 <<<<<<< f3cd07dc01a5a686c97baac198998b3223720833
 >>>>>>> LVRUBYM-219: Fixed
 <<<<<<< d8b9c0db237e3dad7f9d0674c6bd4e388b0a48e1
@@ -48,6 +52,9 @@ ActiveRecord::Schema.define(version: 20170403084317) do
 # It's strongly recommended that you check this file into your version control system.
 
 
+=======
+ActiveRecord::Schema.define(version: 20170409135323) do
+>>>>>>> LVRUBYM-219: add ReportTimesController
 
 >>>>>>> LVRUBYM-219: Fixed
   # These are extensions that must be enabled in order to support this database
@@ -59,6 +66,17 @@ ActiveRecord::Schema.define(version: 20170403084317) do
     t.datetime "updated_at", null: false
   end
 >>>>>>> LVRUBYM-219: Add CI
+
+  create_table "my_day_reports", force: :cascade do |t|
+    t.date     "day"
+    t.text     "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.integer  "student_id"
+    t.index ["group_id"], name: "index_my_day_reports_on_group_id", using: :btree
+    t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
+  end
 
   create_table "presence_reports", force: :cascade do |t|
     t.date     "day"
@@ -89,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170403084317) do
     t.index ["reportable_type", "reportable_id"], name: "index_report_times_on_reportable_type_and_reportable_id", using: :btree
   end
 
+<<<<<<< 7f951a3c1338830006f0fec34b0c3a0e31dd3c4b
 <<<<<<< f3cd07dc01a5a686c97baac198998b3223720833
 <<<<<<< d8b9c0db237e3dad7f9d0674c6bd4e388b0a48e1
 <<<<<<< 0daf2461b8ee7f70196d1654769d7179d5b95b24
@@ -137,7 +156,12 @@ ActiveRecord::Schema.define(version: 20170403084317) do
 >>>>>>> LVRUBYM-219: Add CI
 =======
 
+<<<<<<< 5c0bc7762ed72a707b07d65e609572a0ef480472
 >>>>>>> LVRUBYM-219: Fixed
+=======
+=======
+>>>>>>> LVRUBYM-219: add ReportTimesController
+>>>>>>> LVRUBYM-219: add ReportTimesController
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -166,6 +190,7 @@ ActiveRecord::Schema.define(version: 20170403084317) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+<<<<<<< 5c0bc7762ed72a707b07d65e609572a0ef480472
 <<<<<<< 002fb8593a1a5ba24bbc2e7176ad50e465ec3d76
 <<<<<<< dee51ffb7ca113bcca323d7fbb9309d0e14d4b3a
   add_foreign_key "my_day_reports", "groups"
@@ -184,11 +209,16 @@ ActiveRecord::Schema.define(version: 20170403084317) do
   add_foreign_key "students", "groups"
 =======
 
+=======
+>>>>>>> LVRUBYM-219: add ReportTimesController
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
-
   add_foreign_key "presence_reports", "groups"
   add_foreign_key "presence_reports", "students"
+<<<<<<< 5c0bc7762ed72a707b07d65e609572a0ef480472
 
 >>>>>>> LVRUBYM-219: Fixed
+=======
+  add_foreign_key "students", "groups"
+>>>>>>> LVRUBYM-219: add ReportTimesController
 end
