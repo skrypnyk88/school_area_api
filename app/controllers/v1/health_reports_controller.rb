@@ -1,16 +1,17 @@
 module V1
   class HealthReportsController < ApplicationController
     before_action :set_group
-    before_action :set_report, only: [:show, :update, :destroy]
+    before_action :set_report, only: [:show, :update]
 
     def index
       @reports = @group.health_reports
+      @students = Group.find(params[:group_id]).students
     end
 
     def show; end
 
     def create
-      @report =  @group.health_reports.build(report_params)
+      @report = @group.health_reports.build(report_params)
       if @report.save
         render :show, status: :created
       else
@@ -24,11 +25,6 @@ module V1
       else
         bad_reqest
       end
-    end
-
-    def destroy
-      @report.destroy
-      head :no_content
     end
 
     private

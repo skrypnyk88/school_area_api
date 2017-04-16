@@ -20,10 +20,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   end
 
   let(:health_reports) do
-    5.times do
-      create(:health_report, group: group)
-    end
-    group
+    5.times { create(:health_report, group: group) }
   end
 
   before do
@@ -32,7 +29,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   describe 'GET #show' do
     it 'returns report' do
-      get :show, params: { id: report, group_id: health_reports },
+      get :show, params: { id: report, group_id: group },
                  format: :json
 
       expect(response.body).to eq(report_params(report).to_json)
@@ -41,9 +38,9 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns all reports' do
-      responce_report = health_reports.health_reports
-                                      .map { |s| report_params(s) }
-                                      .to_json
+      responce_report = group.health_reports
+                             .map { |s| report_params(s) }
+                             .to_json
 
       get :index, format: :json,
                   params: { group_id: group }
@@ -111,29 +108,6 @@ RSpec.describe V1::HealthReportsController, type: :controller do
                report: { special_care: nil }
              }
         expect(response).to have_http_status(:bad_request)
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    let(:delete_params) do
-      { method: :delete, id: report, group_id: group }
-    end
-    context 'when report is valid' do
-      it 'destroy report' do
-        post :destroy,
-             format: :json,
-             params: delete_params
-
-        expect(HealthReport.exists?(report.id)).to be false
-      end
-
-      it 'renders ok response' do
-        post :destroy,
-             format: :json,
-             params: delete_params
-
-        expect(response).to have_http_status(:no_content)
       end
     end
   end
