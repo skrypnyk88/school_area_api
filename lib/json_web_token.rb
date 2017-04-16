@@ -9,7 +9,7 @@ module JsonWebToken
   end
 
   def self.payload(user)
-    exp_time = Time.now.to_i + 60
-    { exp: exp_time, user_id: user.id, type: user.type }
+    exp_time = (Time.now + 30.minutes).to_i
+    { exp: exp_time, user_id: user.id }
   end
 end
