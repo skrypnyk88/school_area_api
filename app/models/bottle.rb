@@ -7,4 +7,8 @@ class Bottle < ApplicationRecord
   validates :time,
             presence: true
   validates_inclusion_of :uom, in: uoms.keys
+
+  def time_formated
+    time.strftime('%H:%M')
+  end
 end
