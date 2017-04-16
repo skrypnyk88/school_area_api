@@ -21,7 +21,7 @@ RSpec.describe V1::GroupsController, type: :controller do
     group.attributes.extract!(:name)
   end
 
-  describe 'teacher has one group' do
+  describe "returns only current user's groups" do
     let!(:group_2) { create(:group) }
     it 'is not valid' do
       expect(response.body).to_not include(group_json(group_2))
