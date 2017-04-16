@@ -9,7 +9,7 @@ module V1
       @report = MyDayReport.find_by(id: params[:id],
                                     group_id: params[:group_id])
       head :not_found unless @report
-      @report.update(report_params) ? render :update :(head :bad_request)
+      @report.update(report_params) ? (render :update) : (head :bad_request)
     end
 
     private
@@ -17,6 +17,5 @@ module V1
     def report_params
       params.require(:report).permit(:day, :note)
     end
-
   end
 end
