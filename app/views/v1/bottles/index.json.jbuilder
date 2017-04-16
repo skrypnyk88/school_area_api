@@ -3,5 +3,5 @@ json.array! @bottles do |bottle|
                         :quantity,
                         :uom,
                         :bottle_report_id
-  json.time bottle.time.strftime('%H:%M')
+  json.time bottle.time_formated
 end

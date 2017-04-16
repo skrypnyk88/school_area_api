@@ -3,7 +3,7 @@ json.array!(@bottle_reports) do |bottle_report|
   json.bottles bottle_report.bottles do |bottle|
     json.id bottle.id
     json.quantity bottle.quantity
-    json.time bottle.time.strftime('%H:%M')
+    json.time bottle.time_formated
     json.uom bottle.uom
     json.bottle_report_id bottle.bottle_report_id
   end
