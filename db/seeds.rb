@@ -25,9 +25,7 @@ group = Group.create(name: 'Group 1')
     note:  Faker::Lorem.sentence,
     student_id: student.id
   )
-end
 
-10.times do
   group.health_reports.create(
     day: Faker::Date.backward(100),
     special_care: [true, false].sample,
