@@ -26,7 +26,6 @@ module SchoolAreaApi
         origins '*'
         resource '*', headers: :any,
                       methods: [:get, :post, :put, :patch, :delete, :options],
-                      methods: [:get, :post, :options, :delete, :put],
                       expose: ['Auth-Token']
       end
     end
