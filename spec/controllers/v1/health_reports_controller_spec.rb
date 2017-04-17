@@ -23,19 +23,6 @@ RSpec.describe V1::HealthReportsController, type: :controller do
     allow(subject).to receive(:authenticate_user!)
   end
 
-  describe 'GET #index' do
-    it 'returns all reports' do
-      get :index, format: :json,
-                  params: { id: create_health_reports,
-                    group_id: group }
-
-
-                  p response.body
-
-      expect(response.body).to be_eql(HealthReport.all.to_json)
-    end
-  end
-
   describe 'PATCH #update' do
     context 'when report is valid' do
       it 'updates reports attributes' do

@@ -7,7 +7,3 @@ json.array! @reports do |report|
   json.health_note report.health_note
   json.day report.day
 end
-
-# json.array! @reports do |report|
-
-# end

@@ -4,7 +4,7 @@ module V1
     before_action :set_report, only: [:update]
 
     def index
-      @reports = @group.health_reports.order("id asc")
+      @reports = @group.health_reports.order('id asc')
       @students = @group.students
     end
 
