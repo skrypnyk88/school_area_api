@@ -1,7 +1,6 @@
 json.array!(@bottle_reports) do |bottle_report|
-  json.extract! bottle_report, :id, :day, :group_id, :student_id
-  json.student_first_name bottle_report.student.first_name
-  json.student_last_name bottle_report.student.last_name
+  json.extract! bottle_report, :id, :day, :group_id
+  json.student bottle_report.student, :id, :first_name, :last_name
   json.bottles bottle_report.bottles do |bottle|
     json.id bottle.id
     json.quantity bottle.quantity
