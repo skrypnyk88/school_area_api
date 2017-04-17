@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe V1::GroupsController, type: :controller do
   render_views
+
   let!(:group) { create(:group) }
   let(:current_user) { create(:teacher) }
+
   before do
     allow(subject).to receive(:authenticate_user!)
     allow(subject).to receive(:current_user).and_return(current_user)
@@ -21,17 +23,17 @@ RSpec.describe V1::GroupsController, type: :controller do
     group.attributes.extract!(:name)
   end
 
-  describe "returns only current user's groups" do
-    let!(:group_2) { create(:group) }
-    it 'is not valid' do
-      expect(response.body).to_not include(group_json(group_2))
-    end
-  end
-
   describe 'GET #index' do
-    it 'return all groups' do
+    let!(:group_2) { create(:group) }
+
+    it "includes current user's group" do
       get :index, format: :json
       expect(response.body).to include(group_json(group))
+    end
+
+    it "doesn't include current user's group" do
+      get :index, format: :json
+      expect(response.body).to_not include(group_json(group_2))
     end
   end
 
@@ -90,7 +92,7 @@ RSpec.describe V1::GroupsController, type: :controller do
       post :destroy,
            format: :json,
            params: delete_params
-      expect(Group.exists?(group.id)).to be false
+      expect(Group.exists?(group.id)).to be_falsey
     end
 
     it 'renders ok response' do
