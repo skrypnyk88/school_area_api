@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :my_day_reports, shallow: true
       resources :bottle_reports, only: [:index] do
         resources :bottles
-      end
+      resources :health_reports
     end
   end
 end
