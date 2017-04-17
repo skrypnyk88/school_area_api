@@ -8,6 +8,8 @@ RSpec.describe V1::BottleReportsController, type: :controller do
                                       'day',
                                       'group_id',
                                       'student_id')
+                 .merge!(student_first_name: bottle_report.student.first_name)
+                 .merge!(student_last_name: bottle_report.student.last_name)
                  .merge!(bottles: [])
   end
 
