@@ -15,69 +15,24 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   let(:report) { create(:health_report, group: group, student: student) }
 
-  let(:attributes_for_health_reports) do
-    attributes_for(:health_report).with_indifferent_access
-  end
-
-  let(:health_reports) do
-    5.times { create(:health_report, group: group) }
+  let(:create_health_reports) do
+    5.times { create(:health_report, group: group, student: student) }
   end
 
   before do
     allow(subject).to receive(:authenticate_user!)
   end
 
-  describe 'GET #show' do
-    it 'returns report' do
-      get :show, params: { id: report, group_id: group },
-                 format: :json
-
-      expect(response.body).to eq(report_params(report).to_json)
-    end
-  end
-
   describe 'GET #index' do
     it 'returns all reports' do
-      responce_report = group.health_reports
-                             .map { |s| report_params(s) }
-                             .to_json
-
       get :index, format: :json,
-                  params: { group_id: group }
+                  params: { id: create_health_reports,
+                    group_id: group }
 
-      expect(response.body).to be_eql(responce_report)
-    end
-  end
 
-  describe 'POST #create' do
-    context 'when report is valid' do
-      it 'renders report json' do
-        test_report = report
+                  p response.body
 
-        post :create,
-             format: :json,
-             params: {
-               group_id: 1,
-               student_id: 1,
-               id: test_report
-             }
-
-        expect(HealthReport.find_by(report_params(test_report))).to be_present
-      end
-    end
-
-    context 'when report is not valid' do
-      it 'renders bad_request response' do
-        post :create,
-             format: :json,
-             params: {
-               group_id: group,
-               student_id: student,
-               report: attributes_for_health_reports
-             }
-
-        expect(response).to have_http_status(:bad_request)
-      end
+      expect(response.body).to be_eql(HealthReport.all.to_json)
     end
   end
 

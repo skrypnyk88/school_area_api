@@ -1,22 +1,11 @@
 module V1
   class HealthReportsController < ApplicationController
     before_action :set_group
-    before_action :set_report, only: [:show, :update]
+    before_action :set_report, only: [:update]
 
     def index
-      @reports = @group.health_reports
-      @students = Group.find(params[:group_id]).students
-    end
-
-    def show; end
-
-    def create
-      @report = @group.health_reports.build(report_params)
-      if @report.save
-        render :show, status: :created
-      else
-        bad_reqest
-      end
+      @reports = @group.health_reports.order("id asc")
+      @students = @group.students
     end
 
     def update
