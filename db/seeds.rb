@@ -25,7 +25,9 @@ group = Group.create(name: 'Group 1')
     note:  Faker::Lorem.sentence,
     student_id: student.id
   )
+end
 
+10.times do
   group.health_reports.create(
     day: Faker::Date.backward(100),
     special_care: [true, false].sample,
@@ -33,16 +35,16 @@ group = Group.create(name: 'Group 1')
     student_id: student.id
   )
 
-  bottle_report = group.bottle_report.create(
-    group
-    student
+  bottle_report = group.bottle_reports.create(
+    group_id: group.id,
+    student_id: student.id,
     day: Faker::Date.forward(23)
   )
 
-  bottle = bottle_report.bottle.create(
-    bottle_report
-    quantity: Faker::Number.between(30, 300)
-    time: DateTime.now
+  bottle_report.bottles.create(
+    bottle_report_id: bottle_report.id,
+    quantity: Faker::Number.between(30, 300),
+    time: DateTime.now,
     uom: %w(ml oz).sample
   )
 end

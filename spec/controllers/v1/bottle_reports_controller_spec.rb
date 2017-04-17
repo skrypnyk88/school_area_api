@@ -6,10 +6,11 @@ RSpec.describe V1::BottleReportsController, type: :controller do
   def bottle_report_data(bottle_report)
     bottle_report.attributes.extract!('id',
                                       'day',
-                                      'group_id',
-                                      'student_id')
-                 .merge!(student_first_name: bottle_report.student.first_name)
-                 .merge!(student_last_name: bottle_report.student.last_name)
+                                      'group_id')
+                 .merge!(student: bottle_report.student
+                 .attributes.extract!('id',
+                                      'first_name',
+                                      'last_name'))
                  .merge!(bottles: [])
   end
 
