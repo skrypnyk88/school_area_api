@@ -1,6 +1,6 @@
 module V1
   class BottlesController < ApplicationController
-    before_action :fill_group, :fill_bottle_report
+    before_action :find_group, :fill_bottle_report
     before_action :find_bottle, only: [:update, :destroy]
 
     def index
@@ -22,11 +22,6 @@ module V1
     end
 
     private
-
-    def fill_group
-      @group = Group.find_by id: params[:group_id]
-      nil_handler(@group)
-    end
 
     def fill_bottle_report
       @bottle_report = @group.bottle_reports
