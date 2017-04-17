@@ -21,30 +21,6 @@ RSpec.describe V1::ReportTimesController, type: :controller do
     }.to_json
   end
 
-  def report_time_params(report)
-    report.attributes.extract!(:start_time)
-  end
-
-  describe 'GET #index' do
-    it 'return all reports' do
-      get :index, format: :json,
-                  params: { group_id: group,
-                            presence_report_id: presence_report.id }
-      expect(response.body)
-        .to include(report_time_json(report))
-    end
-  end
-
-  describe 'GET #show' do
-    it 'renders presence_report json' do
-      get :show, format: :json,
-                 params: { id: report,
-                           group_id: group,
-                           presence_report_id: presence_report.id }
-      expect(response.body).to eq(report_time_json(report))
-    end
-  end
-
   describe 'POST #create' do
     context 'when group is valid' do
       it 'creates group' do

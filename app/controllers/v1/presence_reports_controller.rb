@@ -6,8 +6,6 @@ module V1
       @reports = Group.find(params[:group_id]).presence_reports
     end
 
-    def show; end
-
     def create
       @report = PresenceReport.new(report_params)
       render_json_or_exception(@report.save, :create)

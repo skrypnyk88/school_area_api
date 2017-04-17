@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe V1::PresenceReportsController, type: :controller do
   render_views
   let!(:group) { create(:group) }
-
   let!(:student) { create(:student, group: group) }
   let!(:report) do
     create(:presence_report, group: group, student: student)
@@ -20,17 +19,6 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
       day: report.day,
       student_id: report.student_id
     }.to_json
-  end
-
-  def presence_report_json_update(report)
-    {
-      day: report.day,
-      updated_at: report.updated_at
-    }.to_json
-  end
-
-  def presence_report_params(report)
-    report.attributes.extract!(:day)
   end
 
   describe 'GET #index' do
