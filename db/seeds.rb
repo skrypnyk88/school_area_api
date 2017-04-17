@@ -32,4 +32,17 @@ group = Group.create(name: 'Group 1')
     health_note: Faker::Lorem.sentence,
     student_id: student.id
   )
+
+  bottle_report = group.bottle_report.create(
+    group
+    student
+    day: Faker::Date.forward(23)
+  )
+
+  bottle = bottle_report.bottle.create(
+    bottle_report
+    quantity: Faker::Number.between(30, 300)
+    time: DateTime.now
+    uom: %w(ml oz).sample
+  )
 end
