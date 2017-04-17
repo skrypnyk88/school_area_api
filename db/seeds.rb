@@ -70,7 +70,26 @@ group = Group.create(name: 'Group 1')
         start_time: Faker::Date.backward(111),
         end_time: Faker::Date.backward(111)
       )
-   end
+
+      group.my_day_reports.create(
+        day: Faker::Date.backward(111),
+        note: Faker::Lorem.sentence,
+        student_id: student.id
+      )
+
+      bottle_report = group.bottle_report.create(
+        group
+        student
+        day: Faker::Date.forward(23)
+      )
+
+      bottle = bottle_report.bottle.create(
+        bottle_report
+        quantity: Faker::Number.between(30, 300)
+        time: DateTime.now
+        uom: %w(ml oz).sample
+      )
+    end
   end
 =======
   group.my_day_reports.create(
