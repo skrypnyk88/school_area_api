@@ -25,4 +25,11 @@ group = Group.create(name: 'Group 1')
     note:  Faker::Lorem.sentence,
     student_id: student.id
   )
+
+  group.health_reports.create(
+    day: Faker::Date.backward(100),
+    special_care: [true, false].sample,
+    health_note: Faker::Lorem.sentence,
+    student_id: student.id
+  )
 end
