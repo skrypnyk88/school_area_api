@@ -1,5 +1,4 @@
 require 'database_cleaner'
-# This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 if Rails.env.production?
@@ -11,7 +10,10 @@ require 'database_cleaner'
 require 'support/factory_girl'
 
 ActiveRecord::Migration.maintain_test_schema!
+
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   Shoulda::Matchers.configure do |conf|
     conf.integrate do |with|
       with.test_framework :rspec

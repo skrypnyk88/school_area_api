@@ -25,9 +25,11 @@ module SchoolAreaApi
       allow do
         origins '*'
         resource '*', headers: :any,
-                      methods: [:get, :post, :options],
+                      methods: [:get, :post, :put, :patch, :delete, :options],
                       expose: ['Auth-Token']
       end
     end
+
+    Rack::Utils::SYMBOL_TO_STATUS_CODE[:authentication_timeout] = 419
   end
 end
