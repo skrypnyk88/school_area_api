@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :groups do
       resources :students, shallow: true
       resources :my_day_reports, shallow: true
+      resources :our_days
       resources :bottle_reports, only: [:index] do
         resources :bottles
       end

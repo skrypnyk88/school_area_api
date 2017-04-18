@@ -19,7 +19,10 @@ group = Group.create(name: 'Group 1')
     birthdate: Faker::Date.birthday(2, 6),
     gender: Faker::Demographic.sex.downcase
   )
-
+  group.our_days.create(
+    description: Faker::Lorem.paragraph,
+    day: Faker::Date.between(10.days.ago, Date.today)
+  )
   group.my_day_reports.create(
     day: Faker::Date.backward(111),
     note:  Faker::Lorem.sentence,
