@@ -1,11 +1,7 @@
 module V1
   class OurDaysController < ApplicationController
-    before_action :find_groups
+    before_action :find_group
     before_action :find_our_day, only: [:show, :update]
-
-    def index
-      @our_days = @group.our_days
-    end
 
     def create
       @our_day = @group.our_days.build(our_day_params)
@@ -20,7 +16,7 @@ module V1
 
     private
 
-    def find_groups
+    def find_group
       @group = Group.find_by(id: params[:group_id])
       head :bad_request unless @group
     end
