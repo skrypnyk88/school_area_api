@@ -32,7 +32,7 @@ RSpec.describe V1::GroupsController, type: :controller do
 
     it "doesn't include not current user's group" do
       get :index, format: :json
-      expect(response.body).to_not eq(not_current_user_groups)
+      expect(response.body).to_not include(not_current_user_groups)
     end
   end
 end
