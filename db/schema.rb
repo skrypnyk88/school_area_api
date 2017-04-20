@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170426134528) do
     t.string   "email",              default: "", null: false
     t.string   "encrypted_password", default: "", null: false
     t.integer  "locale"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
