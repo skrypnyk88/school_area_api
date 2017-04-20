@@ -1,4 +1,5 @@
 class PasswordsController < ApplicationController
+<<<<<<< cb0feb669b3285d38adab527efd3ecfb28894c66
   skip_before_action :authenticate_user!
   before_action :find_user_by_token, only: [:reset]
   before_action :find_user_by_email, only: [:forgot]
