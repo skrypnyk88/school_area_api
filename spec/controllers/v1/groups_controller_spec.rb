@@ -20,7 +20,7 @@ RSpec.describe V1::GroupsController, type: :controller do
   end
 
   describe 'GET #index' do
-    it "includes current user's group" do
+    it "returns only current user's groups" do
       get :index, format: :json
       expect(response.body).to eq(current_user_groups)
     end
