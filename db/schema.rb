@@ -1,4 +1,5 @@
-ActiveRecord::Schema.define(version: 20170409135323) do
+ActiveRecord::Schema.define(version: 20170413145257) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -6,6 +7,13 @@ ActiveRecord::Schema.define(version: 20170409135323) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id",  null: false
+    t.index ["group_id"], name: "index_groups_users_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_groups_users_on_user_id", using: :btree
   end
 
   create_table "my_day_reports", force: :cascade do |t|
