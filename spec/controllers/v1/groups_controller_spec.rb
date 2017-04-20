@@ -20,19 +20,9 @@ RSpec.describe V1::GroupsController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:not_current_user_groups) do
-      group = create(:group)
-      group.attributes.with_indifferent_access.extract!(:id, :name).to_json
-    end
-
     it "includes current user's group" do
       get :index, format: :json
       expect(response.body).to eq(current_user_groups)
-    end
-
-    it "doesn't include not current user's group" do
-      get :index, format: :json
-      expect(response.body).to_not include(not_current_user_groups)
     end
   end
 end
