@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.integer :gender
       t.string :phone
       t.string :type
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
 
       t.timestamps
     end

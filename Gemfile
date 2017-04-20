@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise', '~> 4.2', '>= 4.2.1'
+gem 'i18n', '~> 0.8.1'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.6'
 gem 'paperclip', '~> 5.1'
@@ -13,8 +14,10 @@ gem 'pg', '~> 0.20.0'
 gem 'puma', '~> 3.0'
 gem 'rack-cors', '~> 0.4.1'
 gem 'rails', '~> 5.0.2'
+gem 'redis', '~> 3.3', '>= 3.3.3'
 gem 'rubocop', '~> 0.47.1'
 gem 'unicorn', '~> 5.1'
+gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
