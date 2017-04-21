@@ -20,4 +20,15 @@ class User < ApplicationRecord
   def send_reset_password_instructions
     ResetPasswordMailer.reset_password_instructions(self).deliver
   end
+
+  def send_reset_info
+    set_reset_password_token
+    ResetPasswordWorker.perform_async(id)
+  end
+
+  def reset_pass(params)
+    return unless reset_password_period_valid?
+
+    reset_password(params[:password], params[:password_confirmation])
+  end
 end

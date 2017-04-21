@@ -1,5 +1,4 @@
 class PasswordsController < ApplicationController
-<<<<<<< cb0feb669b3285d38adab527efd3ecfb28894c66
   skip_before_action :authenticate_user!
   before_action :find_user_by_token, only: [:reset]
   before_action :find_user_by_email, only: [:forgot]
@@ -45,5 +44,11 @@ class PasswordsController < ApplicationController
     else
       render json: @user.errors.full_messages.to_json, status: :bad_request
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :reset_token)
   end
 end
