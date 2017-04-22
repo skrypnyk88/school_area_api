@@ -1,5 +1,6 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 Devise.setup do |config|
+  config.secret_key = ENV['SECRET_KEY_BASE']
   # Configure the e-mail address which will be shown in Devise::Mailer
   config.mailer_sender = 'example.com'
   # ==> ORM configuration

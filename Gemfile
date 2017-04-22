@@ -13,6 +13,7 @@ gem 'puma', '~> 3.0'
 gem 'rack-cors', '~> 0.4.1'
 gem 'rails', '~> 5.0.2'
 gem 'rubocop', '~> 0.47.1'
+gem 'unicorn', '~> 5.1'
 
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
