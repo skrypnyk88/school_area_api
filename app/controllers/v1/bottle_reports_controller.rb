@@ -4,7 +4,7 @@ module V1
     include Searching
 
     def index
-      @bottle_reports = create_service(BottleReport).get_reports
+      @bottle_reports = create_service(BottleReport).find_or_create
     end
   end
 end
