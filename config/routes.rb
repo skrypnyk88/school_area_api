@@ -11,9 +11,13 @@ Rails.application.routes.draw do
     resources :groups do
       resources :students, shallow: true
       resources :my_day_reports, shallow: true
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
       
+=======
+
+>>>>>>> LVRUBYM-191: rebase master branch
       resources :presence_reports do
         resources :report_times
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390

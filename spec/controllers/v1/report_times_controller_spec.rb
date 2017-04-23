@@ -3,6 +3,7 @@
 # RSpec.describe V1::ReportTimesController, type: :controller do
 #   render_views
 
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
@@ -62,6 +63,8 @@
   end
 <<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 =======
+=======
+>>>>>>> LVRUBYM-191: rebase master branch
 #   let!(:group) { create(:group) }
 #   let!(:student) { create(:student, group: group) }
 #   let!(:presence_report) do
@@ -71,6 +74,7 @@
 #   before do
 #     allow(subject).to receive(:authenticate_user!)
 #   end
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 >>>>>>> LVRUBYM-191: rebase master branch
 
 #   def report_time_json(report)
@@ -284,15 +288,18 @@
   # end
 =======
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+>>>>>>> LVRUBYM-191: rebase master branch
 
-  def report_time_json(report)
-    {
-      id: report.id,
-      start_time: report.start_time,
-      end_time: report.end_time
-    }.to_json
-  end
+#   def report_time_json(report)
+#     {
+#       id: report.id,
+#       start_time: report.start_time,
+#       end_time: report.end_time
+#     }.to_json
+#   end
 
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
   def report_time_params(report)
     report.attributes.extract!(:start_time)
   end
@@ -344,44 +351,74 @@
       end
     end
   end
+=======
+#   describe 'POST #create' do
+#     context 'when group is valid' do
+#       it 'creates group' do
+#         post :create,
+#              format: :json,
+#              params: {
+#                group_id: group,
+#                presence_report_id: presence_report.id,
+#                report_time: { start_time: '2017-01-01',
+#                               end_time: '2017-02-01' }
+#              }
+#         expect(ReportTime.find_by(start_time: '2017-01-01')).to be_present
+#       end
+#     end
+#     context 'when group is not valid' do
+#       it 'renders bad_request response' do
+#         post :create,
+#              format: :json,
+#              params: {
+#                group_id: group,
+#                presence_report_id: presence_report.id,
+#                report_time: { start_time: '`a`' }
+#              }
+#         expect(response).to have_http_status(:bad_request)
+#       end
+#     end
+#   end
+>>>>>>> LVRUBYM-191: rebase master branch
 
-  describe 'PATCH #update' do
-    context 'when group is valid' do
-      let(:valid_params) do
-        {
-          method: :patch,
-          id: report,
-          group_id: group,
-          presence_report_id: presence_report.id,
-          report_time: { start_time: '2000-01-01' }
-        }
-      end
+#   describe 'PATCH #update' do
+#     context 'when group is valid' do
+#       let(:valid_params) do
+#         {
+#           method: :patch,
+#           id: report,
+#           group_id: group,
+#           presence_report_id: presence_report.id,
+#           report_time: { start_time: '2000-01-01' }
+#         }
+#       end
 
-      it 'renders group json' do
-        post :update, format: :json,
-                      params: valid_params
-        expect(response.body).to include(report_time_json(report.reload))
-      end
-    end
-  end
+#       it 'renders group json' do
+#         post :update, format: :json,
+#                       params: valid_params
+#         expect(response.body).to include(report_time_json(report.reload))
+#       end
+#     end
+#   end
 
-  describe 'DELETE #destroy' do
-    let(:delete_params) do
-      {
-        method: :delete,
-        id: report,
-        group_id: group,
-        presence_report_id: presence_report.id
-      }
-    end
+#   describe 'DELETE #destroy' do
+#     let(:delete_params) do
+#       {
+#         method: :delete,
+#         id: report,
+#         group_id: group,
+#         presence_report_id: presence_report.id
+#       }
+#     end
 
-    it 'deletes reports' do
-      post :destroy,
-           format: :json,
-           params: delete_params
-      expect(ReportTime.exists?(report.id)).to be false
-    end
+#     it 'deletes reports' do
+#       post :destroy,
+#            format: :json,
+#            params: delete_params
+#       expect(ReportTime.exists?(report.id)).to be false
+#     end
 
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
   #       expect(ReportTime.exists?(@report_time.id)).to be false
   #     end
@@ -399,6 +436,8 @@
 >>>>>>> LVRUBYM-219: add ReportTimesController
 end
 =======
+=======
+>>>>>>> LVRUBYM-191: rebase master branch
 #     it 'renders ok response' do
 #       post :destroy,
 #            format: :json,
@@ -407,4 +446,7 @@ end
 #     end
 #   end
 # end
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
+>>>>>>> LVRUBYM-191: rebase master branch
+=======
 >>>>>>> LVRUBYM-191: rebase master branch

@@ -11,8 +11,12 @@ class ReportTime < ApplicationRecord
 >>>>>>> LVRUBYM-219: add ReportTimesController
 
   validates :start_time, presence: true
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
 
+=======
+  
+>>>>>>> LVRUBYM-191: rebase master branch
 =======
   
 >>>>>>> LVRUBYM-191: rebase master branch
@@ -21,6 +25,7 @@ class ReportTime < ApplicationRecord
   end
 
   def end_time_formated
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
     end_time.strftime('%H:%M') unless end_time.nil?
 =======
@@ -30,4 +35,8 @@ class ReportTime < ApplicationRecord
 =======
   validates :start_time, presence: true
 >>>>>>> LVRUBYM-203: ReportTime model creation
+=======
+    end_time.strftime('%H:%M') if end_time != nil
+  end
+>>>>>>> LVRUBYM-191: rebase master branch
 end

@@ -9,6 +9,7 @@ json.array!(@reports) do |report|
     json.id report_time.id
     json.start_time report_time.start_time_formated
     json.end_time report_time.end_time_formated
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 =======
 =======
 >>>>>>> LVRUBYM-190: User actions on backend
@@ -41,3 +42,7 @@ end
 =======
 json.array! @reports
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+  end
+end
+>>>>>>> LVRUBYM-191: rebase master branch

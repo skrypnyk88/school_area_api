@@ -1,3 +1,4 @@
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
 require 'rails_helper'
 
@@ -269,6 +270,8 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
 >>>>>>> LVRUBYM-219: add ReportTimesController
 end
 =======
+=======
+>>>>>>> LVRUBYM-191: rebase master branch
 # require 'rails_helper'
 
 # RSpec.describe V1::PresenceReportsController, type: :controller do
@@ -301,4 +304,7 @@ end
 #   end
 
 # end
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
+>>>>>>> LVRUBYM-191: rebase master branch
+=======
 >>>>>>> LVRUBYM-191: rebase master branch

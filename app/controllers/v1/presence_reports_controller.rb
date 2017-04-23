@@ -1,5 +1,6 @@
 module V1
   class PresenceReportsController < ApplicationController
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
 <<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
 <<<<<<< 3f32bbaa485f770a2a11f6c172d2e4aed1e17a50
@@ -26,9 +27,13 @@ module V1
 =======
     before_action :find_group, only: [:index]
 >>>>>>> LVRUBYM-191: rebase master branch
+=======
+    before_action :find_group, only: [:index]
+>>>>>>> LVRUBYM-191: rebase master branch
 
 >>>>>>> LVRUBYM-219: add ReportTimesController
     def index
+<<<<<<< 85309f794ef111fce370c679a0b7e9ec681d373e
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
       @reports = Group.find(params[:group_id]).presence_reports
 =======
@@ -41,6 +46,10 @@ module V1
     def index
       @reports = Group.find(params[:group_id]).presence_reports
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+      @reports = @group.presence_reports
+      @students = @group.students
+>>>>>>> LVRUBYM-191: rebase master branch
     end
 
     def show; end
