@@ -58,8 +58,4 @@ RSpec.describe AuthenticationController, type: :controller do
       end
     end
   end
-<<<<<<< 4c2c86725e9454e52a38e519030d76f860dc676a
 end
-=======
-end
->>>>>>> LVRUBYM-219: change report time controller

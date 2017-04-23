@@ -9,7 +9,8 @@ module V1
     end
 
     def update
-      render_json_or_exception(@report.update_attributes(report_params), :update)
+      render_json_or_exception(@report.update_attributes(report_params),
+                               :update)
       @report.save
     end
 
@@ -21,7 +22,7 @@ module V1
     private
 
     def report_params
-      params.require(:report_time).permit(:id,:start_time, :end_time)
+      params.require(:report_time).permit(:id, :start_time, :end_time)
     end
 
     def find_report_time

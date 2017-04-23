@@ -1,11 +1,10 @@
 module V1
   class PresenceReportsController < ApplicationController
-    before_action :find_presence_report, only: [:show, :destroy]
+    before_action :find_group, only: [:index]
 
     def index
-      #@reports = PresenceReport.all
-      @reports = Group.find(params[:group_id]).presence_reports
-      @students = Group.find(params[:group_id]).students
+      @reports = @group.presence_reports
+      @students = @group.students
     end
 
     def create

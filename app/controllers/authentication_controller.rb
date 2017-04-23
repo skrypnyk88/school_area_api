@@ -1,7 +1,7 @@
 class AuthenticationController < ApplicationController
   skip_before_action :authenticate_user!, only: :authenticate
 
- def authenticate
+  def authenticate
     user = User.find_by(email: user_credentials[:email])
     if user && user.valid_password?(user_credentials[:password])
       send_token_header(user)

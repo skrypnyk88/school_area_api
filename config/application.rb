@@ -29,11 +29,7 @@ module SchoolAreaApi
                       expose: ['Auth-Token']
       end
     end
-<<<<<<< 4c2c86725e9454e52a38e519030d76f860dc676a
 
     Rack::Utils::SYMBOL_TO_STATUS_CODE[:authentication_timeout] = 419
-=======
-  Rack::Utils::SYMBOL_TO_STATUS_CODE[:authentication_timeout] = 419
->>>>>>> LVRUBYM-219: change report time controller
   end
 end
