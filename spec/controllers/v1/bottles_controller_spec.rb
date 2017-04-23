@@ -4,10 +4,10 @@ RSpec.describe V1::BottlesController, type: :controller do
   render_views
 
   def bottle_data(bottle)
-    bottle.attributes.extract!('id',
-                               'quantity',
-                               'uom',
-                               'bottle_report_id')
+    bottle.attributes.with_indifferent_access.extract!(:id,
+                               :quantity,
+                               :uom,
+                               :bottle_report_id)
           .merge!(time: bottle.time.strftime('%H:%M'))
   end
 
@@ -25,25 +25,6 @@ RSpec.describe V1::BottlesController, type: :controller do
 
   before do
     allow(subject).to receive(:authenticate_user!)
-  end
-
-  describe 'GET #index' do
-    context 'when return all bottles belongs to exact report' do
-      it 'return all bottles for exact report' do
-        test_bottles = FactoryGirl.create_list(:bottle, 10,
-                                               bottle_report_id:
-                                               test_bottle_report.id)
-        get :index, format: :json,
-                    group_id: test_group.id,
-                    bottle_report_id: test_bottle_report.id
-
-        body = test_bottles.collect { |entry| bottle_data(entry) }
-                           .to_json
-
-        expect(response.body)
-          .to eq(body)
-      end
-    end
   end
 
   describe 'POST #create' do

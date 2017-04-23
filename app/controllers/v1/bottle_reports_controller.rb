@@ -1,11 +1,10 @@
 module V1
   class BottleReportsController < ApplicationController
-    before_action :find_group, :set_day
+    include Reportable
+    include Searching
 
     def index
-
-      @bottle_reports = BottleReportService.new(@day, @group.id)
-      .find_or_create_bottle_report
+      @bottle_reports = create_service(BottleReport).get_reports
     end
   end
 end

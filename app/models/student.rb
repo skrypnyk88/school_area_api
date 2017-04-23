@@ -6,6 +6,7 @@ class Student < ApplicationRecord
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
   has_many :presence_reports, dependent: :nullify
+<<<<<<< a6a50299efba44f13a3e557fed3e3f3d2bca1ad3
 =======
   has_many :presence_reports
   
@@ -20,6 +21,9 @@ class Student < ApplicationRecord
 =======
   has_many :presence_reports, dependent: :nullify
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+  has_many :bottle_reports, dependent: :nullify
+>>>>>>> LVRUBYM-221:Add module and service
 
   before_save :titleize_name
 
