@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :groups do
       resources :students, shallow: true
       resources :my_day_reports, shallow: true
+      
       resources :presence_reports do
         resources :report_times
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390

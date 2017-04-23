@@ -17,11 +17,17 @@ module V1
     end
 
     def update
+<<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
       if @report.update(report_params)
         render :report_time
       else
         render json: { errors: @report.errors.full_messages }
       end
+=======
+      render_json_or_exception(@report.update_attributes(report_params),
+                               :update)
+      @report.save
+>>>>>>> LVRUBYM-191: rebase master branch
     end
 
     def destroy
@@ -32,7 +38,11 @@ module V1
     private
 
     def report_params
+<<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
       params.require(:report_time).permit(:start_time, :end_time)
+=======
+      params.require(:report_time).permit(:id, :start_time, :end_time)
+>>>>>>> LVRUBYM-191: rebase master branch
     end
 
     def find_report_time

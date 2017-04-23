@@ -12,6 +12,7 @@ json.presence_reports @presence_reports do |presence_report|
   json.id presence_report.id
   json.report_times presence_report.report_times do |report_time|
     json.id report_time.id
+<<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
     json.start_time report_time.start_time
     json.end_time report_time.end_time     
 >>>>>>> LVRUBYM-190: User actions on backend
@@ -20,3 +21,9 @@ end
 =======
 json.array! @reports
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+    json.start_time report_time.start_time_formated
+    json.end_time report_time.end_time_formated
+  end
+end
+>>>>>>> LVRUBYM-191: rebase master branch
