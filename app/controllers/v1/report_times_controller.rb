@@ -4,12 +4,13 @@ module V1
     before_action :find_report_time, only: [:show, :update, :destroy]
 
     def create
-      @report = @presence.report_times.new(report_params)
+      @report = @presence.report_times.new(start_time: DateTime.now)
       render_json_or_exception(@report.save, :create)
     end
 
     def update
-      render_json_or_exception(@report.update(report_params), :update)
+      render_json_or_exception(@report.update_attributes(report_params), :update)
+      @report.save
     end
 
     def destroy
@@ -20,7 +21,7 @@ module V1
     private
 
     def report_params
-      params.require(:report_time).permit(:start_time, :end_time)
+      params.require(:report_time).permit(:id,:start_time, :end_time)
     end
 
     def find_report_time
