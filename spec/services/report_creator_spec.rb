@@ -22,10 +22,8 @@ RSpec.describe V1::ReportCreator do
   describe '#find_or_create' do
     context 'when student don"t have report' do
       it 'should create report for this student' do
-        body = MyDayReport.exists?(day: day, student: student_2)
-
         expect { subject.find_or_create }
-          .to change { body }
+          .to change { MyDayReport.exists?(day: day, student: student_2) }
       end
     end
   end
@@ -33,10 +31,8 @@ RSpec.describe V1::ReportCreator do
   describe '#find_or_create' do
     context 'when student have report' do
       it 'should return current report belongs to this student' do
-        body = MyDayReport.exists?(day: day, student: student_1)
-
         expect { subject.find_or_create }
-          .to_not change { body }
+          .to_not change { MyDayReport.exists?(day: day, student: student_1) }
       end
     end
   end
