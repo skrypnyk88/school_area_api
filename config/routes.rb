@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       resources :presence_reports do
         resources :report_times
       end
+<<<<<<< 3891f7ce3693427e4e458451cdaaaed30bcc177a
 <<<<<<< dc7cabfcc374cf2f4458079cda5f4c52ddaf7205
 >>>>>>> LVRUBYM-219: add ReportTimesController
     end
@@ -78,6 +79,10 @@ Rails.application.routes.draw do
         resources :bottles
 >>>>>>> LVRUBYM-221:Changed controllers, add an updated tests; fixed routes; add index.json.jbuilder
       end
+=======
+    resources :bottle_reports, only: [:index] do
+      resources :bottles
+>>>>>>> LVRUBYM-221:Change routes; add service and module
     end
 >>>>>>> LVRUBYM-221:Added associations to group and student; Changed controllers and added tests for it
   end
