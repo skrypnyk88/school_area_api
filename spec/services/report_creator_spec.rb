@@ -15,14 +15,14 @@ RSpec.describe V1::ReportCreator do
                                        day: day)
   end
 
-  subject do
-    V1::ReportCreator.new(day: day, group: group, model: MyDayReport)
+  let!(:report) do
+    described_class.new(day: day, group: group, model: MyDayReport)
   end
 
   describe '#find_or_create' do
     context 'when student don"t have report' do
       it 'should create report for this student' do
-        expect { subject.find_or_create }
+        expect { report.find_or_create }
           .to change { MyDayReport.exists?(day: day, student: student_2) }
       end
     end

@@ -1,5 +1,5 @@
 module V1
-  module Searching
+  module CurrentUserGroup
     extend ActiveSupport::Concern
 
     included do
@@ -9,7 +9,7 @@ module V1
     private
 
     def find_group
-      @group = Group.find_by(id: params[:group_id])
+      @group = current_user.groups.find_by(id: params[:group_id])
       head :not_found unless @group
     end
   end
