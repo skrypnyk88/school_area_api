@@ -4,7 +4,8 @@ module V1
     include CurrentUserGroup
 
     def index
-      @bottle_reports = create_service(BottleReport).find_or_create
+      @bottle_reports = find_or_create_service(BottleReport)
+      .find_or_create
     end
   end
 end
