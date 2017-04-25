@@ -6,7 +6,7 @@ module V1
       @model = model
     end
 
-    attr_reader: group, model, day
+    attr_reader :group, :model, :day
 
     def find_or_create
       group.students.map do |student|
