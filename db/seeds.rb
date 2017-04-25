@@ -1,6 +1,9 @@
 require 'faker'
 
+<<<<<<< 68884a04755223fe567efd3a1454c892e5bd5307
 <<<<<<< 3d6ef24b1f115a08fa031f7cb22c9e05126b0cb6
+=======
+>>>>>>> LVRUBYM-221:Fixed seeds and schema
 n = 0
 2.times do |i|
 <<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
@@ -47,7 +50,6 @@ group = Group.create(name: 'Group 1')
     group = Group.create(name: "Group #{n += 1}")
     teacher.groups << group
 
-<<<<<<< f101e11b6badb7e2886dee07c332b87b80d82953
     10.times do
       student = group.students.create(
         first_name: Faker::Name.first_name,
