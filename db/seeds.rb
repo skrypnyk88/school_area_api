@@ -1,7 +1,5 @@
 require 'faker'
-
 n = 0
-
 2.times do |i|
   teacher = Teacher.create(
     first_name: Faker::Name.first_name,
@@ -13,8 +11,8 @@ n = 0
     phone: '1234567890'
   )
 
-  3.times do |j|
-    group = Group.create(name: "Group #{ n+=1 }")
+  3.times do
+    group = Group.create(name: "Group #{n += 1}")
     teacher.groups << group
 
     10.times do

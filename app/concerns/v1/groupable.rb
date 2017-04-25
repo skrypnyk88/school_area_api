@@ -1,5 +1,5 @@
 module V1
-  module CurrentUserGroup
+  module Groupable
     extend ActiveSupport::Concern
 
     included do

@@ -9,6 +9,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
+    - 'db/seeds.rb'
 
 Metrics/MethodLength:
   Exclude:

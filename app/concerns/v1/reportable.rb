@@ -12,8 +12,8 @@ module V1
       @day = params[:day] ? Date.parse(params[:day]) : DateTime.now
     end
 
-    def find_or_create_service(model)
-      ReportCreator.new(day: @day, group: @group, model: model)
+    def reports_renderer(students, model)
+      ReportsRenderer.new(day: @day, students: students, model: model)
     end
   end
 end
