@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::ReportsRenderer do
-  TestReport = Struct.new(:day, :students, :group) do
+  TestReport = Struct.new(:day, :students, :model) do
     def self.find_or_create_by(params)
       new(params)
     end
@@ -20,18 +20,12 @@ RSpec.describe V1::ReportsRenderer do
   end
 
   describe '#find_or_create' do
-    context 'when student don"t have report' do
-      it 'should create report for this student' do
-        expect(report_renderer.call.length).to eq(2)
-      end
+    it 'should return report for each student' do
+      expect(report_renderer.call.length).to eq(2)
     end
-  end
 
-  describe '#find_or_create' do
-    context 'when student have report' do
-      it 'should return current report belongs to this student' do
-        expect(report_renderer.call).to all(be_a(TestReport))
-      end
+    it 'should return all reports are type TestReport' do
+      expect(report_renderer.call).to all(be_a(TestReport))
     end
   end
 end
