@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe V1::ReportsRenderer do
-  TestReport = Struct.new(:day, :students, :model) do
+  TestReport = Struct.new(:day, :student, :group) do
     def self.find_or_create_by(params)
-      new(params)
+      new(params[:day], params[:student], params[:group])
     end
   end
 
@@ -26,6 +26,11 @@ RSpec.describe V1::ReportsRenderer do
 
     it 'should return all reports are type TestReport' do
       expect(report_renderer.call).to all(be_a(TestReport))
+    end
+
+    it 'should have attributes set with correct values' do
+      expect(report_renderer.call).to all(have_attributes(day: day,
+                                                          group: group))
     end
   end
 end
