@@ -17,15 +17,15 @@ RSpec.describe V1::ReportsRenderer do
     end
   end
 
-  let!(:group) { FactoryGirl.create(:group) }
+  let(:group) { FactoryGirl.create(:group) }
 
-  let!(:students) do
+  let(:students) do
     FactoryGirl.create_list(:student, 2, group_id: group.id)
   end
 
-  let!(:day) { DateTime.now }
+  let(:day) { DateTime.now }
 
-  let!(:report_renderer) do
+  let(:report_renderer) do
     described_class.new(day: day, students: students, model: TestReport)
   end
 
