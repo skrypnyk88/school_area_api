@@ -29,8 +29,12 @@ RSpec.describe V1::ReportsRenderer do
     end
 
     it 'should have attributes set with correct values' do
-      expect(report_renderer.call).to all(have_attributes(day: day,
-                                                          group: group))
+      expect(report_renderer.call)
+        .to all(satisfy do |t|
+                  t.day == day &&
+                  t.group == group &&
+                  students.include?(t.student)
+                end)
     end
   end
 end
