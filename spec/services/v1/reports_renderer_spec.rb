@@ -1,19 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe V1::ReportsRenderer do
-  class TestReport
-    def initialize(day:, group:, student:)
-      @day = day
-      @group = group
-      @student = student
-    end
-
-    attr_reader :day, :group, :student
-
-    def self.find_or_create_by(params = {})
-      TestReport.new(day: params[:day],
-                     group: params[:group],
-                     student: params[:student])
+  TestReport = Struct.new(:day, :students, :group) do
+    def self.find_or_create_by(params)
+      new(params)
     end
   end
 
@@ -40,8 +30,7 @@ RSpec.describe V1::ReportsRenderer do
   describe '#find_or_create' do
     context 'when student have report' do
       it 'should return current report belongs to this student' do
-        expect(report_renderer.call).to all((be_a(TestReport)
-          .and satisfy { |t| t.day == day && t.group == group }))
+        expect(report_renderer.call).to all(be_a(TestReport))
       end
     end
   end

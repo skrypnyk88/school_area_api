@@ -19,7 +19,7 @@ n = 0
       student = group.students.create(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        birthdate: Faker::Date.birthday(2, 6),
+        birthdate: Faker::Date.between(6.years.ago, 2.years.ago),
         gender: Faker::Demographic.sex.downcase
       )
 
