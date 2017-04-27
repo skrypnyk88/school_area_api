@@ -29,12 +29,15 @@ RSpec.describe V1::ReportsRenderer do
     end
 
     it 'should have attributes set with correct values' do
-      expect(report_renderer.call)
-        .to all(satisfy do |t|
-                  t.day == day &&
-                  t.group == group &&
-                  students.include?(t.student)
-                end)
+      expect(TestReport).to receive(:find_or_create_by)
+        .once.with(day: day,
+                   student: students.first,
+                   group: group)
+      expect(TestReport).to receive(:find_or_create_by)
+        .once.with(day: day,
+                   student: students.last,
+                   group: group)
+      report_renderer.call
     end
   end
 end
