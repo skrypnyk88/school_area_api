@@ -8,5 +8,6 @@ FactoryGirl.define do
     gender { %w(male female other).sample }
     phone '0673377891'
     locale { %w(en ua).sample }
+    reset_password_token nil
   end
 end
