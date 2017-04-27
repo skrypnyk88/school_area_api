@@ -257,6 +257,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   timecop (~> 0.8.1)
   unicorn (~> 5.1)
+  timecop (~> 0.8.1)
 
 BUNDLED WITH
    1.14.6

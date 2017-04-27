@@ -10,6 +10,7 @@ class PasswordsController < ApplicationController
     else
       render json: I18n.t('mailer.errors.not_found').to_json,
              status: :not_found
+      render json: { error: 'Email not found' }, status: :not_found
     end
   end
 
@@ -49,6 +50,7 @@ class PasswordsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :reset_token)
+    params.require(:user)
+          .permit(:email, :password, :password_confirmation, :reset_token)
   end
 end
