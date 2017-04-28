@@ -44,10 +44,17 @@ class Student < ApplicationRecord
     age.between?(2, 6)
   end
 
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
   scope :present, lambda { |day|
     includes(presence_reports: :report_times)
       .where('presence_reports.day' => day)
       .where.not('report_times.start_time' => nil)
+=======
+  scope :present, lambda {
+    includes(presence_reports: :report_times)
+      .where('report_times.start_time' => DateTime.now.beginning_of_day..
+                                          DateTime.now.end_of_day)
+>>>>>>> LVRUBYM-219: Fixed controller and tests
   }
 
   private

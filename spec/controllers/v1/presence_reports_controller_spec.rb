@@ -26,6 +26,7 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
     current_user.groups << group_1
   end
 
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
   let(:student_1) { create(:student, group: group_1) }
   let(:student_2) { create(:student, group: group_1) }
 
@@ -39,6 +40,21 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
     create(:presence_report,
            student: student_2,
            group: group_1,
+=======
+  let(:student_1) { create(:student, group_id: group_1.id) }
+  let(:student_2) { create(:student, group_id: group_1.id) }
+
+  let!(:presence_report_1) do
+    create(:presence_report,
+           student_id: student_1.id,
+           group_id: group_1.id,
+           day: DateTime.now)
+  end
+  let!(:presence_report_2) do
+    create(:presence_report,
+           student_id: student_2.id,
+           group_id: group_1.id,
+>>>>>>> LVRUBYM-219: Fixed controller and tests
            day: DateTime.now)
   end
   before do
@@ -54,6 +70,12 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
                .to_json
         get :index, format: :json,
                     params: { group_id: group_1.id }
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
+=======
+        body = [presence_report_1, presence_report_2]
+               .collect { |n| presence_report_data(n) }
+               .to_json
+>>>>>>> LVRUBYM-219: Fixed controller and tests
         expect(response.body).to eq(body)
       end
 
@@ -64,7 +86,13 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
         Timecop.freeze(Date.today + 1) do
           get :index, format: :json,
                       params: { group_id: group_1.id }
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
 
+=======
+          body = [presence_report_1, presence_report_2]
+                 .collect { |n| presence_report_data(n) }
+                 .to_json
+>>>>>>> LVRUBYM-219: Fixed controller and tests
           expect(response.body).to_not include(body)
         end
       end

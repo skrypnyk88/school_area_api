@@ -1,8 +1,11 @@
 module V1
   class ReportTimesController < ApplicationController
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
 <<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
 <<<<<<< 3d6ef24b1f115a08fa031f7cb22c9e05126b0cb6
+=======
+>>>>>>> LVRUBYM-219: Fixed controller and tests
     include Groupable
     before_action :find_presence_report
     before_action :find_report_time, only: [:update, :destroy]
@@ -47,6 +50,7 @@ module V1
 
     def find_report_time
       @report = @presence.report_times.find_by(id: params[:id])
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
       return if @report
       render json: { errors: "Report Time doesn't exist" }, status: :not_found
     end
@@ -57,6 +61,14 @@ module V1
       return if @presence
       render json: { errors: "PresenceReport doesn't exist" },
              status: :not_found
+=======
+      render json: { errors: 'Not found' }, status: :not_found unless @report
+    end
+
+    def find_presence_report
+      @presence = @group.presence_reports.find(params[:presence_report_id])
+      render json: { errors: 'Not found' }, status: :not_found unless @presence
+>>>>>>> LVRUBYM-219: Fixed controller and tests
     end
 =======
 =======

@@ -3,8 +3,11 @@
 # RSpec.describe V1::ReportTimesController, type: :controller do
 #   render_views
 
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
 <<<<<<< 48bf061c9e2c32a48fdffd185f80ffa2dc468c4c
 <<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
+=======
+>>>>>>> LVRUBYM-219: Fixed controller and tests
   def report_time_data(_report_time)
     bottle.attributes.with_indifferent_access.extract!(:id,
                                                        :start_time,
@@ -38,6 +41,7 @@
         post :create, format: :json,
                       params: { presence_report_id: presence_report_1.id,
                                 group_id: group_1.id,
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
                                 report_time: {
                                   start_time: '2017-01-01 11:11'
                                 } }
@@ -122,6 +126,10 @@
              }
         expect(response).to have_http_status(:bad_request)
 >>>>>>> LVRUBYM-219: add ReportTimesController
+=======
+                                report_time: { start_time: DateTime.now } }
+        expect(JSON.parse(response.body)['id']).to be > 0
+>>>>>>> LVRUBYM-219: Fixed controller and tests
       end
     end
   end
@@ -146,6 +154,15 @@
 
   describe 'DELETE #destroy' do
     context 'when report_time is deleted' do
+<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
+=======
+      it 'report_time exist ' do
+        existed_report_time = ReportTime.find_by id: report_time_1.id
+
+        expect(existed_report_time).not_to be_nil
+      end
+
+>>>>>>> LVRUBYM-219: Fixed controller and tests
       it "report_time doesn't exist anymore" do
         delete :destroy, format: :json,
                          params: { group_id: group_1.id,
