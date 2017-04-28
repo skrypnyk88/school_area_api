@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170424073006) do
+ActiveRecord::Schema.define(version: 20170426134528) do
 
   enable_extension "plpgsql"
 
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170424073006) do
     t.datetime "updated_at",                      null: false
     t.string   "email",              default: "", null: false
     t.string   "encrypted_password", default: "", null: false
+    t.integer  "locale"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 

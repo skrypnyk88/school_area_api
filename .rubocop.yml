@@ -5,6 +5,7 @@ AllCops:
   Exclude:
     - 'app/views/**/*'
     - 'db/schema.rb'
+    - 'db/seeds.rb'
 
 Metrics/BlockLength:
   Exclude:

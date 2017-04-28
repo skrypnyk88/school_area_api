@@ -15,4 +15,5 @@ class User < ApplicationRecord
             length: { in: 7..10 },
             format: { with: VALID_PHONE_REGEX, message: 'use only digits' },
             allow_nil: true
+  enum locale: { en: 0, ua: 1 }
 end

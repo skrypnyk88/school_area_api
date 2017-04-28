@@ -9,7 +9,8 @@ n = 0
     password: 'password',
     password_confirmation: 'password',
     gender: %w(male female other).sample,
-    phone: '1234567890'
+    phone: '1234567890',
+    locale: %w(en ua).sample
   )
 
   3.times do

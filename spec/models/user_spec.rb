@@ -75,4 +75,11 @@ RSpec.describe User, type: :model do
       end
     end
   end
+  describe '#locale' do
+    context "when is 'en', 'ua'" do
+      it 'is valid' do
+        expect(build(:user, locale: :en)).to be_valid
+      end
+    end
+  end
 end

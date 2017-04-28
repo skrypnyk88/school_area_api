@@ -8,7 +8,8 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
   let!(:report) { create(:my_day_report, group: group, student: student) }
 
   before do
-    allow(subject).to receive(:authenticate_user!)
+    allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:set_locale)
   end
 
   def my_day_report_json(report)

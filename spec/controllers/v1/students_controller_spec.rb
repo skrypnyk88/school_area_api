@@ -23,6 +23,7 @@ RSpec.describe V1::StudentsController, type: :controller do
 
   before do
     allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:set_locale)
   end
 
   describe 'GET #index' do
