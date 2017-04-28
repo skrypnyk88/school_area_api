@@ -1,22 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ReportTime, type: :model do
+  let(:presence_report) do
+    create(:presence_report)
+  end
+
   describe '#start_time' do
     context 'when empty' do
       it 'is invalid' do
-        expect(build(:presence_report, day: nil)).to_not be_valid
+        expect(build(:report_time, start_time: nil,
+                                   reportable: presence_report)).to_not be_valid
       end
     end
 
     context 'when not empty' do
       it 'is valid' do
-        expect(build(:presence_report, day: '2017-01-11')).to be_valid
-      end
-    end
-
-    context 'when incorrect order' do
-      it 'is invalid' do
-        expect(build(:presence_report, day: '20 2017 April')).to_not be_valid
+        expect(build(:report_time, start_time: '2017-01-11',
+                                   reportable: presence_report)).to be_valid
       end
     end
   end
@@ -24,13 +24,8 @@ RSpec.describe ReportTime, type: :model do
   describe '#end_time' do
     context 'when not empty' do
       it 'is valid' do
-        expect(build(:presence_report, day: '2017-01-11')).to be_valid
-      end
-    end
-
-    context 'when incorrect order' do
-      it 'is invalid' do
-        expect(build(:presence_report, day: '20 2017 April')).to_not be_valid
+        expect(build(:report_time, end_time: '2017-01-11',
+                                   reportable: presence_report)).to be_valid
       end
     end
   end

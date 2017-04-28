@@ -1,17 +1,24 @@
 module V1
   class ReportTimesController < ApplicationController
+    include Groupable
     before_action :find_presence_report
-    before_action :find_report_time, only: [:show, :update, :destroy]
+    before_action :find_report_time, only: [:update, :destroy]
 
     def create
-      @report = @presence.report_times.new(start_time: DateTime.now)
-      render_json_or_exception(@report.save, :create)
+      @report = @presence.report_times.new(report_params)
+      if @report.save
+        render :report_time
+      else
+        render json: { errors: @report.errors.full_messages }
+      end
     end
 
     def update
-      render_json_or_exception(@report.update_attributes(report_params),
-                               :update)
-      @report.save
+      if @report.update(report_params)
+        render :report_time
+      else
+        render json: { errors: @report.errors.full_messages }
+      end
     end
 
     def destroy
@@ -22,19 +29,17 @@ module V1
     private
 
     def report_params
-      params.require(:report_time).permit(:id, :start_time, :end_time)
+      params.require(:report_time).permit(:start_time, :end_time)
     end
 
     def find_report_time
       @report = @presence.report_times.find_by(id: params[:id])
+      render json: { errors: 'Not found' }, status: :not_found unless @report
     end
 
     def find_presence_report
-      @presence = PresenceReport.find(params[:presence_report_id])
-    end
-
-    def render_json_or_exception(condition, json_file)
-      condition ? (render json_file) : (head :bad_request)
+      @presence = @group.presence_reports.find(params[:presence_report_id])
+      render json: { errors: 'Not found' }, status: :not_found unless @presence
     end
   end
 end
