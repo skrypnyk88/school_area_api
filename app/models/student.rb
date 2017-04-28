@@ -57,19 +57,29 @@ class Student < ApplicationRecord
     age.between?(2, 6)
   end
 
+<<<<<<< d9d731eaeea8e8673d191dcb08e794be672f94bc
 <<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
   scope :present, lambda { |day|
     includes(presence_reports: :report_times)
       .where('presence_reports.day' => day)
       .where.not('report_times.start_time' => nil)
 =======
+<<<<<<< e9a9c3f681a1e1ea8c4423eaa74fd6e00e38269a
+>>>>>>> LVRUBYM-219: Fixed controller and tests
+=======
   scope :present, lambda {
     includes(presence_reports: :report_times)
       .where('report_times.start_time' => DateTime.now.beginning_of_day..
                                           DateTime.now.end_of_day)
+<<<<<<< d9d731eaeea8e8673d191dcb08e794be672f94bc
 >>>>>>> LVRUBYM-219: Fixed controller and tests
   }
 
+=======
+  }
+
+>>>>>>> LVRUBYM-219: Fixed controller and tests
+>>>>>>> LVRUBYM-219: Fixed controller and tests
   private
 
   def titleize_name
