@@ -21,7 +21,7 @@ RSpec.describe V1::ReportsRenderer do
 
   describe '#find_or_create' do
     it 'should return report for each student' do
-      expect(report_renderer.call.length).to eq(2)
+      expect(report_renderer.call.length).to eq(students.length)
     end
 
     it 'should return all reports are type TestReport' do
