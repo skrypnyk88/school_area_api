@@ -1,18 +1,18 @@
 module V1
   class BottlesController < ApplicationController
-    before_action :find_group,
-
     def create
-      @bottle = Bottle.new(time: DateTime.now, quantity: 30,
-      bottle_report_id: params[:bottle_report_id])
-      @bottle.save ? (render :bottle) : (head :bad_request)
+      @bottle = Bottle.new(time: DateTime.now,
+                           quantity: 30,
+                           bottle_report_id: params[:bottle_report_id])
+      render :bottle if @bottle.save
+      render json: { errors: @bottle.errors.full_messages }
     end
 
     def update
       @bottle = @bottle_report.bottles.find_by id: params[:id]
       head :not_found if @bottle.nil?
-      @bottle
-      .update_attributes(bottle_params) ? (render :bottle) : (head :bad_request)
+      render :bottle if @bottle.update_attributes(bottle_params)
+      render json: { errors: @bottle.errors.full_messages }
     end
 
     def destroy

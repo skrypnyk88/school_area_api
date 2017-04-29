@@ -4,7 +4,6 @@ module V1
 
     included do
       before_action :find_group
-      before_action :find_present_students
     end
 
     private
@@ -13,6 +12,7 @@ module V1
       @group = current_user.groups.find_by(id: params[:group_id])
       head :not_found unless @group
     end
+<<<<<<< 4f52e0f1d6eb81057d222fe0f906647ae6985b1e
 
     def find_present_students
 <<<<<<< d9d731eaeea8e8673d191dcb08e794be672f94bc
@@ -25,5 +25,7 @@ module V1
       @students = @group.students.present
 >>>>>>> LVRUBYM-219: Fixed controller and tests
     end
+=======
+>>>>>>> LVRUBYM-221:Changed controllers
   end
 end

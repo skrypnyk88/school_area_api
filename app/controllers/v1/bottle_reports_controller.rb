@@ -1,11 +1,10 @@
 module V1
   class BottleReportsController < ApplicationController
     include Reportable
-    include CurrentUserGroup
+    include Groupable
 
     def index
-      @bottle_reports = find_or_create_service(BottleReport)
-      .find_or_create
+      @bottle_reports = reports_renderer(@students, BottleReport).call
     end
   end
 end
