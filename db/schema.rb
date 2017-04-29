@@ -1,6 +1,5 @@
-ActiveRecord::Schema.define(version: 20170413145257) do
+ActiveRecord::Schema.define(version: 20170423095234) do
 
-  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
@@ -19,8 +18,8 @@ ActiveRecord::Schema.define(version: 20170413145257) do
   create_table "my_day_reports", force: :cascade do |t|
     t.date     "day"
     t.text     "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "group_id"
     t.integer  "student_id"
     t.index ["group_id"], name: "index_my_day_reports_on_group_id", using: :btree
