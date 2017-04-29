@@ -9,7 +9,7 @@ module V1
     private
 
     def set_day
-      @day = params[:day] ? Date.parse(params[:day]) : DateTime.now
+      @day = params[:day] ? Date.parse(params[:day]) : Date.today
     end
 
     def reports_renderer(students, model)
