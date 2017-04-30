@@ -36,8 +36,10 @@ RSpec.describe V1::ReportTimesController, type: :controller do
         post :create, format: :json,
                       params: { presence_report_id: presence_report_1.id,
                                 group_id: group_1.id,
-                                report_time: { start_time: DateTime.now } }
-        expect(JSON.parse(response.body)['id']).to be > 0
+                                report_time: {
+                                  start_time: '2017-01-01 11:11'
+                                } }
+        expect(ReportTime.exists?(start_time: '2017-01-01 11:11')).to be_truthy
       end
     end
   end
@@ -61,12 +63,6 @@ RSpec.describe V1::ReportTimesController, type: :controller do
 
   describe 'DELETE #destroy' do
     context 'when report_time is deleted' do
-      it 'report_time exist ' do
-        existed_report_time = ReportTime.find_by id: report_time_1.id
-
-        expect(existed_report_time).not_to be_nil
-      end
-
       it "report_time doesn't exist anymore" do
         delete :destroy, format: :json,
                          params: { group_id: group_1.id,

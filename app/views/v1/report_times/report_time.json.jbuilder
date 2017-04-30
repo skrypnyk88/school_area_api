@@ -1,1 +1,3 @@
-json.(@report, :id, :start_time, :end_time)
+json.(@report, :id,
+               :start_time_formated,
+               :end_time_formated)

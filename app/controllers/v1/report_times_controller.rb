@@ -34,12 +34,16 @@ module V1
 
     def find_report_time
       @report = @presence.report_times.find_by(id: params[:id])
-      render json: { errors: 'Not found' }, status: :not_found unless @report
+      return if @report
+      render json: { errors: "Report Time doesn't exist" }, status: :not_found
     end
 
     def find_presence_report
-      @presence = @group.presence_reports.find(params[:presence_report_id])
-      render json: { errors: 'Not found' }, status: :not_found unless @presence
+      @presence = @group.presence_reports
+                        .find_by(id: params[:presence_report_id])
+      return if @presence
+      render json: { errors: "PresenceReport doesn't exist" },
+             status: :not_found
     end
   end
 end

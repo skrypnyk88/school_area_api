@@ -24,7 +24,8 @@ RSpec.describe ReportTime, type: :model do
   describe '#end_time' do
     context 'when not empty' do
       it 'is valid' do
-        expect(build(:report_time, end_time: '2017-01-11',
+        expect(build(:report_time, start_time: '2017-01-10',
+                                   end_time: '2017-01-11',
                                    reportable: presence_report)).to be_valid
       end
     end

@@ -15,7 +15,7 @@ module V1
     end
 
     def find_present_students
-      @students = @group.students.present
+      @students = @group.students.present(@day)
     end
   end
 end

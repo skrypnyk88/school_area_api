@@ -1,7 +1,7 @@
 class PresenceReport < ApplicationRecord
   belongs_to :student
   belongs_to :group
+  has_many :report_times, as: :reportable
 
   validates :day, presence: true
-  has_many :report_times, as: :reportable
 end
