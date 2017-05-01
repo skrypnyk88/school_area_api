@@ -16,8 +16,8 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'rails', '~> 5.0.2'
 gem 'redis', '~> 3.3', '>= 3.3.3'
 gem 'rubocop', '~> 0.47.1'
-gem 'unicorn', '~> 5.1'
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
+gem 'unicorn', '~> 5.1'
 
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'

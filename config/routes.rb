@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   post '/signin', to: 'authentication#authenticate'
   get '/refresh_token', to: 'authentication#refresh_token'
 
-  post 'password/forgot', to: 'passwords#forgot'
-  post 'password/reset', to: 'passwords#reset'
+  post 'forgot_password', to: 'passwords#forgot'
+  post 'reset_password', to: 'passwords#reset'
 
   devise_for :user, skip: :sessions
 
