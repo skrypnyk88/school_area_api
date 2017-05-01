@@ -1,6 +1,7 @@
 class Student < ApplicationRecord
   belongs_to :group, optional: true
   has_many :my_day_reports, dependent: :nullify
+  has_many :presence_reports, dependent: :nullify
 
   before_save :titleize_name
 
@@ -33,6 +34,12 @@ class Student < ApplicationRecord
   def valid_age?
     age.between?(2, 6)
   end
+
+  scope :present, lambda { |day|
+    includes(presence_reports: :report_times)
+      .where('presence_reports.day' => day)
+      .where.not('report_times.start_time' => nil)
+  }
 
   private
 

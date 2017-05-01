@@ -8,6 +8,7 @@ module Devise
       def authenticate!
         payload = JsonWebToken.decode(token)
         success! User.find(payload[:user_id])
+
       rescue ::JWT::ExpiredSignature, ::JWT::DecodeError
         fail!
       end

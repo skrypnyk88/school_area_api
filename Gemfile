@@ -17,7 +17,7 @@ gem 'unicorn', '~> 5.1'
 
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
-  gem 'pry-byebug', '~> 3.3'
+  gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
   gem 'rspec-rails', '~> 3.5'
 end
 
@@ -31,4 +31,5 @@ group :test do
   gem 'database_cleaner', '>= 1.5.3'
   gem 'faker', '~> 1.7', '>= 1.7.3'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'timecop', '~> 0.8.1'
 end

@@ -1,5 +1,6 @@
-ActiveRecord::Schema.define(version: 20170423095234) do
+ActiveRecord::Schema.define(version: 20170413145257) do
 
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
@@ -18,12 +19,35 @@ ActiveRecord::Schema.define(version: 20170423095234) do
   create_table "my_day_reports", force: :cascade do |t|
     t.date     "day"
     t.text     "note"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "group_id"
     t.integer  "student_id"
     t.index ["group_id"], name: "index_my_day_reports_on_group_id", using: :btree
     t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
+  end
+
+  create_table "presence_reports", force: :cascade do |t|
+    t.date     "day"
+    t.integer  "updated_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.integer  "student_id"
+    t.index ["group_id"], name: "index_presence_reports_on_group_id", using: :btree
+    t.index ["student_id"], name: "index_presence_reports_on_student_id", using: :btree
+  end
+
+  create_table "report_times", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "reportable_id"
+    t.string   "reportable_type"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["reportable_type", "reportable_id"], name: "index_report_times_on_reportable_type_and_reportable_id", using: :btree
   end
 
   create_table "students", force: :cascade do |t|
@@ -52,5 +76,7 @@ ActiveRecord::Schema.define(version: 20170423095234) do
 
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
+  add_foreign_key "presence_reports", "groups"
+  add_foreign_key "presence_reports", "students"
   add_foreign_key "students", "groups"
 end
