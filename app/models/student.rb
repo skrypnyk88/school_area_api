@@ -1,29 +1,8 @@
 class Student < ApplicationRecord
   belongs_to :group, optional: true
   has_many :my_day_reports, dependent: :nullify
-<<<<<<< 6b426f725b27b5ae5adb7f602876ca02cc82fe0d
-<<<<<<< bd094170f2a1e4c4eb2a71d5eaff6e9be248fe61
-<<<<<<< beb61cd08c7579e6cfe7ba570ddf37a33be33390
-<<<<<<< 16049e24e6c0c43dd3e60d88d2f6c531fa9a75fa
   has_many :presence_reports, dependent: :nullify
-<<<<<<< a6a50299efba44f13a3e557fed3e3f3d2bca1ad3
-=======
-  has_many :presence_reports
-  
->>>>>>> LVRUBYM-219: Fixed
-=======
-  has_many :presence_reports, dependent: :nullify
->>>>>>> LVRUBYM-219: add ReportTimesController
-=======
-  has_many :presence_reports
-  
->>>>>>> LVRUBYM-219: Fixed
-=======
-  has_many :presence_reports, dependent: :nullify
->>>>>>> LVRUBYM-219: add ReportTimesController
-=======
   has_many :bottle_reports, dependent: :nullify
->>>>>>> LVRUBYM-221:Add module and service
 
   before_save :titleize_name
 
@@ -57,29 +36,12 @@ class Student < ApplicationRecord
     age.between?(2, 6)
   end
 
-<<<<<<< d9d731eaeea8e8673d191dcb08e794be672f94bc
-<<<<<<< 72d59ee036847a4966334687cc75c280e5f58758
   scope :present, lambda { |day|
     includes(presence_reports: :report_times)
       .where('presence_reports.day' => day)
       .where.not('report_times.start_time' => nil)
-=======
-<<<<<<< e9a9c3f681a1e1ea8c4423eaa74fd6e00e38269a
->>>>>>> LVRUBYM-219: Fixed controller and tests
-=======
-  scope :present, lambda {
-    includes(presence_reports: :report_times)
-      .where('report_times.start_time' => DateTime.now.beginning_of_day..
-                                          DateTime.now.end_of_day)
-<<<<<<< d9d731eaeea8e8673d191dcb08e794be672f94bc
->>>>>>> LVRUBYM-219: Fixed controller and tests
   }
 
-=======
-  }
-
->>>>>>> LVRUBYM-219: Fixed controller and tests
->>>>>>> LVRUBYM-219: Fixed controller and tests
   private
 
   def titleize_name

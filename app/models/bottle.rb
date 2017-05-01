@@ -4,8 +4,7 @@ class Bottle < ApplicationRecord
   validates :quantity,
             presence: true,
             numericality: { greater_than_or_equal_to: 0 }
-  validates :time,
-            presence: true
+  validates :time, presence: true
   validates_inclusion_of :uom, in: uoms.keys
 
   def time_formated

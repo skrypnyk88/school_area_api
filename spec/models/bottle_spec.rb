@@ -24,13 +24,13 @@ RSpec.describe Bottle, type: :model do
 
     context 'when not empty' do
       it 'is valid' do
-        expect(build(:bottle, time: '2017-04-01 15:03:00')).to be_valid
+        expect(build(:bottle, time: DateTime.now)).to be_valid
       end
     end
 
     context 'when correct format' do
       it 'is valid' do
-        expect(build(:bottle, time: '2017-04-01 15:03:25')).to be_valid
+        expect(build(:bottle, time: DateTime.now)).to be_valid
       end
     end
 

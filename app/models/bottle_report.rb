@@ -3,6 +3,5 @@ class BottleReport < ApplicationRecord
   belongs_to :group
   belongs_to :student
 
-  validates :day,
-            presence: true
+  validates :day, presence: true
 end

@@ -3,20 +3,27 @@ module V1
     def create
       @bottle = Bottle.new(time: DateTime.now,
                            quantity: 30,
+                           uom: 'ml',
                            bottle_report_id: params[:bottle_report_id])
-      render :bottle if @bottle.save
-      render json: { errors: @bottle.errors.full_messages }
+      if @bottle.save
+        render :bottle
+      else
+        render json: { errors: @bottle.errors.full_messages }
+      end
     end
 
     def update
-      @bottle = @bottle_report.bottles.find_by id: params[:id]
+      @bottle = Bottle.find_by id: params[:id]
       head :not_found if @bottle.nil?
-      render :bottle if @bottle.update_attributes(bottle_params)
-      render json: { errors: @bottle.errors.full_messages }
+      if @bottle.update_attributes(bottle_params)
+        render :bottle
+      else
+        render json: { errors: @bottle.errors.full_messages }
+      end
     end
 
     def destroy
-      @bottle = @bottle_report.bottles.find_by id: params[:id]
+      @bottle = Bottle.find_by id: params[:id]
       head :not_found if @bottle.nil?
       @bottle.destroy
       head :ok
