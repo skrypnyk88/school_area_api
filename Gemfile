@@ -8,6 +8,7 @@ end
 gem 'devise', '~> 4.2', '>= 4.2.1'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.6'
+gem 'paperclip', '~> 5.1'
 gem 'pg', '~> 0.20.0'
 gem 'puma', '~> 3.0'
 gem 'rack-cors', '~> 0.4.1'
@@ -32,4 +33,8 @@ group :test do
   gem 'faker', '~> 1.7', '>= 1.7.3'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'timecop', '~> 0.8.1'
+end
+
+group :production do
+  gem 'fog-aws', '~> 0.7.6'
 end
