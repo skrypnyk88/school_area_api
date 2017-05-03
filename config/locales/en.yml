@@ -226,4 +226,9 @@ en:
   action: "Change my password"
   instruction_2: "If you didn't request this, please ignore this email."
   instruction_3: "Your password won't change until you access the link above and create a new one."
+  email_sent: "Email was succesfully sent."
+  not_found: "User not found."
+  password_reset: "The password was succesfully reset."
+  invalid_token: "The token is invalid."
+
 

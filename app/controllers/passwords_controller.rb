@@ -4,13 +4,13 @@ class PasswordsController < ApplicationController
   before_action :find_user_by_email, only: [:forgot]
 
   def forgot
-    if @user
-      @user.send_reset_info
-      render json: I18n.t('mailer.email_sent').to_json, status: :ok
+    user = User.find_by(email: user_params[:email])
+    if user
+      user.send_reset_info
+      render json: I18n.t('email_sent'), status: :ok
     else
-      render json: I18n.t('mailer.errors.not_found').to_json,
-             status: :not_found
-      render json: { error: 'Email not found' }, status: :not_found
+      render json: I18n.t('not_found'), status: :not_found
+
     end
   end
 
