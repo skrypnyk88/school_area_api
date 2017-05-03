@@ -111,7 +111,6 @@ RSpec.describe User, type: :model do
     context 'when reset_password_token is valid' do
       it 'resets password' do
         user.send(:set_reset_password_token)
-        user.reset_password_period_valid?
         expect(user).to receive(:reset_password)
         user.reset_pass(params)
       end
@@ -120,7 +119,6 @@ RSpec.describe User, type: :model do
       it "doesn't reset password" do
         user.send(:set_reset_password_token)
         Timecop.freeze(Date.today + 7) do
-          user.reset_password_period_valid?
           expect(user).not_to receive(:reset_password)
           user.reset_pass(params)
         end
