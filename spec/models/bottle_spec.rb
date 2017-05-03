@@ -7,21 +7,9 @@ RSpec.describe Bottle, type: :model do
         expect(build(:bottle, quantity: '130')).to be_valid
       end
     end
-
-    context 'when empty' do
-      it 'is invalid' do
-        expect(build(:bottle, quantity: nil)).to_not be_valid
-      end
-    end
   end
 
   describe '#time' do
-    context 'when empty' do
-      it 'is invalid' do
-        expect(build(:bottle, time: nil)).to_not be_valid
-      end
-    end
-
     context 'when not empty' do
       it 'is valid' do
         expect(build(:bottle, time: DateTime.now)).to be_valid
@@ -31,12 +19,6 @@ RSpec.describe Bottle, type: :model do
     context 'when correct format' do
       it 'is valid' do
         expect(build(:bottle, time: DateTime.now)).to be_valid
-      end
-    end
-
-    context 'when letters' do
-      it 'is invalid' do
-        expect(build(:bottle, time: 'five past two')).to_not be_valid
       end
     end
   end

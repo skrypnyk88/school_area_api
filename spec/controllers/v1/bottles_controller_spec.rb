@@ -49,7 +49,7 @@ RSpec.describe V1::BottlesController, type: :controller do
                                  id: test_bottle.id,
                                  bottle: { time: DateTime.now } }
 
-          expect(test_bottle.reload.time) == Time.zone.now
+          expect(test_bottle.reload.time) == DateTime.now
         end
       end
     end
@@ -63,9 +63,7 @@ RSpec.describe V1::BottlesController, type: :controller do
                                    bottle_report_id: test_bottle_report.id,
                                    id: test_bottle.id }
 
-        deleted_bottle = Bottle.find_by id: test_bottle.id
-
-        expect(deleted_bottle).to be_nil
+        expect(Bottle.exists?(id: test_bottle.id)).to be_falsey
       end
     end
   end
