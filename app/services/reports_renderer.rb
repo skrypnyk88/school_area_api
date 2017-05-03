@@ -12,6 +12,7 @@ class ReportsRenderer
       model.find_or_create_by(day: day,
                               group: student.group,
                               student: student)
+
     end
   end
 end
