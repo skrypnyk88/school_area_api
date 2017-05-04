@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::ReportsRenderer do
+RSpec.describe ReportsRenderer do
   TestReport = Struct.new(:day, :student, :group) do
     def self.find_or_create_by(params)
       new(params[:day], params[:student], params[:group])
