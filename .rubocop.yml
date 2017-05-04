@@ -7,7 +7,6 @@ AllCops:
   Exclude:
     - 'app/views/**/*'
     - 'db/schema.rb'
-    - 'config/environments/*'
 
 Metrics/BlockLength:
   Exclude:
