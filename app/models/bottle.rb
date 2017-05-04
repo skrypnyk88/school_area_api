@@ -18,8 +18,8 @@ class Bottle < ApplicationRecord
   private
 
   def set_default_params
-    self.time = DateTime.now
-    self.quantity = 30
-    self.uom = 'ml'
+    self.time ||= DateTime.now
+    self.quantity ||= 30
+    self.uom ||= 'ml'
   end
 end
