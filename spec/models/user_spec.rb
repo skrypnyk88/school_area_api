@@ -85,22 +85,24 @@ RSpec.describe User, type: :model do
   end
 
   describe '#send_reset_info' do
-    let(:reset_token) { create(:user).send(:set_reset_password_token) }
+    let(:user) do
+      user = create(:user)
+      user.send(:set_reset_password_token)
+      user
+    end
 
     it 'generates reset password token' do
-      expect(:reset_token).to_not be_nil
+      expect(user.reset_password_token).to_not be_nil
     end
 
     it 'makes a job send reset password instruction email' do
-      user = create(:user)
-
       expect(ResetPasswordWorker).to receive(:perform_async).with(user.id)
       user.send_reset_info
     end
   end
 
   describe '#reset_pass' do
-    let!(:user) { create(:user) }
+    let(:user) { create(:user) }
     let(:params) do
       {
         'password' => '7654321',
@@ -118,8 +120,8 @@ RSpec.describe User, type: :model do
     context 'when reset_password_token is not valid' do
       it "doesn't reset password" do
         user.send(:set_reset_password_token)
-        Timecop.freeze(Date.today + 7) do
-          expect(user).not_to receive(:reset_password)
+        Timecop.freeze(Date.today + 33) do
+          expect(user).to_not receive(:reset_password)
           user.reset_pass(params)
         end
       end

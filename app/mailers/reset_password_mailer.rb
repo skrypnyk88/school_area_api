@@ -1,5 +1,5 @@
 class ResetPasswordMailer < ApplicationMailer
-  default from: 'takecare.user@gmail.com'
+  default from: ENV['GMAIL_USERNAME']
   default template_path: 'v1/users/mailer'
 
   def reset_password_instructions(user)
