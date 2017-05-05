@@ -34,7 +34,7 @@ RSpec.describe V1::BottlesController, type: :controller do
                                 bottle_report_id: test_bottle_report.id,
                                 group_id: test_group.id }
 
-        expect(Bottle.exists?(id: test_bottle.id)).to be_truthy
+        expect(Bottle.exists?(id: test_bottle.id)).to be true
       end
     end
   end
@@ -42,15 +42,13 @@ RSpec.describe V1::BottlesController, type: :controller do
   describe 'PUT #update' do
     context 'when bottle is updated' do
       it 'property time is updated' do
-        Timecop.freeze(DateTime.now) do
           put :update, format: :json,
                        params: { group_id: test_group.id,
                                  bottle_report_id: test_bottle_report.id,
                                  id: test_bottle.id,
-                                 bottle: { time: DateTime.now } }
+                                 bottle: { quantity: 100 } }
 
-          expect(test_bottle.reload.time) == DateTime.now
-        end
+          expect(test_bottle.reload.quantity).to eq(100)
       end
     end
   end
@@ -63,7 +61,7 @@ RSpec.describe V1::BottlesController, type: :controller do
                                    bottle_report_id: test_bottle_report.id,
                                    id: test_bottle.id }
 
-        expect(Bottle.exists?(id: test_bottle.id)).to be_falsey
+        expect(Bottle.exists?(id: test_bottle.id)).to be false
       end
     end
   end

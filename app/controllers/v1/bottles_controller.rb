@@ -9,7 +9,8 @@ module V1
       if @bottle.save
         render :bottle
       else
-        render json: { errors: @bottle.errors.full_messages }, status: 500
+        render json: { errors: @bottle.errors.full_messages },
+               status: :bad_request
       end
     end
 
@@ -19,7 +20,8 @@ module V1
       if @bottle.update_attributes(bottle_params)
         render :bottle
       else
-        render json: { errors: @bottle.errors.full_messages }, status: 500
+        render json: { errors: @bottle.errors.full_messages },
+               status: :bad_request
       end
     end
 
