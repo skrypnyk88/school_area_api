@@ -42,13 +42,13 @@ RSpec.describe V1::BottlesController, type: :controller do
   describe 'PUT #update' do
     context 'when bottle is updated' do
       it 'property time is updated' do
-          put :update, format: :json,
-                       params: { group_id: test_group.id,
-                                 bottle_report_id: test_bottle_report.id,
-                                 id: test_bottle.id,
-                                 bottle: { quantity: 100 } }
+        put :update, format: :json,
+                     params: { group_id: test_group.id,
+                               bottle_report_id: test_bottle_report.id,
+                               id: test_bottle.id,
+                               bottle: { quantity: 100 } }
 
-          expect(test_bottle.reload.quantity).to eq(100)
+        expect(test_bottle.reload.quantity).to eq(100)
       end
     end
   end
