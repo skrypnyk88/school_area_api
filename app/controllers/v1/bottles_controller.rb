@@ -1,5 +1,7 @@
 module V1
   class BottlesController < ApplicationController
+    include Groupable
+
     before_action :find_bottle_report
 
     def create
@@ -31,16 +33,15 @@ module V1
     private
 
     def bottle_params
-      params.require(:bottle).permit(:id,
-                                     :bottle_report_id,
-                                     :quantity,
+      params.require(:bottle).permit(:quantity,
                                      :time,
                                      :uom)
     end
 
     def find_bottle_report
       @bottle_report = BottleReport.includes(:bottles)
-                                   .find_by(id: params[:bottle_report_id])
+                                   .find_by(id: params[:bottle_report_id],
+                                            group_id: @group)
     end
   end
 end

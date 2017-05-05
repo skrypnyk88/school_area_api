@@ -1,7 +1,7 @@
 class Bottle < ApplicationRecord
   belongs_to :bottle_report
 
-  before_validation :set_default_params, on: [:create]
+  before_validation :set_default_values, on: [:create]
 
   enum uom: { ml: 0, oz: 1 }
 
@@ -17,7 +17,7 @@ class Bottle < ApplicationRecord
 
   private
 
-  def set_default_params
+  def set_default_values
     self.time ||= DateTime.now
     self.quantity ||= 30
     self.uom ||= 'ml'
