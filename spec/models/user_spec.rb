@@ -75,6 +75,7 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
   describe '#locale' do
     context "when is 'en', 'ua'" do
       it 'is valid' do

@@ -9,7 +9,7 @@ RSpec.describe V1::TeachersController, type: :controller do
            .extract!(:id, :first_name, :last_name, :email, :phone, :locale)
   end
 
-  let(:current_user) { create(:teacher) }
+  let(:current_user) { create(:user) }
 
   before do
     allow(controller).to receive(:authenticate_user!)
@@ -29,30 +29,15 @@ RSpec.describe V1::TeachersController, type: :controller do
       let(:valid_params) do
         { method: :patch,
           id: current_user,
-          teacher: { first_name: 'Xxxx' } }
+          current_user: { locale: 'ua' } }
       end
 
       it 'updates teacher attributes' do
         post :update, format: :json,
                       params: valid_params
 
-        expect(current_user.reload.first_name)
-          .to eq(valid_params[:teacher][:first_name])
-      end
-    end
-
-    context 'when teacher is not valid' do
-      let(:invalid_params) do
-        { method: :patch,
-          id: current_user,
-          teacher: { first_name: '150' } }
-      end
-
-      it 'updates teacher attributes' do
-        post :update, format: :json,
-                      params: invalid_params
-        expect(response.body)
-          .to eq({ errors: current_user.errors.full_messages }.to_json)
+        expect(current_user.reload.locale)
+          .to eq(valid_params[:current_user][:locale])
       end
     end
   end

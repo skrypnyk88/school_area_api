@@ -15,7 +15,9 @@ class Student < ApplicationRecord
             length: { maximum: 20 },
             format: {
               with: /\A[a-z '-]+\z/i,
-              message: 'allows only letters'
+              message: proc do
+                I18n.t('student_model.errors_of_validation.allows_only_letters')
+              end
             }
 
   validates :birthdate,
@@ -24,8 +26,7 @@ class Student < ApplicationRecord
   validates :gender,
             allow_nil: true,
             inclusion: {
-              in: :gender,
-              message: 'should be male or female'
+              in: :gender
             }
 
   def age
@@ -51,6 +52,6 @@ class Student < ApplicationRecord
 
   def validate_age
     return unless birthdate && !valid_age?
-    errors.add(:age, ' should be from 2 to 6')
+    errors.add(:age, I18n.t('student_model.errors_of_validation.child_age'))
   end
 end

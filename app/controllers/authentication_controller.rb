@@ -1,23 +1,26 @@
 class AuthenticationController < ApplicationController
   skip_before_action :authenticate_user!, only: :authenticate
-  skip_before_action :set_locale
+
   def authenticate
     user = User.find_by(email: user_credentials[:email])
     if user && user.valid_password?(user_credentials[:password])
-      send_token_header(user)
+      send_response(user)
     else
       head :unauthorized
     end
   end
 
   def refresh_token
-    send_token_header(current_user)
+    send_response(current_user)
   end
 
   private
 
-  def send_token_header(user)
-    head :ok, auth_token: JsonWebToken.encode(user)
+  def send_response(user)
+    response.headers['Auth-Token'] = JsonWebToken.encode(user)
+    render json: user.attributes
+      .with_indifferent_access
+      .extract!(:first_name, :last_name, :locale), status: :ok
   end
 
   def user_credentials

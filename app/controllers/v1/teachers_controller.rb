@@ -5,16 +5,20 @@ module V1
     end
 
     def update
-      if current_user.update(teacher_params)
+      if current_user.update(current_teacher_params)
         head :no_content
       else
-        render json: { errors: current_user.errors.full_messages }
+        render json: { errors: current_user.errors.full_messages },
+               status: :bad_request
       end
     end
 
-    def teacher_params
-      params.require(:teacher)
-            .permit(:first_name, :last_name, :email, :phone, :locale, :id)
+    def current_teacher_params
+      params.require(:current_user).permit(:first_name,
+                                           :last_name,
+                                           :email,
+                                           :phone,
+                                           :locale)
     end
   end
 end

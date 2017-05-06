@@ -23,7 +23,7 @@ Devise.setup do |config|
   # ==> Configuration for :validatable
   config.password_length = 6..128
   # Email regex used to validate email formats.
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.email_regexp = /\A[\w+\-.']+@[a-z\d\-.]+\.[a-z]+\z/i
   # ==> Configuration for :recoverable
   # Time interval you can reset your password with a reset password key.
   config.reset_password_within = 6.hours
