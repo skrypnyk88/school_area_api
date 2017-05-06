@@ -16,12 +16,15 @@ module V1
 
     def update
       @bottle = @bottle_report.bottles.find_by id: params[:id]
-      head :not_found if @bottle.nil?
-      if @bottle.update_attributes(bottle_params)
-        render :bottle
+      if @bottle.nil?
+        head :not_found
       else
-        render json: { errors: @bottle.errors.full_messages },
-               status: :bad_request
+        if @bottle.update_attributes(bottle_params)
+           render :bottle
+        else
+           render json: { errors: @bottle.errors.full_messages },
+                  status: :bad_request
+        end
       end
     end
 
