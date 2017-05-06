@@ -18,9 +18,8 @@ class AuthenticationController < ApplicationController
 
   def send_response(user)
     response.headers['Auth-Token'] = JsonWebToken.encode(user)
-    render json: user.attributes
-      .with_indifferent_access
-      .extract!(:first_name, :last_name, :locale), status: :ok
+    @current_user = user
+    render 'v1/users/show', status: :ok
   end
 
   def user_credentials

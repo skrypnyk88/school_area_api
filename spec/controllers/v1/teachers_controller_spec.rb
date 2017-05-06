@@ -29,7 +29,7 @@ RSpec.describe V1::TeachersController, type: :controller do
       let(:valid_params) do
         { method: :patch,
           id: current_user,
-          current_user: { locale: 'ua' } }
+          teacher: { locale: 'ua' } }
       end
 
       it 'updates teacher attributes' do
@@ -37,7 +37,7 @@ RSpec.describe V1::TeachersController, type: :controller do
                       params: valid_params
 
         expect(current_user.reload.locale)
-          .to eq(valid_params[:current_user][:locale])
+          .to eq(valid_params[:teacher][:locale])
       end
     end
   end

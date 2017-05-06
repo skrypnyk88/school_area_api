@@ -1,24 +1,30 @@
 module V1
   class TeachersController < ApplicationController
-    def show
-      @teacher = current_user
-    end
+    before_action :find_teacher
+
+    def show; end
 
     def update
-      if current_user.update(current_teacher_params)
+      if @teacher.update_attributes(teacher_params)
         head :no_content
       else
-        render json: { errors: current_user.errors.full_messages },
+        render json: { errors: @teacher.errors.full_messages },
                status: :bad_request
       end
     end
 
-    def current_teacher_params
-      params.require(:current_user).permit(:first_name,
-                                           :last_name,
-                                           :email,
-                                           :phone,
-                                           :locale)
+    def teacher_params
+      params.require(:teacher).permit(:first_name,
+                                      :last_name,
+                                      :email,
+                                      :phone,
+                                      :locale)
+    end
+
+    private
+
+    def find_teacher
+      @teacher = current_user
     end
   end
 end
