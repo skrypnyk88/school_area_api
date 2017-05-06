@@ -27,9 +27,12 @@ module V1
 
     def destroy
       @bottle = @bottle_report.bottles.find_by id: params[:id]
-      head :not_found if @bottle.nil?
-      @bottle.destroy
-      head :ok
+      if @bottle.nil?
+        head :not_found
+      else
+        @bottle.destroy
+        head :ok
+      end
     end
 
     private
