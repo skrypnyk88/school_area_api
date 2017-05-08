@@ -4,9 +4,8 @@ class PasswordsController < ApplicationController
   before_action :find_user_by_email, only: [:forgot]
 
   def forgot
-    user = User.find_by(email: user_params[:email])
-    if user
-      user.send_reset_info
+    if @user
+      @user.send_reset_info
       render json: I18n.t('mailer.email_sent').to_json, status: :ok
     else
       render json: I18n.t('mailer.errors.not_found').to_json,
@@ -45,16 +44,5 @@ class PasswordsController < ApplicationController
     else
       render json: @user.errors.full_messages.to_json, status: :bad_request
     end
-  end
-
-  private
-
-  def find_user
-    @user = User.find_by(reset_password_token: user_params[:reset_token])
-  end
-
-  def user_params
-    params.require(:user)
-          .permit(:email, :password, :password_confirmation, :reset_token)
   end
 end
