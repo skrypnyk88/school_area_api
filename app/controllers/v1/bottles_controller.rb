@@ -3,6 +3,7 @@ module V1
     include Groupable
 
     before_action :find_bottle_report
+    before_action :find_bottle, only: [:update, :destroy]
 
     def create
       @bottle = @bottle_report.bottles.new
@@ -15,10 +16,7 @@ module V1
     end
 
     def update
-      @bottle = @bottle_report.bottles.find_by id: params[:id]
-      if @bottle.nil?
-        head :not_found
-      elsif @bottle.update_attributes(bottle_params)
+      if @bottle.update_attributes(bottle_params)
         render :bottle
       else
         render json: { errors: @bottle.errors.full_messages },
@@ -27,13 +25,8 @@ module V1
     end
 
     def destroy
-      @bottle = @bottle_report.bottles.find_by id: params[:id]
-      if @bottle.nil?
-        head :not_found
-      else
-        @bottle.destroy
-        head :ok
-      end
+      @bottle.destroy
+      head :ok
     end
 
     private
@@ -48,6 +41,11 @@ module V1
       @bottle_report = BottleReport.includes(:bottles)
                                    .find_by(id: params[:bottle_report_id],
                                             group_id: @group)
+    end
+
+    def find_bottle
+      @bottle = @bottle_report.bottles.find_by id: params[:id]
+      head :not_found unless @bottle
     end
   end
 end
