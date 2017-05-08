@@ -5,6 +5,7 @@ class MyDayReport < ApplicationRecord
   validates :day, presence: true
   validates :note,
             presence: true,
+            allow_nil: true,
             length: {
               in: 2..1000,
               too_long: '%{count} characters is the maximum allowed',

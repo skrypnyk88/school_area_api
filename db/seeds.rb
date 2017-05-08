@@ -25,12 +25,6 @@ n = 0
         gender: Faker::Demographic.sex.downcase
       )
 
-      group.my_day_reports.create(
-        day: Date.today,
-        note:  Faker::Lorem.sentence,
-        student_id: student.id
-      )
-
       presence_report = group.presence_reports.create(
         day: Date.today,
         student_id: student.id
