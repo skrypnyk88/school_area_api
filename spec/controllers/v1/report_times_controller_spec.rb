@@ -3,12 +3,6 @@ require 'rails_helper'
 RSpec.describe V1::ReportTimesController, type: :controller do
   render_views
 
-  def report_time_data(_report_time)
-    bottle.attributes.with_indifferent_access.extract!(:id,
-                                                       :start_time,
-                                                       :end_time)
-  end
-
   let(:current_user) { create(:teacher) }
   let(:group_1) { create(:group) }
   let!(:current_user_groups) do

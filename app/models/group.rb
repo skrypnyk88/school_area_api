@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   has_many :my_day_reports, dependent: :nullify
   has_and_belongs_to_many :teachers, association_foreign_key: 'user_id'
   has_many :presence_reports, dependent: :nullify
+  has_many :bottle_reports, dependent: :nullify
 
   before_save :capitalize_name
 
