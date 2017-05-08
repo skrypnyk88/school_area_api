@@ -80,20 +80,6 @@ RSpec.describe PasswordsController, type: :controller do
         expect(response).to have_http_status(:not_found)
       end
     end
-    context "when user's password, password_confirmation are valid" do
-      it 'has status 200 ok' do
-        user.send_reset_info
-        post :reset, format: :json,
-                     params: {
-                       user: {
-                         reset_token: user.reset_password_token,
-                         password: '1234567',
-                         password_confirmation: '1234567'
-                       }
-                     }
-        expect(response).to have_http_status(:ok)
-      end
-    end
     context "when user's password, password_confirmation are not valid" do
       it 'has status bad_request' do
         user.send_reset_info
