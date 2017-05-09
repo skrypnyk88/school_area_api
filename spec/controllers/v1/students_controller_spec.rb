@@ -42,8 +42,7 @@ RSpec.describe V1::StudentsController, type: :controller do
                                    .map { |s| student_params(s) }
                                    .to_json
 
-      get :index, format: :json,
-                  params: { group_id: current_user_group }
+      get :index, format: :json, params: { group_id: current_user_group }
 
       expect(response.body).to eq(students)
     end
@@ -65,12 +64,10 @@ RSpec.describe V1::StudentsController, type: :controller do
       it 'renders student json' do
         student_attrs[:birthdate] = student_attrs[:birthdate].to_s
 
-        post :create,
-             format: :json,
-             params: {
-               group_id: current_user_group,
-               student: student_attrs
-             }
+        post :create, format: :json, params: {
+          group_id: current_user_group,
+          student: student_attrs
+        }
 
         expect(JSON.parse(response.body)).to include(student_attrs)
       end
@@ -82,26 +79,23 @@ RSpec.describe V1::StudentsController, type: :controller do
       it 'renders errors json' do
         allow(Student).to receive(:new).and_return(invalid_student)
 
-        post :create,
-             format: :json,
-             params: {
-               group_id: current_user_group,
-               student: invalid_student.attributes
-             }
+        post :create, format: :json, params: {
+          group_id: current_user_group,
+          student: invalid_student.attributes
+        }
 
         expect(response.body)
-          .to eq(invalid_student.errors.full_messages.to_json)
+          .to eq({ errors: invalid_student.errors.full_messages }.to_json)
       end
     end
   end
 
   describe 'GET #show' do
     it 'renders student json' do
-      get :show, format: :json,
-                 params: {
-                   group_id: current_user_group,
-                   id: student
-                 }
+      get :show, format: :json, params: {
+        group_id: current_user_group,
+        id: student
+      }
 
       expect(response.body).to eq(student_params(student).to_json)
     end
@@ -117,16 +111,14 @@ RSpec.describe V1::StudentsController, type: :controller do
       end
 
       it 'updates students attributes' do
-        post :update, format: :json,
-                      params: valid_params
+        post :update, format: :json, params: valid_params
 
         expect(student.reload.first_name)
           .to eq(valid_params[:student][:first_name])
       end
 
       it 'renders student json' do
-        post :update, format: :json,
-                      params: valid_params
+        post :update, format: :json, params: valid_params
 
         expect(response.body).to eq(student_params(student.reload).to_json)
       end
@@ -146,11 +138,9 @@ RSpec.describe V1::StudentsController, type: :controller do
       end
 
       it 'renders errors json' do
-        post :update,
-             format: :json,
-             params: invalid_params
+        post :update, format: :json, params: invalid_params
 
-        expect(response.body).to eq(update_errors.to_json)
+        expect(response.body).to eq({ errors: update_errors }.to_json)
       end
     end
   end
@@ -163,17 +153,13 @@ RSpec.describe V1::StudentsController, type: :controller do
     end
 
     it 'deletes student' do
-      post :destroy,
-           format: :json,
-           params: delete_params
+      post :destroy, format: :json, params: delete_params
 
       expect(Student.exists?(student.id)).to be false
     end
 
     it 'renders ok response' do
-      post :destroy,
-           format: :json,
-           params: delete_params
+      post :destroy, format: :json, params: delete_params
 
       expect(response).to have_http_status(:no_content)
     end
@@ -213,11 +199,10 @@ RSpec.describe V1::StudentsController, type: :controller do
           .to receive(:call)
           .and_return(invalid_attachment)
 
-        post :upload, format: :json,
-                      params: params
+        post :upload, format: :json, params: params
 
         expect(response.body)
-          .to eq(invalid_attachment.errors.full_messages.to_json)
+          .to eq({ errors: invalid_attachment.errors.full_messages }.to_json)
       end
     end
   end

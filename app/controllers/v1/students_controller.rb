@@ -14,7 +14,8 @@ module V1
       if @student.save
         render :show, status: :created
       else
-        render json: @student.errors.full_messages, status: :bad_request
+        render json: { errors: @student.errors.full_messages },
+               status: :bad_request
       end
     end
 
@@ -24,7 +25,8 @@ module V1
       if @student.update_attributes(student_params)
         render :show
       else
-        render json: @student.errors.full_messages, status: :bad_request
+        render json: { errors: @student.errors.full_messages },
+               status: :bad_request
       end
     end
 
@@ -38,7 +40,8 @@ module V1
       if attachment.valid?
         render :show, status: :created
       else
-        render json: attachment.errors.full_messages, status: :bad_request
+        render json: { errors: attachment.errors.full_messages },
+               status: :bad_request
       end
     end
 
@@ -48,7 +51,8 @@ module V1
       @student = Student.find_by(id: params[:id], group: @group)
       return if @student
 
-      render json: 'Student not found'.to_json, status: :not_found
+      render json: { errors: [I18n.t('callbacks.student_not_found')] },
+             status: :not_found
     end
 
     def student_params
