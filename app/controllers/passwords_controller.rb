@@ -24,12 +24,26 @@ class PasswordsController < ApplicationController
 
   private
 
+  def user_language
+    I18n.locale = @user.locale
+  end
+
   def find_user_by_token
     @user = User.find_by(reset_password_token: user_params[:reset_token])
+    if @user
+      user_language
+    else
+      I18n.locale = 'en'
+    end
   end
 
   def find_user_by_email
     @user = User.find_by(email: user_params[:email])
+    if @user
+      user_language
+    else
+      I18n.locale = 'en'
+    end
   end
 
   def user_params

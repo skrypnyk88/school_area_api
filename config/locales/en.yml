@@ -1,3 +1,4 @@
+---
 en:
   student_model:
     errors_of_validation:
@@ -225,9 +226,8 @@ en:
     action: "Change my password"
     instruction_2: "If you didn't request this, please ignore this email."
     instruction_3: "Your password won't change until you access the link above and create a new one."
-    email_sent: "Email was succesfully sent."
+    email_sent: "Reset password instructions were sent to your email"
     password_reset: "The password was succesfully changed."
     errors:
       invalid_token: "The reset password token is invalid."
       not_found: "User not found."
-
