@@ -34,4 +34,9 @@ Rails.application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  config.paperclip_defaults = {
+    url: '/system/:rails_env/:class/:attachment/:id_partition/:style/:filename',
+    path: ':rails_root/public:url'
+  }
 end
