@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
+    resources :teachers
   end
 end

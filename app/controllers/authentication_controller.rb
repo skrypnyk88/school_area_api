@@ -4,20 +4,22 @@ class AuthenticationController < ApplicationController
   def authenticate
     user = User.find_by(email: user_credentials[:email])
     if user && user.valid_password?(user_credentials[:password])
-      send_token_header(user)
+      send_response(user)
     else
       head :unauthorized
     end
   end
 
   def refresh_token
-    send_token_header(current_user)
+    send_response(current_user)
   end
 
   private
 
-  def send_token_header(user)
-    head :ok, auth_token: JsonWebToken.encode(user)
+  def send_response(user)
+    response.headers['Auth-Token'] = JsonWebToken.encode(user)
+    @current_user = user
+    render 'v1/users/show', status: :ok
   end
 
   def user_credentials

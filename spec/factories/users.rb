@@ -7,5 +7,6 @@ FactoryGirl.define do
     password_confirmation 'password'
     gender { %w(male female other).sample }
     phone '0673377891'
+    locale { %w(en ua).sample }
   end
 end

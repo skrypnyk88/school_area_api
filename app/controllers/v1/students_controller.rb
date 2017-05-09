@@ -30,7 +30,12 @@ module V1
     end
 
     def render_show_or_bad_request(succeed)
-      succeed ? (render :show) : (head :bad_request)
+      if succeed
+        render :show
+      else
+        render json: { errors: @student.errors.full_messages },
+               status: :bad_request
+      end
     end
 
     def student_params

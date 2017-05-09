@@ -2,6 +2,8 @@ Documentation:
   Enabled: false
 
 AllCops:
+  TargetRubyVersion: 2.4
+
   Exclude:
     - 'app/views/**/*'
     - 'db/schema.rb'
@@ -15,3 +17,6 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

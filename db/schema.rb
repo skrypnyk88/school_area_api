@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170424073006) do
+ActiveRecord::Schema.define(version: 20170426134528) do
 
   enable_extension "plpgsql"
 
@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 20170424073006) do
   end
 
   create_table "bottles", force: :cascade do |t|
-    t.float    "quantity",         default: 30.0
+    t.float    "quantity"
     t.datetime "time"
-    t.integer  "uom",              default: 0
+    t.integer  "uom"
     t.integer  "bottle_report_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "groups", force: :cascade do |t|
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170424073006) do
     t.datetime "updated_at",                      null: false
     t.string   "email",              default: "", null: false
     t.string   "encrypted_password", default: "", null: false
+    t.integer  "locale"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 

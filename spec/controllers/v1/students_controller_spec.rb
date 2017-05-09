@@ -10,6 +10,8 @@ RSpec.describe V1::StudentsController, type: :controller do
            .update(age: student.age)
   end
 
+  let(:current_user) { create(:user) }
+
   let(:group) { create(:group) }
 
   let(:student) { create(:student, group: group) }
@@ -23,6 +25,7 @@ RSpec.describe V1::StudentsController, type: :controller do
 
   before do
     allow(controller).to receive(:authenticate_user!)
+    allow(subject).to receive(:current_user).and_return(current_user)
   end
 
   describe 'GET #index' do

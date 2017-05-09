@@ -7,8 +7,11 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
   let!(:student) { create(:student, group: group) }
   let!(:report) { create(:my_day_report, group: group, student: student) }
 
+  let(:current_user) { create(:teacher) }
+
   before do
     allow(subject).to receive(:authenticate_user!)
+    allow(subject).to receive(:current_user).and_return(current_user)
   end
 
   def my_day_report_json(report)
