@@ -6,6 +6,7 @@ module V1
       include Groupable
       before_action :set_day
       before_action :find_present_students
+      before_action :find_present_student
     end
 
     private
@@ -20,6 +21,10 @@ module V1
 
     def reports_renderer(students, model)
       ReportsRenderer.new(day: @day, students: students, model: model)
+    end
+
+    def find_present_student
+      @student_id = @students.find_by(id: params[:student_id])
     end
   end
 end

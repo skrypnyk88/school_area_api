@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 20170505222223) do
     t.index ["user_id"], name: "index_groups_users_on_user_id", using: :btree
   end
 
+  create_table "health_reports", force: :cascade do |t|
+    t.boolean  "special_care", default: false
+    t.text     "health_note"
+    t.date     "day"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "group_id"
+    t.integer  "student_id"
+    t.index ["group_id"], name: "index_health_reports_on_group_id", using: :btree
+    t.index ["student_id"], name: "index_health_reports_on_student_id", using: :btree
+  end
+
   create_table "my_day_reports", force: :cascade do |t|
     t.date     "day"
     t.text     "note"
@@ -108,6 +120,8 @@ ActiveRecord::Schema.define(version: 20170505222223) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "health_reports", "groups"
+  add_foreign_key "health_reports", "students"
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
   add_foreign_key "presence_reports", "groups"

@@ -1,35 +1,25 @@
 module V1
   class HealthReportsController < ApplicationController
-
-    def show
-      @reports = HealthReport.find(params[:id])
-    end
+    include Reportable
 
     def index
-      @reports = HealthReport.all
-    end
-
-    def create
-      @reports = HealthReport.new(report_params)
-      if @reports.save
-        render json: @reports, status: :created
-      else
-        render json: @reports.errors, status: :unprocessable_entity
-      end
+      @reports = reports_renderer(@students, HealthReport).call
     end
 
     def update
-      @report = HealthReport.find(params[:id])
+      @report = HealthReport.find_by(id: params[:id], student_id: @student_id)
       if @report.update(report_params)
         head :no_content
       else
-        render json: @report.errors, status: :unprocessable_entity
+        render json: { errors: @report.errors.full_messages },
+               status: :bad_request
       end
     end
 
     private
-      def report_params
-        params.require(:reports).permit(:health_note, :special_care)
-      end
+
+    def report_params
+      params.require(:report).permit(:health_note, :special_care)
+    end
   end
 end

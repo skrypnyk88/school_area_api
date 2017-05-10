@@ -1,46 +1,70 @@
 require 'rails_helper'
 
 RSpec.describe HealthReport, type: :model do
-  describe 'Validation of HealthReport' do
-    before do
-    @test_report_1 = HealthReport.create(health_note: "All is allright",
-                                         special_care: false)
-    @befor_count = HealthReport.count
-    @test_report_2 = HealthReport.new(health_note: 'All is allright',
-                                      special_care: false)
+  describe '#health_report' do
+    context 'when data is valid' do
+      it 'is valid' do
+        expect(build(:health_report)).to be_valid
+      end
+    end
   end
-    context 'when peport is valid' do
-      it 'be valid if all value is valid' do
-        @test_report_2.save
-        expect(HealthReport.count).not_to be eq(@befor_count)
-      end
-      it 'be valid if length of health note is less then 250 char' do
-        @test_report_2.health_note = 'a'*150
-        expect(@test_report_2).to be_valid
-      end
-      it 'be valid if health be empty' do
-        @test_report_2.health_note = nil
-        expect(@test_report_2).to be_valid
-      end
-      it 'be valid if special_care = true' do
-      @test_report_2.special_care = true
-      expect(@test_report_2).to be_valid
-      end
 
-      it 'be valid if special_care = false' do
-      @test_report_2.special_care = false
-      expect(@test_report_2).to be_valid
+  describe '#health note' do
+    context 'when length <= 250 char' do
+      it 'is valid' do
+        expect(build(:health_report, health_note: 'a' * 249)).to be_valid
       end
     end
 
-    context 'when peport is invalid' do
-      it 'be invalid if some value is invalid' do
-        @test_report_2.special_care = nil
-        expect(@test_report_2).not_to be_valid
+    context 'when health note = nil' do
+      it 'is valid' do
+        expect(build(:health_report, health_note: nil)).to be_valid
       end
-      it 'be invalid if length of health note is more then 250 char' do
-        @test_report_2.health_note = 'a'*251
-        expect(@test_report_2).not_to be_valid
+    end
+
+    context 'when length >= 250 char' do
+      it 'is not valid' do
+        expect(build(:health_report, health_note: 'a' * 251)).to_not be_valid
+      end
+    end
+  end
+
+  describe '#special care' do
+    context 'when special_care = true' do
+      it 'is valid' do
+        expect(build(:health_report, special_care: true)).to be_valid
+      end
+    end
+
+    context 'when special_care = false' do
+      it 'is valid' do
+        expect(build(:health_report, special_care: false)).to be_valid
+      end
+    end
+
+    context 'when special_care = nil' do
+      it 'is not valid' do
+        expect(build(:health_report, special_care: nil)).to_not be_valid
+      end
+    end
+  end
+
+  describe '#day' do
+    context 'when day is valid' do
+      it 'is valid' do
+        expect(build(:health_report, day: '21.10.2000')).to be_valid
+      end
+    end
+
+    context 'when day is nil' do
+      it 'is not valid' do
+        expect(build(:health_report, day: nil)).to_not be_valid
+      end
+    end
+
+    context 'when day = day' do
+      it 'is not valid' do
+        expect(build(:health_report, day: 'day')).to_not be_valid
       end
     end
   end

@@ -4,6 +4,7 @@ class Student < ApplicationRecord
   has_many :my_day_reports, dependent: :nullify
   has_many :presence_reports, dependent: :nullify
   has_many :bottle_reports, dependent: :nullify
+  has_many :health_reports, dependent: :destroy
 
   before_save :titleize_name
 
