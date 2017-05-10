@@ -12,18 +12,20 @@ module V1
     def create
       @student = Student.new(student_params)
       if @student.save
-        render :show, status: :created
+        render @student, status: :created
       else
         render json: { errors: @student.errors.full_messages },
                status: :bad_request
       end
     end
 
-    def show; end
+    def show
+      render @student
+    end
 
     def update
       if @student.update_attributes(student_params)
-        render :show
+        render @student
       else
         render json: { errors: @student.errors.full_messages },
                status: :bad_request
@@ -38,7 +40,7 @@ module V1
     def upload
       attachment = attachment_uploader.call(attachment_owner: @student)
       if attachment.valid?
-        render :show, status: :created
+        render @student, status: :created
       else
         render json: { errors: attachment.errors.full_messages },
                status: :bad_request

@@ -12,7 +12,7 @@ RSpec.describe V1::StudentsController, type: :controller do
     if student.attachment
       params.merge(url: "http://#{request.host}#{student.attachment.file.url}")
     else
-      params
+      params.merge(url: nil)
     end
   end
 
