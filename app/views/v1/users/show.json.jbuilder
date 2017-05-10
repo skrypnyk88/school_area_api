@@ -1,3 +1,4 @@
-json.(@current_user, :first_name,
+json.(@current_user, :id,
+                     :first_name,
                      :last_name,
                      :locale)
