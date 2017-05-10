@@ -1,17 +1,15 @@
 module V1
   class MyDayReportsController < ApplicationController
-    include Groupable
     include Reportable
+    include Groupable
 
     def index
-      @reports = reports_renderer(@group.students, MyDayReport).call
+      @reports = reports_renderer(@students, MyDayReport).call
     end
 
     def update
-      @report = MyDayReport.find_by(id: params[:id])
-      if @report.nil?
-        head :not_found
-      elsif @report.update(report_params)
+      @report = MyDayReport.find_by(id: params[:id], group_id: @group)
+      if @report.update(report_params)
         render :update
       else
         render json: { errors: @report.errors.full_messages },
