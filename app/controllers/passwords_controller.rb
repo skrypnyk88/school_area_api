@@ -6,9 +6,9 @@ class PasswordsController < ApplicationController
   def forgot
     if @user
       @user.send_reset_info
-      render json: I18n.t('mailer.email_sent').to_json, status: :ok
+      render json: { success: [I18n.t('mailer.email_sent')] }, status: :ok
     else
-      render json: I18n.t('mailer.errors.not_found').to_json,
+      render json: { errors: [I18n.t('mailer.errors.not_found')] },
              status: :not_found
     end
   end
@@ -17,7 +17,7 @@ class PasswordsController < ApplicationController
     if @user
       check_new_password
     else
-      render json: I18n.t('mailer.errors.invalid_token').to_json,
+      render json: { errors: [I18n.t('mailer.errors.invalid_token')] },
              status: :not_found
     end
   end
@@ -25,25 +25,17 @@ class PasswordsController < ApplicationController
   private
 
   def user_language
-    I18n.locale = @user.locale
+    I18n.locale = @user&.locale || I18n.default_locale
   end
 
   def find_user_by_token
     @user = User.find_by(reset_password_token: user_params[:reset_token])
-    if @user
-      user_language
-    else
-      I18n.locale = 'en'
-    end
+    user_language
   end
 
   def find_user_by_email
     @user = User.find_by(email: user_params[:email])
-    if @user
-      user_language
-    else
-      I18n.locale = 'en'
-    end
+    user_language
   end
 
   def user_params
@@ -54,9 +46,9 @@ class PasswordsController < ApplicationController
   def check_new_password
     if @user.reset_password(user_params[:password],
                             user_params[:password_confirmation])
-      render json: I18n.t('mailer.password_reset').to_json, status: :ok
+      render json: { success: [I18n.t('mailer.password_reset')] }, status: :ok
     else
-      render json: @user.errors.full_messages.to_json, status: :bad_request
+      render json: { errors: @user.errors.full_messages }, status: :bad_request
     end
   end
 end

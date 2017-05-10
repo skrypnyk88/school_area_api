@@ -222,7 +222,7 @@ en:
   mailer:
     greeting: "Hello"
     reset_password_instructions_subject: "TakeCare Reset password instructions"
-    instruction: "Someone has requested a link to change your password. You can do this through the link below."
+    instruction: "Someone has requested a link to change your password from TakeCare. You can do this through the link below."
     action: "Change my password"
     instruction_2: "If you didn't request this, please ignore this email."
     instruction_3: "Your password won't change until you access the link above and create a new one."
