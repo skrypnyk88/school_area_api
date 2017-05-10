@@ -43,6 +43,7 @@ Rails.application.configure do
   config.paperclip_defaults = {
     url: '/system/:rails_env/:class/:attachment/:id_partition/:style/:filename',
     path: ':rails_root/public:url'
+  }
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
