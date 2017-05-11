@@ -16,7 +16,7 @@ module V1
     end
 
     def find_present_students
-      @students = @group.students.present(@day)
+      @students = @group.students#.present(@day)
     end
 
     def reports_renderer(students, model)
