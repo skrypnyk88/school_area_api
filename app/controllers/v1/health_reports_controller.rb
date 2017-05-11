@@ -9,7 +9,7 @@ module V1
     def update
       @report = HealthReport.find_by(id: params[:id], student_id: @student_id)
       if @report.update(report_params)
-        head :no_content
+        render :index
       else
         render json: { errors: @report.errors.full_messages },
                status: :bad_request
