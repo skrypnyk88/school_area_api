@@ -2,8 +2,10 @@
 en:
   student_model:
     errors_of_validation:
-      allows_only_letters: "allows only letters"
-      child_age: 'should be from 2 to 6'
+      allows_only_letters: allows only letters
+      child_age: should be from 2 to 6
+  callbacks:
+    student_not_found: Student not found
   activerecord:
     errors:
       messages:
@@ -143,6 +145,8 @@ en:
         one: is the wrong length (should be 1 character)
         other: is the wrong length (should be %{count} characters)
       other_than: must be other than %{count}
+      in_between: "must be in between %{min} and %{max}"
+      spoofed_media_type: "has contents that are not what they are reported to be"
     template:
       body: 'There were problems with the following fields:'
       header:

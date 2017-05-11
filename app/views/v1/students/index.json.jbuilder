@@ -1,6 +1,1 @@
-json.array! @students, :id,
-                       :first_name,
-                       :last_name,
-                       :birthdate,
-                       :gender,
-                       :age
+json.partial! 'student', collection: @students, as: :student

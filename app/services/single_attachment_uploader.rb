@@ -2,7 +2,7 @@ class SingleAttachmentUploader
   attr_accessor :file
 
   def initialize(attachment_params)
-    decode_base64(attachment_params.symbolize_keys)
+    decode_base64(attachment_params.to_h.symbolize_keys)
   end
 
   def call(attachment_owner:)
