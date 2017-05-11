@@ -3,7 +3,7 @@ class Attachment < ApplicationRecord
 
   has_attached_file :file,
                     styles: {
-                      thumb: '100x100>'
+                      thumb: '150x150#'
                     }
 
   validates_attachment :file,
