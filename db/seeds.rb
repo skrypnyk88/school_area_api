@@ -26,23 +26,23 @@ n = 0
       )
 
       group.my_day_reports.create(
-        day: Faker::Date.backward(111),
+        day: Date.today,
         note:  Faker::Lorem.sentence,
         student_id: student.id
       )
 
       presence_report = group.presence_reports.create(
-        day: Faker::Date.backward(111),
+        day: Date.today,
         student_id: student.id
       )
 
       presence_report.report_times.create(
-        start_time: Faker::Date.backward(111),
-        end_time: Faker::Date.backward(111)
+        start_time: Date.today,
+        end_time: Date.today
       )
 
       group.my_day_reports.create(
-        day: Faker::Date.backward(111),
+        day: Date.today,
         note: Faker::Lorem.sentence,
         student_id: student.id
       )
@@ -50,7 +50,7 @@ n = 0
       bottle_report = group.bottle_reports.create(
         group_id: group.id,
         student_id: student.id,
-        day: Faker::Date.forward(23)
+        day: Date.today
       )
 
       bottle_report.bottles.create(
