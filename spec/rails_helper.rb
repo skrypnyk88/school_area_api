@@ -8,6 +8,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'database_cleaner'
 require 'support/factory_girl'
+require 'support/report_helpers'
 
 ActiveRecord::Migration.maintain_test_schema!
 

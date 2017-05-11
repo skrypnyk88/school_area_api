@@ -4,13 +4,9 @@ RSpec.describe V1::BottleReportsController, type: :controller do
   render_views
 
   def bottle_report_data(bottle_report)
-    bottle_report.attributes.with_indifferent_access.extract!(:id,
-                                                              :day,
-                                                              :group_id)
-                 .merge!(student: bottle_report.student
-                 .attributes.with_indifferent_access.extract!(:id,
-                                                              :first_name,
-                                                              :last_name))
+    bottle_report.attributes.with_indifferent_access
+                 .extract!(:id, :day, :group_id)
+                 .merge!(student: student_params(bottle_report.student))
                  .merge!(bottles: [])
   end
 

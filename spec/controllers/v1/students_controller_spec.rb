@@ -3,19 +3,6 @@ require 'rails_helper'
 RSpec.describe V1::StudentsController, type: :controller do
   render_views
 
-  def student_params(student)
-    params = student.attributes
-                    .with_indifferent_access
-                    .extract!(:id, :first_name, :last_name, :birthdate, :gender)
-                    .merge(age: student.age)
-
-    if student.attachment
-      params.merge(url: "http://#{request.host}#{student.attachment.file.url}")
-    else
-      params.merge(url: nil)
-    end
-  end
-
   let(:teacher) { create(:teacher) }
 
   let(:group) { create(:group) }

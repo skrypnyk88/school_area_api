@@ -4,14 +4,9 @@ RSpec.describe V1::PresenceReportsController, type: :controller do
   render_views
 
   def presence_report_data(presence_report)
-    presence_report.attributes.with_indifferent_access.extract!(:id,
-                                                                :day,
-                                                                :group_id)
-                   .merge(student: presence_report.student
-                          .attributes.with_indifferent_access
-                          .extract!(:id,
-                                    :first_name,
-                                    :last_name))
+    presence_report.attributes.with_indifferent_access
+                   .extract!(:id, :day, :group_id)
+                   .merge(student: student_params(presence_report.student))
                    .merge(report_time: [])
   end
 
