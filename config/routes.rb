@@ -6,14 +6,21 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :groups do
-      resources :students, shallow: true
       resources :my_day_reports, shallow: true
     end
+
+    resources :students do
+      put :upload, on: :member
+    end
+
     resources :presence_reports
     resources :report_times
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
-    resources :teachers
+
+    resources :teachers do
+      put :upload, on: :member
+    end
   end
 end

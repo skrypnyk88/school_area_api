@@ -1,6 +1,5 @@
 module V1
   class PresenceReportsController < ApplicationController
-    include Groupable
     include Reportable
 
     def index

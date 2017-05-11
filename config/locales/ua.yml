@@ -2,8 +2,10 @@
 ua:
   student_model:
     errors_of_validation:
-      allows_only_letters: "дозволено тільки букви"
-      child_age: 'повинен бути від 2 до 6'
+      allows_only_letters: дозволено тільки букви
+      child_age: повинен бути від 2 до 6
+  callbacks:
+    student_not_found: Студент не знайдений
   activerecord:
     errors:
       messages:
@@ -173,6 +175,8 @@ ua:
         one: неправильна довжина (має бути %{count} знак)
         other: неправильна довжина (має бути %{count} знаку)
       other_than: має відрізнятись від %{count}
+      in_between: повинен бути між %{min} та %{max}"
+      spoofed_media_type: вміст не відповідає заявленому формату
     template:
       body: 'Помилки виявлено в таких полях:'
       header:

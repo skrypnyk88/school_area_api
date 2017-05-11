@@ -5,5 +5,6 @@ FactoryGirl.define do
     birthdate { Faker::Date.birthday(2, 6) }
     gender { Faker::Demographic.sex.downcase }
     group
+    attachment
   end
 end
