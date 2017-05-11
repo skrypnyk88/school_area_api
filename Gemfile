@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise', '~> 4.2', '>= 4.2.1'
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'i18n', '~> 0.8.1'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt', '~> 1.5', '>= 1.5.6'
