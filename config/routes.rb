@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       put :upload, on: :member
     end
 
+    resources :groups
     resources :my_day_reports
     resources :presence_reports
     resources :report_times
