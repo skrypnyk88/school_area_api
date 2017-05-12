@@ -4,13 +4,9 @@ RSpec.describe V1::MyDayReportsController, type: :controller do
   render_views
 
   def report_params(my_day_report)
-    my_day_report.attributes.with_indifferent_access.extract!(:id,
-                                                              :note)
-                 .merge!(student: my_day_report.student
-                        .attributes.with_indifferent_access
-                        .extract!(:id,
-                                  :first_name,
-                                  :last_name))
+    my_day_report.attributes.with_indifferent_access
+                 .extract!(:id, :note)
+                 .merge(student: student_params(my_day_report.student))
   end
 
   let(:current_user) { create(:teacher) }

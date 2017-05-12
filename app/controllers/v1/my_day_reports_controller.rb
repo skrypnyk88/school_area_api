@@ -9,11 +9,11 @@ module V1
 
     def update
       @report = MyDayReport.find_by(id: params[:id], group_id: @group)
-      if @report.update(report_params)
+      if @report.update_attributes(report_params)
         render :update
       else
         render json: { errors: @report.errors.full_messages },
-               status: 400
+               status: :bad_request
       end
     end
 
