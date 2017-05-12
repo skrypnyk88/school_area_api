@@ -1,8 +1,10 @@
-before_script: 
+before_script:
   - "cp config/database.yml.example config/database.yml"
   - "RAILS_ENV=test rake db:create db:schema:load"
 language: ruby
 install: bundle install
+services:
+  - redis-server
 script:
   - bundle exec rspec
   - bundle exec rubocop

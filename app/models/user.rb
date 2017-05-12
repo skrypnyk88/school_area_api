@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Others available devise modules are:
   # :confirmable, :lockable, :timeoutable, :omniauthable
-  # :registerable, :recoverable, :rememberable, :trackable
-  devise :database_authenticatable, :validatable
+  # :registerable, :rememberable, :trackable
+  devise :database_authenticatable, :validatable, :recoverable
   VALID_NAME_REGEX = /\A[a-zA-Z'-]+\z/
   VALID_PHONE_REGEX = /\A[\d\- ]{7,10}\z/
   enum gender: { male: 0, female: 1, other: 2 }
@@ -16,4 +16,9 @@ class User < ApplicationRecord
             length: { in: 7..10 },
             format: { with: VALID_PHONE_REGEX },
             allow_nil: true
+
+  def send_reset_info
+    set_reset_password_token
+    ResetPasswordWorker.perform_async(id)
+  end
 end

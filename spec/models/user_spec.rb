@@ -83,4 +83,13 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#send_reset_info' do
+    let(:user) { create(:user) }
+
+    it 'makes a job send reset password instruction email' do
+      expect(ResetPasswordWorker).to receive(:perform_async).with(user.id)
+      user.send_reset_info
+    end
+  end
 end
