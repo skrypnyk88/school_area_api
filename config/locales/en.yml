@@ -114,6 +114,8 @@ en:
       year: Year
   errors:
     format: "%{attribute} %{message}"
+    unauthenticated: Invalid email or password
+    token_timeout: Your session has expired
     messages:
       accepted: must be accepted
       blank: can't be blank
