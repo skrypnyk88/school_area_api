@@ -18,7 +18,8 @@ RSpec.describe V1::BottlesController, type: :controller do
   end
 
   let(:test_bottle) do
-    create(:bottle, bottle_report_id: test_bottle_report.id)
+    create(:bottle, bottle_report_id: test_bottle_report.id,
+                    quantity: 20)
   end
 
   before do
