@@ -5,6 +5,13 @@ RSpec.describe AuthenticationController, type: :controller do
   let(:token) { JsonWebToken.encode(user) }
   let(:valid_token_header) { { authorization: token } }
   let(:invalid_token_header) { { authorization: token * 2 } }
+  let(:unauthenticated_errors) do
+    { errors: [I18n.t('errors.unauthenticated')] }
+  end
+
+  let(:token_timeout_errors) do
+    { errors: [I18n.t('errors.token_timeout')] }
+  end
 
   describe 'POST #authenticate' do
     context 'when user credentials are correct' do
@@ -33,6 +40,18 @@ RSpec.describe AuthenticationController, type: :controller do
 
         expect(response).to have_http_status(:unauthorized)
       end
+
+      it 'returns error messages' do
+        post :authenticate, format: :json,
+                            params: {
+                              user: {
+                                email: user.email,
+                                password: user.password * 2
+                              }
+                            }
+
+        expect(response.body).to eq(unauthenticated_errors.to_json)
+      end
     end
   end
 
@@ -55,6 +74,14 @@ RSpec.describe AuthenticationController, type: :controller do
         get :refresh_token, format: :json
 
         expect(response).to have_http_status(419)
+      end
+
+      it 'returns error messages' do
+        request.headers.merge! invalid_token_header
+
+        get :refresh_token, format: :json
+
+        expect(response.body).to eq(token_timeout_errors.to_json)
       end
     end
   end
