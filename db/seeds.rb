@@ -1,6 +1,21 @@
 require 'faker'
 
+julia = Teacher.create(
+    first_name: "Julia",
+    last_name: "Shtohtyn",
+    email: "julia.ilkiv@gmail.com",
+    password: 'password',
+    password_confirmation: 'password',
+    gender: 1,
+    phone: '1234567890',
+    locale: 0
+  )
+
+my_group = Group.create(name: "Sun")
+  julia.groups << my_group
+
 n = 0
+
 2.times do |i|
   teacher = Teacher.create(
     first_name: Faker::Name.first_name,
@@ -56,3 +71,4 @@ n = 0
     end
   end
 end
+
