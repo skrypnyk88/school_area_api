@@ -9,10 +9,7 @@ RSpec.describe V1::HealthReportsController, type: :controller do
                                               :special_care,
                                               :health_note,
                                               :day)
-    binding.pry
-    # student: student_params(health_report.student)
-    student_report = health_report.student.attributes.with_indifferent_access
-                                  .extract!(:id, :first_name, :last_name)
+    student_report = student_params(health_report.student)
     report_hash = { report: my_health_report }
     student_hash = { student: student_report }
     report_hash.merge(student_hash)
@@ -27,8 +24,6 @@ RSpec.describe V1::HealthReportsController, type: :controller do
 
   let(:student_1) { create(:student, group: group_1) }
   let(:student_2) { create(:student, group: group_1) }
-  let(:student_3) { create(:student, group: group_2) }
-
 
   let(:report) { create(:health_report, group: group_1, student: student_1) }
 
@@ -42,13 +37,6 @@ RSpec.describe V1::HealthReportsController, type: :controller do
   let(:health_report_2) do
     create(:health_report,
            student: student_2,
-           group: group_1,
-           day: DateTime.now)
-  end
-
-  let(:health_report_3) do
-    create(:health_report,
-           student: student_3,
            group: group_1,
            day: DateTime.now)
   end
@@ -67,23 +55,12 @@ RSpec.describe V1::HealthReportsController, type: :controller do
            day: DateTime.now)
   end
 
-  let(:presence_report_3) do
-    create(:presence_report,
-           student: student_3,
-           group: group_2,
-           day: DateTime.now)
-  end
-
   let!(:report_time_1) do
     create(:report_time, reportable: presence_report_1)
   end
 
   let!(:report_time_2) do
     create(:report_time, reportable: presence_report_2)
-  end
-
-  let!(:report_time_3) do
-    create(:report_time, reportable: presence_report_3)
   end
 
   before do

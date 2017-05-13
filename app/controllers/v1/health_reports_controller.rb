@@ -7,9 +7,9 @@ module V1
     end
 
     def update
-      @report = HealthReport.find_by(id: params[:id], student_id: @student_id)
-      if @report.update(report_params)
-        render :index
+      @report = HealthReport.find_by(id: params[:id], group_id: @group)
+      if @report.update_attributes(report_params)
+        render :update
       else
         render json: { errors: @report.errors.full_messages },
                status: :bad_request
