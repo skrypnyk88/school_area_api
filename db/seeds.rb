@@ -70,7 +70,7 @@ n = 0
       )
 
       group.health_reports.create(
-        day: Faker::Date.backward(100),
+        day: Date.today,
         special_care: [true, false].sample,
         health_note: Faker::Lorem.sentence,
         student_id: student.id
