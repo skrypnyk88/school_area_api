@@ -138,6 +138,8 @@ ua:
       year: Рік
   errors:
     format: "%{attribute} %{message}"
+    unauthenticated: Не вірний email чи пароль
+    token_timeout: Час сесії вичерпано
     messages:
       accepted: має бути прийнятий
       blank: не може бути пустим

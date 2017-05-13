@@ -6,7 +6,8 @@ class AuthenticationController < ApplicationController
     if user && user.valid_password?(user_credentials[:password])
       send_response(user)
     else
-      head :unauthorized
+      render json: { errors: [I18n.t('errors.unauthenticated')] },
+             status: :unauthorized
     end
   end
 
