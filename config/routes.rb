@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :my_day_reports
     resources :presence_reports
     resources :report_times
-    resources :healthReports
+    resources :health_reports
 
     resources :bottle_reports, only: [:index] do
       resources :bottles
