@@ -76,6 +76,11 @@ n = 0
         student_id: student.id
       )
     end
+
+    group.our_days.create(
+      description: Faker::Lorem.paragraph,
+      day: Date.today
+    )
   end
 end
 

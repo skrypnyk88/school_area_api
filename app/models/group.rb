@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
   has_many :students, dependent: :nullify
+  has_many :our_days, dependent: :nullify
   has_many :my_day_reports, dependent: :nullify
   has_and_belongs_to_many :teachers, association_foreign_key: 'user_id'
   has_many :presence_reports, dependent: :nullify
