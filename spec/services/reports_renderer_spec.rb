@@ -19,7 +19,7 @@ RSpec.describe ReportsRenderer do
     described_class.new(day: day, students: students, model: TestReport)
   end
 
-  describe '.find_or_create_by' do
+  describe '#call' do
     it 'should return report for each student' do
       expect(report_renderer.call.length).to eq(students.length)
     end
