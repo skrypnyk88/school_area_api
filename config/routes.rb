@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     resources :presence_reports
     resources :report_times
     resources :health_reports
-
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
