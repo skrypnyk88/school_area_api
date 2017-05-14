@@ -1,7 +1,6 @@
 module V1
   class HealthReportsController < ApplicationController
     include Reportable
-    include Groupable
 
     def index
       @reports = reports_renderer(@students, HealthReport).call
