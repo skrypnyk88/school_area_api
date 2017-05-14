@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
-    resources :teachers
     get '/our_day/:day', to: 'our_days#show'
     put '/our_day/:day', to: 'our_days#update'
   end
