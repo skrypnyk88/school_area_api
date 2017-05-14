@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       resources :report_times
     end
 
-    resources :teachers
-    resources :health_reports
+    resource :our_day, only: [:show, :update]
   end
 end

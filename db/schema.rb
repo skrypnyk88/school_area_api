@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 20170520223117) do
     t.index ["group_id"], name: "index_nap_reports_on_group_id", using: :btree
     t.index ["student_id"], name: "index_nap_reports_on_student_id", using: :btree
   end
+  
+  create_table "our_days", force: :cascade do |t|
+    t.text     "description"
+    t.date     "day"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "group_id"
+    t.index ["day"], name: "index_our_days_on_day", using: :btree
+    t.index ["group_id"], name: "index_our_days_on_group_id", using: :btree
+  end
 
   create_table "presence_reports", force: :cascade do |t|
     t.date     "day"
@@ -136,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170520223117) do
   add_foreign_key "my_day_reports", "students"
   add_foreign_key "nap_reports", "groups"
   add_foreign_key "nap_reports", "students"
+  add_foreign_key "our_days", "groups"
   add_foreign_key "presence_reports", "groups"
   add_foreign_key "presence_reports", "students"
   add_foreign_key "students", "groups"
