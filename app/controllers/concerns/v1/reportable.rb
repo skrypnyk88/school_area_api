@@ -15,11 +15,15 @@ module V1
     end
 
     def find_present_students
-      @students = @group.students.present(@day)
+      @students = @group.students#.present(@day)
     end
 
     def reports_renderer(students, model)
       ReportsRenderer.new(day: @day, students: students, model: model)
+    end
+
+    def single_report_renderer(model, group)
+      SingleReportRenderer.new(day: @day, model: model, group: group)
     end
   end
 end
