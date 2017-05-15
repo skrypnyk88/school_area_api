@@ -4,8 +4,6 @@ module V1
 
     before_action :find_teacher
 
-    # def show; end
-
     def update
       if @teacher.update_attributes(teacher_params)
         render @teacher
