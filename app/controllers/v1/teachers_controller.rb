@@ -22,13 +22,7 @@ module V1
     end
 
     def upload
-      attachment = attachment_uploader.call(attachment_owner: @teacher)
-      if attachment.valid?
-        render @teacher, status: :created
-      else
-        render json: { errors: attachment.errors.full_messages },
-               status: :bad_request
-      end
+      upload_attachment(@teacher)
     end
 
     private
