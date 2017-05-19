@@ -2,8 +2,6 @@ module V1
   class TeachersController < ApplicationController
     before_action :find_teacher
 
-    def show; end
-
     def update
       if @teacher.update_attributes(teacher_params)
         head :no_content
@@ -19,6 +17,16 @@ module V1
                                       :email,
                                       :phone,
                                       :locale)
+    end
+
+    def upload
+      attachment = attachment_uploader.call(attachment_owner: @teacher)
+      if attachment.valid?
+        render @teacher, status: :created
+      else
+        render json: { errors: attachment.errors.full_messages },
+               status: :bad_request
+      end
     end
 
     private

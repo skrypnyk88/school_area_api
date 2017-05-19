@@ -17,6 +17,7 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
+    - 'spec/controllers/v1/teachers_controller_spec.rb'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
