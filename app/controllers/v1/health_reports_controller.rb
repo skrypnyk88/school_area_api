@@ -8,12 +8,10 @@ module V1
 
     def update
       @report = HealthReport.find_by(id: params[:id], group_id: @group)
-      if @report.update_attributes(report_params)
-        render :update
-      else
-        render json: { errors: @report.errors.full_messages },
-               status: :bad_request
-      end
+      return if @report.update_attributes(report_params)
+
+      render json: { errors: @report.errors.full_messages },
+             status: :bad_request
     end
 
     private
