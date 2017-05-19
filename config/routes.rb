@@ -12,16 +12,18 @@ Rails.application.routes.draw do
       put :upload, on: :member
     end
 
+    resources :teachers do
+      put :upload, on: :member
+    end
+
     resources :groups
     resources :my_day_reports
     resources :presence_reports
     resources :report_times
+    resources :health_reports
 
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
-
-    resources :teachers
-    resources :health_reports
   end
 end

@@ -1,10 +1,12 @@
 module V1
   class TeachersController < ApplicationController
+    include Attachable
+
     before_action :find_teacher
 
     def update
       if @teacher.update_attributes(teacher_params)
-        head :no_content
+        render @teacher
       else
         render json: { errors: @teacher.errors.full_messages },
                status: :bad_request
