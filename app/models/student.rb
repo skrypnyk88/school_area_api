@@ -1,9 +1,10 @@
 class Student < ApplicationRecord
   belongs_to :group, optional: true
   has_one :attachment, as: :attachable, dependent: :destroy
-  has_many :my_day_reports, dependent: :nullify
-  has_many :presence_reports, dependent: :nullify
-  has_many :bottle_reports, dependent: :nullify
+  has_many :my_day_reports, dependent: :destroy
+  has_many :presence_reports, dependent: :destroy
+  has_many :bottle_reports, dependent: :destroy
+  has_many :health_reports, dependent: :destroy
 
   before_save :titleize_name
 

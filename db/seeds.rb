@@ -25,12 +25,6 @@ n = 0
         gender: Faker::Demographic.sex.downcase
       )
 
-      group.my_day_reports.create(
-        day: Date.today,
-        note:  Faker::Lorem.sentence,
-        student_id: student.id
-      )
-
       presence_report = group.presence_reports.create(
         day: Date.today,
         student_id: student.id
@@ -58,6 +52,13 @@ n = 0
         quantity: Faker::Number.between(30, 300),
         time: DateTime.now,
         uom: %w(ml oz).sample
+      )
+
+      group.health_reports.create(
+        day: Faker::Date.backward(100),
+        special_care: [true, false].sample,
+        health_note: Faker::Lorem.sentence,
+        student_id: student.id
       )
     end
   end

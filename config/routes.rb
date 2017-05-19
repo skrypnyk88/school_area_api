@@ -24,5 +24,6 @@ Rails.application.routes.draw do
     end
 
     resources :teachers
+    resources :health_reports
   end
 end
