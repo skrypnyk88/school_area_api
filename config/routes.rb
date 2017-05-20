@@ -8,14 +8,12 @@ Rails.application.routes.draw do
   devise_for :user, skip: :sessions
 
   namespace :v1 do
-    resources :groups do
-      resources :my_day_reports, shallow: true
-    end
-
     resources :students do
       put :upload, on: :member
     end
 
+    resources :groups
+    resources :my_day_reports
     resources :presence_reports
     resources :report_times
 
