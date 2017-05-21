@@ -10,10 +10,10 @@ module V1
       params.require(:file).permit(:filetype, :filename, :base64)
     end
 
-    def upload_attachment(owner)
+    def upload_attachment(owner, rendering_object = owner)
       attachment = attachment_uploader.call(attachment_owner: owner)
       if attachment.valid?
-        render owner, status: :created
+        render owner && rendering_object, status: :created
       else
         render json: { errors: attachment.errors.full_messages },
                status: :bad_request

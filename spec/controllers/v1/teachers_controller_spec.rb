@@ -4,20 +4,12 @@ RSpec.describe V1::TeachersController, type: :controller do
   render_views
 
   def teacher_params(teacher)
-    params = teacher.attributes
-                    .with_indifferent_access
-                    .extract!(:id,
-                              :first_name,
-                              :last_name,
-                              :email,
-                              :phone,
-                              :locale)
+    url = "http://#{request.host}#{teacher.attachment.file.url}"
+    params =
+      teacher.attributes.with_indifferent_access
+             .extract!(:id, :first_name, :last_name, :email, :phone, :locale)
 
-    if teacher.attachment
-      params.merge(url: "http://#{request.host}#{teacher.attachment.file.url}")
-    else
-      params.merge(url: nil)
-    end
+    teacher.attachment ? params.merge(url: url) : params.merge(url: nil)
   end
 
   let(:current_user) { create(:teacher) }
