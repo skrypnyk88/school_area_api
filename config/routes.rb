@@ -18,12 +18,21 @@ Rails.application.routes.draw do
 
     resources :groups
     resources :my_day_reports
-    resources :presence_reports
-    resources :report_times
     resources :health_reports
+
+    resources :presence_reports, only: [:index] do
+      resources :report_times
+    end
 
     resources :bottle_reports, only: [:index] do
       resources :bottles
     end
+
+    resources :nap_reports, only: [:index] do
+      resources :report_times
+    end
+
+    resources :teachers
+    resources :health_reports
   end
 end

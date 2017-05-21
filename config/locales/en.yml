@@ -233,3 +233,7 @@ en:
     errors:
       invalid_token: "The reset password token is invalid."
       not_found: "User not found."
+  report_time:
+    errors:
+      not_found: "ReportTime not found"
+      not_found_report: "Report not found"

@@ -5,6 +5,7 @@ class Group < ApplicationRecord
   has_many :presence_reports, dependent: :nullify
   has_many :bottle_reports, dependent: :nullify
   has_many :health_reports, dependent: :nullify
+  has_many :nap_reports, dependent: :nullify
 
   before_save :capitalize_name
 
