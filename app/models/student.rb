@@ -5,6 +5,7 @@ class Student < ApplicationRecord
   has_many :presence_reports, dependent: :destroy
   has_many :bottle_reports, dependent: :destroy
   has_many :health_reports, dependent: :destroy
+  has_many :nap_reports, dependent: :destroy
 
   before_save :titleize_name
 

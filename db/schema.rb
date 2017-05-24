@@ -1,5 +1,5 @@
-ActiveRecord::Schema.define(version: 20170505222223) do
-
+ActiveRecord::Schema.define(version: 20170520223117) do
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attachments", force: :cascade do |t|
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 20170505222223) do
     t.index ["student_id"], name: "index_my_day_reports_on_student_id", using: :btree
   end
 
+  create_table "nap_reports", force: :cascade do |t|
+    t.date     "day"
+    t.integer  "updated_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.integer  "student_id"
+    t.index ["group_id"], name: "index_nap_reports_on_group_id", using: :btree
+    t.index ["student_id"], name: "index_nap_reports_on_student_id", using: :btree
+  end
+
   create_table "presence_reports", force: :cascade do |t|
     t.date     "day"
     t.integer  "updated_by"
@@ -123,6 +134,8 @@ ActiveRecord::Schema.define(version: 20170505222223) do
   add_foreign_key "health_reports", "students"
   add_foreign_key "my_day_reports", "groups"
   add_foreign_key "my_day_reports", "students"
+  add_foreign_key "nap_reports", "groups"
+  add_foreign_key "nap_reports", "students"
   add_foreign_key "presence_reports", "groups"
   add_foreign_key "presence_reports", "students"
   add_foreign_key "students", "groups"

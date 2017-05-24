@@ -286,3 +286,7 @@ ua:
     errors:
       invalid_token: "Невалідний ключ для відновлення паролю."
       not_found: "Користувача не знайдено."
+  report_time:
+    errors:
+      not_found: "Звіт часу не знайдено"
+      not_found_report: "Звіт не знайдено"
